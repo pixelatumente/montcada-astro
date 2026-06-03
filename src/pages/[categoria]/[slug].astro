@@ -4,16 +4,8 @@ import Schema from "../../components/Schema.astro";
 import data from "../../data/enriched-negocios.json";
 
 export async function getStaticPaths() {
-  const slugs = [
-    "bar-el-parador", "taller-mecanico-sant-jordi", "centre-medic-montcada",
-    "perruqueria-los-caballeros", "samiauto-montcada",
-    "mivet-hospital-veterinari-barcelona-sud", "cristina-aguilar-rodriguez-abogada-y-mediadora",
-    "dentalmir-odontologia-integral", "mossos-desquadra-montcada-i-reixac",
-    "policia-de-montcada-i-reixac",
-  ];
   const paths = [];
   for (const n of data.negocios) {
-    if (!slugs.includes(n.slug)) continue;
     const catSlug = n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
     paths.push({
       params: { categoria: catSlug, slug: n.slug },
@@ -60,6 +52,18 @@ function stars(rating) {
 }
 
 const hasEnriched = e.google_place_id ? true : false;
+const cleanContent = negocio.clean_content || negocio.excerpt || "";
+const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
+                   negocio.category === "Talleres" ? "Taller" :
+                   negocio.category === "Fisioterapeutas" ? "Fisioterapeuta" :
+                   negocio.category === "Peluquerías" ? "Peluquería" :
+                   negocio.category === "Concesionarios" ? "Concesionario" :
+                   negocio.category === "Veterinarios" ? "Veterinario" :
+                   negocio.category === "Abogados" ? "Abogado" :
+                   negocio.category === "Dentistas" ? "Dentista" :
+                   negocio.category === "mir" ? "Servicio público" :
+                   negocio.category === "Servicios públicos y trámites" ? "Servicio público" :
+                   negocio.category).toLowerCase();
 ---
 
 <BaseLayout title={title} description={desc.slice(0, 160)} canonical={canon}>
@@ -84,20 +88,19 @@ const hasEnriched = e.google_place_id ? true : false;
   }} />
 
   <article style="max-width:800px;margin:30px auto;padding:0 20px">
-    <!-- Breadcrumb -->
     <nav style="font-size:0.8rem;color:var(--text-light);margin-bottom:20px">
       <a href={`/${catSlug}`} style="color:var(--accent)">← {negocio.category}</a>
     </nav>
 
-    <!-- Main card -->
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
       
       <!-- Header -->
       <div style="padding:30px 30px 20px;border-bottom:1px solid var(--border)">
+        <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">{subTitulo} en Montcada i Reixac</p>
         <h1 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;margin-bottom:8px">{negocio.title}</h1>
         
         {hasEnriched && e.google_rating && (
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;flex-wrap:wrap">
             <span style="color:#eab308;font-size:1.4rem;letter-spacing:2px">{stars(e.google_rating)}</span>
             <span style="font-weight:600;font-size:1.1rem">{e.google_rating}</span>
             <span style="color:var(--text-light);font-size:0.9rem">({e.google_reviews} reseñas en Google)</span>
@@ -105,13 +108,13 @@ const hasEnriched = e.google_place_id ? true : false;
         )}
         
         <div style="color:var(--text-light);font-size:0.9rem">
-          {negocio.category} {e.google_business_status === "OPERATIONAL" ? "· Abierto ahora" : e.google_business_status === "CLOSED_TEMPORARILY" ? "· Cerrado temporalmente" : ""}
+          {negocio.category}
+          {e.google_business_status === "OPERATIONAL" ? " · Abierto ahora" : e.google_business_status === "CLOSED_TEMPORARILY" ? " · Cerrado temporalmente" : ""}
         </div>
       </div>
 
       <!-- Info grid -->
       <div style="padding:25px 30px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
-        <!-- Phone -->
         {(e.google_phone || negocio.phone) && (
           <div>
             <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">📞 Teléfono</div>
@@ -120,16 +123,12 @@ const hasEnriched = e.google_place_id ? true : false;
             </a>
           </div>
         )}
-
-        <!-- Address -->
         {e.google_address && (
           <div>
             <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">📍 Dirección</div>
             <div style="font-size:0.95rem">{e.google_address}</div>
           </div>
         )}
-
-        <!-- Website -->
         {e.google_website && (
           <div>
             <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">🌐 Web</div>
@@ -138,8 +137,6 @@ const hasEnriched = e.google_place_id ? true : false;
             </a>
           </div>
         )}
-
-        <!-- Price -->
         {e.google_price_level && (
           <div>
             <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">💰 Precio</div>
@@ -153,7 +150,7 @@ const hasEnriched = e.google_place_id ? true : false;
         )}
       </div>
 
-      <!-- Hours (full width) -->
+      <!-- Hours -->
       {days && days.length > 0 && (
         <div style="padding:0 30px 20px;border-top:1px solid var(--border);padding-top:20px;margin:0 30px">
           <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:10px">🕐 Horario</div>
@@ -171,7 +168,7 @@ const hasEnriched = e.google_place_id ? true : false;
         </div>
       )}
 
-      <!-- Google Maps link -->
+      <!-- Google Maps -->
       {e.google_maps_url && (
         <div style="padding:20px 30px;background:#f8f8f8;border-top:1px solid var(--border);text-align:center">
           <a href={e.google_maps_url} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:#1a73e8;color:white;border-radius:8px;font-weight:600;font-size:0.9rem;text-decoration:none">
@@ -180,13 +177,13 @@ const hasEnriched = e.google_place_id ? true : false;
         </div>
       )}
 
-      <!-- Business info -->
-      {negocio.clean_content && (
-        <div style="padding:20px 30px;border-top:1px solid var(--border)">
+      <!-- SEO Description -->
+      {cleanContent && (
+        <div style="padding:20px 30px;border-top:1px solid var(--border);line-height:1.9">
           <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:10px">Información</div>
-          <div style="line-height:1.8;font-size:0.95rem;color:var(--text)">
-            {negocio.clean_content.split("\n").filter(l => l.trim()).map(line => (
-              <p style="margin-bottom:8px">{line}</p>
+          <div style="font-size:0.95rem;color:var(--text)">
+            {cleanContent.split("\n").filter(l => l.trim()).map(line => (
+              <p style="margin-bottom:10px">{line}</p>
             ))}
           </div>
         </div>
@@ -202,7 +199,7 @@ const hasEnriched = e.google_place_id ? true : false;
         {data.negocios.filter(n => n.category === negocio.category && n.slug !== negocio.slug).slice(0, 6).map(n => {
           const ne = n.enriched || {};
           return (
-            <a href={`/${catSlug}/${n.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
+            <a href={`/${n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u")}/${n.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
               <strong style="font-size:0.95rem">{n.title}</strong>
               {ne.google_rating && (
                 <div style="margin-top:4px;color:#eab308;font-size:0.85rem">
