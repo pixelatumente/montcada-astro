@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Schema from "../../components/Schema.astro";
+import data from "../../data/negocios.json";
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  for (const n of data.negocios) {
+    const catSlug = n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
+    paths.push({
+      params: { categoria: catSlug, slug: n.slug },
+      props: { negocio: n, catSlug }
+    });
+  }
+  return paths;
+}
+
+const { negocio, catSlug } = Astro.props;
+const title = `${negocio.title} | Montcada i Reixac`;
+const desc = negocio.excerpt || `Información y contacto de ${negocio.title} en Montcada i Reixac. Teléfono, dirección y servicios.`;
+const canon = `https://montcada.com.es/${catSlug}/${negocio.slug}/`;
+---
+
+<BaseLayout title={title} description={desc} canonical={canon}>
+  <Schema type="LocalBusiness" data={{
+    name: negocio.title,
+    description: negocio.excerpt,
+    url: canon,
+    telephone: negocio.phone || undefined,
+    address: true
+  }} />
+  <Schema type="BreadcrumbList" data={{
+    items: [
+      { name: "Inicio", url: "https://montcada.com.es/" },
+      { name: negocio.category, url: `https://montcada.com.es/${catSlug}/` },
+      { name: negocio.title, url: canon }
+    ]
+  }} />
+
+  <section style="padding:30px 0">
+    <a href={`/${catSlug}`} style="font-size:0.85rem;color:var(--text-light)">← Volver a {negocio.category}</a>
+    
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:35px;margin-top:20px">
+      <h1 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;margin-bottom:10px">
+        {negocio.title}
+      </h1>
+
+      {negocio.phone && (
+        <p style="margin:8px 0">
+          <strong>Teléfono:</strong>{" "}
+          <a href={`tel:${negocio.phone.replace(/\s/g, "")}`} style="font-size:1.1rem;font-weight:600">
+            {negocio.phone}
+          </a>
+        </p>
+      )}
+
+      <p style="color:var(--text-light);font-size:0.9rem;margin:8px 0">
+        <strong>Categoría:</strong> {negocio.category}
+      </p>
+
+      {negocio.content && (
+        <div style="margin-top:25px;line-height:1.8;color:var(--text)">
+          {negocio.content.split("\n").filter(l => l.trim()).map(line => (
+            <p style="margin-bottom:12px">{line}</p>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Más negocios de la misma categoría -->
+    <section style="margin-top:40px">
+      <h2 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:600;margin-bottom:15px">
+        Más {negocio.category.toLowerCase()} en Montcada i Reixac
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
+        {data.negocios.filter(n => n.category === negocio.category && n.slug !== negocio.slug).slice(0, 6).map(n => (
+          <a href={`/${catSlug}/${n.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:15px;text-decoration:none;color:var(--text);font-size:0.9rem">
+            <strong>{n.title}</strong>
+            {n.excerpt && <p style="color:var(--text-light);font-size:0.8rem;margin-top:4px">{n.excerpt.slice(0, 80)}...</p>}
+          </a>
+        ))}
+      </div>
+    </section>
+  </section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Schema from "../components/Schema.astro";
+import data from "../data/negocios.json";
+
+export async function getStaticPaths() {
+  return data.categories
+    .filter(c => c.slug !== "tiempo" && c.slug !== "mir")
+    .map(cat => ({
+      params: { categoria: cat.slug },
+      props: { category: cat }
+    }));
+}
+
+const { category } = Astro.props;
+const businesses = data.negocios.filter(n => n.category === category.name);
+const title = `${category.name} en Montcada i Reixac`;
+const desc = `Encuentra los mejores ${category.name.toLowerCase()} en Montcada i Reixac. Directorio con ${businesses.length} negocios, direcciones y teléfonos.`;
+---
+
+<BaseLayout title={title} description={desc}>
+  <Schema type="BreadcrumbList" data={{
+    items: [
+      { name: "Inicio", url: "https://montcada.com.es/" },
+      { name: category.name, url: `https://montcada.com.es/${category.slug}/` }
+    ]
+  }} />
+
+  <section style="padding:30px 0">
+    <a href="/" style="font-size:0.85rem;color:var(--text-light)">← Volver al inicio</a>
+    <h1 style="font-family:var(--font-serif);font-size:2.2rem;font-weight:700;margin:15px 0 10px">
+      {title}
+    </h1>
+    <p style="color:var(--text-light);margin-bottom:30px;font-size:1rem">{businesses.length} negocios encontrados</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px">
+      {businesses.map(b => (
+        <a href={`/${category.slug}/${b.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;transition:all 0.15s;text-decoration:none;color:var(--text)">
+          <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:6px">{b.title}</h3>
+          {b.excerpt && <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:6px">{b.excerpt}</p>}
+          {b.phone && <p style="font-size:0.85rem;color:var(--accent);font-weight:500">{b.phone}</p>}
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

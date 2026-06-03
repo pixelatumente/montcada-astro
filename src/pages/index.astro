@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Schema from "../components/Schema.astro";
+import data from "../data/negocios.json";
+
+const categories = data.categories.filter(c => c.slug !== "tiempo" && c.slug !== "mir");
+const total = data.total;
+const topCategories = categories.sort((a, b) => b.count - a.count);
+---
+
+<BaseLayout
+  title="Negocios en Montcada i Reixac"
+  description="Directorio de comercios, negocios y profesionales de Montcada i Reixac. Encuentra restaurantes, talleres, peluquerías, veterinarios y más."
+>
+  <Schema type="WebPage" data={{ name: "Montcada Online", description: "Guía de negocios de Montcada i Reixac" }} />
+
+  <section style="text-align:center;padding:60px 0 40px">
+    <h1 style="font-family:var(--font-serif);font-size:2.8rem;font-weight:700;margin-bottom:15px">
+      Negocios en <span style="color:var(--accent)">Montcada i Reixac</span>
+    </h1>
+    <p style="font-size:1.15rem;color:var(--text-light);max-width:650px;margin:0 auto">
+      El directorio local con {total} comercios, servicios y profesionales de la ciudad.
+      Encuentra lo que necesitas cerca de ti.
+    </p>
+  </section>
+
+  <section>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+      {topCategories.map(cat => (
+        <a href={`/${cat.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:30px;transition:all 0.2s;text-decoration:none;color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.04)">
+          <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:8px">{cat.name}</h3>
+          <p style="color:var(--text-light);font-size:0.9rem">{cat.count} {cat.count === 1 ? "negocio" : "negocios"}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+export interface Props {
+  type: "LocalBusiness" | "WebPage" | "BreadcrumbList";
+  data: Record<string, any>;
+}
+
+const { type, data } = Astro.props;
+
+function buildSchema() {
+  switch (type) {
+    case "LocalBusiness":
+      return {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        name: data.name,
+        description: data.description,
+        url: data.url,
+        telephone: data.telephone || undefined,
+        address: data.address ? {
+          "@type": "PostalAddress",
+          addressLocality: "Montcada i Reixac",
+          addressRegion: "Barcelona",
+          addressCountry: "ES"
+        } : undefined,
+        image: data.image || undefined,
+        areaServed: {
+          "@type": "City",
+          name: "Montcada i Reixac"
+        }
+      };
+    case "BreadcrumbList":
+      return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: data.items.map((item: any, i: number) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: item.name,
+          item: item.url
+        }))
+      };
+    default:
+      return {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: data.name,
+        description: data.description
+      };
+  }
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(buildSchema())} />

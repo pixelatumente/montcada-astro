@@ -1,0 +1,80 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+
+const { title, description, canonical } = Astro.props;
+const site = "https://montcada.com.es";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Montcada Online</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical || `${site}${Astro.url.pathname}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical || `${site}${Astro.url.pathname}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="robots" content="index, follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style is:global>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --accent: #ff1956;
+        --accent-dark: #b5005a;
+        --bg: #fbfbfb;
+        --card: #ffffff;
+        --text: #3a3a3a;
+        --text-light: #6b7280;
+        --border: #e5e7eb;
+        --font-sans: "Inter", system-ui, sans-serif;
+        --font-serif: "Playfair Display", serif;
+      }
+      body {
+        font-family: var(--font-sans);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { color: var(--accent-dark); }
+      img { max-width: 100%; height: auto; }
+      .container { max-width: 1170px; margin: 0 auto; padding: 0 20px; }
+      @media (max-width: 768px) {
+        .container { padding: 0 15px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container" style="display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:1px solid var(--border)">
+        <a href="/" style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--text)">Montcada Online</a>
+        <div style="display:flex;gap:15px;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">
+          <a href="/">Inicio</a>
+          <a href="/restaurantes">Restaurantes</a>
+          <a href="/talleres">Talleres</a>
+          <a href="/peluquerias">Peluquerías</a>
+        </div>
+      </nav>
+    </header>
+    <main class="container" style="padding:30px 0 60px">
+      <slot />
+    </main>
+    <footer style="background:#050101;color:#ff1956;padding:30px 0;text-align:center;font-size:0.85rem">
+      <div class="container">
+        <p>&copy; 2026 Montcada Online — Guía de Montcada i Reixac</p>
+        <p style="margin-top:5px;color:#666">
+          <a href="/">Inicio</a> · <a href="/publica-tu-negocio">Publica tu negocio</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
