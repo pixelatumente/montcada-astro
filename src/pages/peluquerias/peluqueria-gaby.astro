@@ -1,0 +1,481 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Schema from "../../components/Schema.astro";
+import data from "../../data/enriched-negocios.json";
+
+const negocio = data.negocios.find(n => n.slug === "peluqueria-gaby");
+const e = negocio?.enriched || {};
+
+const title = "Peluquería Gaby — Cortes, Trenzas y Estética | Montcada Online";
+const desc = "Peluquería Gaby en Montcada i Reixac. Expertos en coloración, trenzas africanas y estética personalizada. 4.5★ en Google con 23 reseñas.";
+const canon = "https://montcada.com.es/peluquerias/peluqueria-gaby/";
+
+const related = data.negocios
+  .filter(n => n.category === "Peluquerías" && n.slug !== "peluqueria-gaby")
+  .slice(0, 6);
+
+const dayMap = {
+  "lunes": "Lunes", "martes": "Martes", "miércoles": "Miércoles",
+  "jueves": "Jueves", "viernes": "Viernes", "sábado": "Sábado", "domingo": "Domingo"
+};
+const hours = (e.google_hours || []).map(h => {
+  for (const [es, en] of Object.entries(dayMap)) {
+    if (h.toLowerCase().startsWith(es)) return { day: en, time: h.replace(es + ": ", "") };
+  }
+  return { day: h.split(":")[0], time: h.split(": ").slice(1).join(": ") };
+});
+
+function stars(rating) {
+  if (!rating) return "";
+  const full = Math.floor(rating);
+  const half = rating - full >= 0.3;
+  let s = "★".repeat(full);
+  if (half) s += "½";
+  s += "☆".repeat(5 - full - (half ? 1 : 0));
+  return s;
+}
+
+const services = [
+  { icon: "✂️", name: "Corte y Estilo", desc: "Damas, caballeros y niños. Desde clásicos hasta las últimas tendencias.", bg: "#FDF0ED" },
+  { icon: "🎨", name: "Coloración Experta", desc: "Tintes, mechas, balayage y matices con productos de alta calidad.", bg: "#FEF3C7" },
+  { icon: "👑", name: "Trenzas Africanas", desc: "Nuestra especialidad estrella. Diseños únicos y cuidado profesional.", bg: "#EDE9FE" },
+  { icon: "💅", name: "Manicura y Pedicura", desc: "Cuidado completo para tus manos y pies con acabados impecables.", bg: "#FCE7F3" },
+  { icon: "🏠", name: "Servicio a Domicilio", desc: "Llevamos la experiencia del salón a la comodidad de tu hogar.", bg: "#E8F5F0" },
+  { icon: "💬", name: "Trato Personalizado", desc: "Cada cliente es único. Te asesoramos para encontrar tu mejor versión.", bg: "#F0F9FF" },
+];
+
+const reviews = [
+  { name: "Iratxe D.A.", initials: "ID", stars: 4.5, text: "¡Encantada es poco! En este salón vas a encontrar más de lo que buscas y con una persona maravillosa que te atiende y entiende a la perfección." },
+  { name: "Mariela Saucedo", initials: "MS", stars: 5, text: "Muy buen servicio a domicilio. Corte de pelo, pedicura y también manicura. Una persona encantadora y precio muy asequible." },
+  { name: "Cira Garcia", initials: "CG", stars: 5, text: "Muy buena atención, la dueña es muy amable. Resultados excelentes en color y corte." },
+];
+
+const isOpen = e.google_business_status === "OPERATIONAL";
+---
+
+<BaseLayout title={title} description={desc} canonical={canon}>
+  <Schema type="LocalBusiness" data={{
+    name: "Peluquería Gaby",
+    description: desc.slice(0, 200),
+    url: canon,
+    telephone: "695 52 68 62",
+    address: "Rambla dels Països Catalans, 75, 08110 Barcelona, España",
+    aggregateRating: e.google_rating ? {
+      ratingValue: e.google_rating,
+      reviewCount: e.google_reviews,
+      bestRating: 5
+    } : undefined
+  }} />
+  <Schema type="BreadcrumbList" data={{
+    items: [
+      { name: "Inicio", url: "https://montcada.com.es/" },
+      { name: "Peluquerías", url: "https://montcada.com.es/peluquerias/" },
+      { name: "Peluquería Gaby", url: canon }
+    ]
+  }} />
+
+  <style is:global>
+    .landing-hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, #C94D3A 40%, #1C1917 100%);
+      overflow: hidden;
+      min-height: 520px;
+      display: flex; align-items: center;
+    }
+    .landing-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .landing-hero-content { position: relative; z-index: 2; width: 100%; padding: 80px 0; }
+    .landing-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      padding: 8px 18px; border-radius: 100px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .landing-hero h1 {
+      font-family: var(--font-serif); font-size: 3.4rem; font-weight: 700;
+      line-height: 1.1; color: white; margin-bottom: 12px;
+    }
+    .landing-hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, #FCD34D, #F59E0B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .landing-subtitle {
+      font-size: 1.2rem; color: rgba(255,255,255,0.85);
+      max-width: 540px; line-height: 1.6; font-weight: 300; margin-bottom: 24px;
+    }
+    .landing-stats { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 28px; }
+    .landing-stat { text-align: center; }
+    .landing-stat-num { font-size: 2rem; font-weight: 700; color: #FCD34D; line-height: 1; }
+    .landing-stat-label {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6); margin-top: 4px;
+    }
+    .landing-divider { width: 1px; background: rgba(255,255,255,0.2); align-self: stretch; }
+    .landing-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .landing-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-size: 1rem; font-weight: 600; text-decoration: none;
+      transition: all 0.25s ease; cursor: pointer; border: none;
+    }
+    .landing-btn-primary { background: white; color: var(--primary); }
+    .landing-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,255,255,0.3); color: var(--primary-dark); }
+    .landing-btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); }
+    .landing-btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); color: white; }
+
+    /* Services */
+    .landing-services { padding: 72px 0; }
+    .landing-section-header { text-align: center; margin-bottom: 48px; }
+    .landing-section-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--primary); font-weight: 600; margin-bottom: 8px;
+    }
+    .landing-section-title {
+      font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .landing-section-desc { color: var(--text-light); font-size: 1rem; max-width: 520px; margin: 0 auto; }
+    .landing-services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;
+    }
+    .landing-service-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 32px 28px;
+      transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+      position: relative; overflow: hidden;
+    }
+    .landing-service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--primary); opacity: 0; transition: opacity 0.3s ease;
+    }
+    .landing-service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: transparent; }
+    .landing-service-card:hover::before { opacity: 1; }
+    .landing-service-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 18px;
+    }
+    .landing-service-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .landing-service-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.65; }
+
+    /* Reviews */
+    .landing-reviews { padding: 72px 0; background: var(--bg-alt); }
+    .landing-reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;
+    }
+    .landing-review-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 28px;
+      box-shadow: var(--shadow-sm); transition: all 0.3s ease;
+    }
+    .landing-review-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .landing-review-stars { color: var(--accent); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 12px; }
+    .landing-review-text {
+      font-size: 0.95rem; color: var(--text); line-height: 1.7;
+      font-style: italic; margin-bottom: 16px;
+    }
+    .landing-review-author {
+      display: flex; align-items: center; gap: 10px;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .landing-review-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--primary-light); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem;
+    }
+    .landing-review-name { font-weight: 600; font-size: 0.9rem; }
+    .landing-review-source { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* Info */
+    .landing-info { padding: 72px 0; }
+    .landing-info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
+    }
+    .landing-info-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-md);
+    }
+    .landing-info-row {
+      display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border);
+    }
+    .landing-info-row:last-child { border-bottom: none; }
+    .landing-info-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--primary-light); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .landing-info-label {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--text-muted); margin-bottom: 2px;
+    }
+    .landing-info-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+    .landing-info-value a { color: var(--primary); font-weight: 600; }
+
+    .landing-hours-row {
+      display: flex; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px dashed var(--border);
+      font-size: 0.9rem;
+    }
+    .landing-hours-row:last-child { border-bottom: none; }
+    .landing-hours-day { font-weight: 500; }
+    .landing-hours-time { color: var(--text-light); }
+    .landing-hours-closed { color: var(--primary); font-weight: 500; }
+
+    .landing-map-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #1a73e8, #1557B0);
+      color: white; border-radius: var(--radius);
+      font-weight: 600; font-size: 1rem; text-decoration: none;
+      transition: all 0.2s; margin-top: 20px;
+    }
+    .landing-map-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(26,115,232,0.4); color: white; }
+
+    /* CTA */
+    .landing-cta {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, #C94D3A 100%);
+      text-align: center; color: white; position: relative; overflow: hidden;
+    }
+    .landing-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2l2 2-2 2zm0-16V0h2v4.5h4V6h-4V2h-2v2.5zM0 20.5V20h2v.5h4V20H2v-.5H0zM0 26v-2h6v2H0z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .landing-cta-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+    .landing-cta h2 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; }
+    .landing-cta p { font-size: 1.05rem; opacity: 0.9; line-height: 1.7; margin-bottom: 32px; }
+    .landing-cta-phone {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; background: white; color: var(--primary);
+      border-radius: 100px; font-size: 1.2rem; font-weight: 700;
+      text-decoration: none; transition: all 0.25s;
+    }
+    .landing-cta-phone:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.2); color: var(--primary-dark); }
+    .landing-cta-address { margin-top: 20px; font-size: 0.9rem; opacity: 0.8; }
+
+    /* Related */
+    .landing-related { padding: 48px 0 72px; }
+    .landing-related-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+    }
+    .landing-related-card {
+      display: block; background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; text-decoration: none;
+      color: var(--text); transition: all 0.2s; box-shadow: var(--shadow-sm);
+    }
+    .landing-related-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .landing-hero h1 { font-size: 2.4rem; }
+      .landing-subtitle { font-size: 1.05rem; }
+      .landing-stats { gap: 24px; }
+      .landing-stat-num { font-size: 1.6rem; }
+      .landing-services-grid, .landing-reviews-grid { grid-template-columns: 1fr; }
+      .landing-info-grid { grid-template-columns: 1fr; }
+      .landing-section-title { font-size: 1.8rem; }
+      nav { display: none; }
+      .landing-actions { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .landing-hero h1 { font-size: 2rem; }
+      .landing-hero { min-height: 420px; }
+      .landing-hero-content { padding: 60px 0; }
+    }
+
+    /* Fade in */
+    .landing-fade { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .landing-fade.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .landing-fade { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+
+  <!-- HERO -->
+  <section class="landing-hero">
+    <div class="container landing-hero-content">
+      <div class="landing-badge">⭐ Negocio Destacado — Montcada i Reixac</div>
+      <h1>Peluquería <em>Gaby</em></h1>
+      <p class="landing-subtitle">Realza tu belleza con estilo propio. Expertos en coloración, trenzas africanas y estética personalizada en el corazón de Montcada.</p>
+
+      <div class="landing-stats">
+        <div class="landing-stat">
+          <div class="landing-stat-num">{e.google_rating}</div>
+          <div class="landing-stat-label">Estrellas Google</div>
+        </div>
+        <div class="landing-divider"></div>
+        <div class="landing-stat">
+          <div class="landing-stat-num">{e.google_reviews}</div>
+          <div class="landing-stat-label">Reseñas</div>
+        </div>
+        <div class="landing-divider"></div>
+        <div class="landing-stat">
+          <div class="landing-stat-num">6</div>
+          <div class="landing-stat-label">Servicios</div>
+        </div>
+      </div>
+
+      <div class="landing-actions">
+        <a href="tel:695526862" class="landing-btn landing-btn-primary">📞 Llamar Ahora</a>
+        <a href={e.google_maps_url} target="_blank" rel="noopener" class="landing-btn landing-btn-outline">📍 Cómo Llegar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="landing-services">
+    <div class="container">
+      <div class="landing-section-header landing-fade">
+        <div class="landing-section-tag">✂️ Servicios</div>
+        <h2 class="landing-section-title">Nuestros Servicios</h2>
+        <p class="landing-section-desc">Especialidades diseñadas para resaltar lo mejor de ti.</p>
+      </div>
+
+      <div class="landing-services-grid">
+        {services.map(s => (
+          <div class="landing-service-card landing-fade">
+            <div class="landing-service-icon" style={`background:${s.bg}`}>{s.icon}</div>
+            <h3>{s.name}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="landing-reviews">
+    <div class="container">
+      <div class="landing-section-header landing-fade">
+        <div class="landing-section-tag">💬 Opiniones</div>
+        <h2 class="landing-section-title">Lo que dicen nuestros clientes</h2>
+        <p class="landing-section-desc">{e.google_rating} de 5 estrellas en Google</p>
+      </div>
+
+      <div class="landing-reviews-grid">
+        {reviews.map(r => (
+          <div class="landing-review-card landing-fade">
+            <div class="landing-review-stars">{stars(r.stars)}</div>
+            <p class="landing-review-text">"{r.text}"</p>
+            <div class="landing-review-author">
+              <div class="landing-review-avatar">{r.initials}</div>
+              <div>
+                <div class="landing-review-name">{r.name}</div>
+                <div class="landing-review-source">Google Review</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section class="landing-info">
+    <div class="container">
+      <div class="landing-info-grid">
+        <div class="landing-fade">
+          <div class="landing-section-tag">📍 Contacto</div>
+          <h2 class="landing-section-title" style="margin-bottom:24px">Encuéntranos</h2>
+
+          <div class="landing-info-row">
+            <div class="landing-info-icon">📞</div>
+            <div>
+              <div class="landing-info-label">Teléfono</div>
+              <div class="landing-info-value"><a href="tel:695526862">695 52 68 62</a></div>
+            </div>
+          </div>
+          <div class="landing-info-row">
+            <div class="landing-info-icon">📍</div>
+            <div>
+              <div class="landing-info-label">Dirección</div>
+              <div class="landing-info-value">Rambla dels Països Catalans, 75<br/>08110 Montcada i Reixac, Barcelona</div>
+            </div>
+          </div>
+          <div class="landing-info-row">
+            <div class="landing-info-icon">🌐</div>
+            <div>
+              <div class="landing-info-label">Web</div>
+              <div class="landing-info-value"><a href="https://montcada.com.es" target="_blank" rel="noopener">montcada.com.es</a></div>
+            </div>
+          </div>
+
+          <a href={e.google_maps_url} target="_blank" rel="noopener" class="landing-map-btn">
+            📍 Ver en Google Maps <span style="font-size:0.8rem;opacity:0.7">↗</span>
+          </a>
+        </div>
+
+        <div class="landing-info-card landing-fade">
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:16px">🕐 Horario</div>
+          {hours.map((h, i) => (
+            <div class="landing-hours-row">
+              <span class="landing-hours-day">{h.day}</span>
+              <span class={h.time === "Cerrado" ? "landing-hours-closed" : "landing-hours-time"}>
+                {h.time === "Cerrado" ? "Cerrado" : h.time}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="landing-cta">
+    <div class="container landing-cta-content landing-fade">
+      <h2>¿Listo para un nuevo look?</h2>
+      <p>Ven a visitarnos y descubre por qué somos la peluquería favorita de Montcada i Reixac.</p>
+      <a href="tel:695526862" class="landing-cta-phone">📞 695 52 68 62</a>
+      <div class="landing-cta-address">📍 Rambla dels Països Catalans, 75 — Montcada i Reixac</div>
+    </div>
+  </section>
+
+  <!-- RELATED -->
+  {related.length > 0 && (
+    <section class="landing-related">
+      <div class="container">
+        <div class="landing-section-header landing-fade">
+          <div class="landing-section-tag">💇 Más peluquerías</div>
+          <h2 class="landing-section-title">Otras peluquerías en Montcada</h2>
+        </div>
+        <div class="landing-related-grid">
+          {related.map(n => {
+            const ne = n.enriched || {};
+            const nr = ne.google_rating;
+            const s = nr ? "★".repeat(Math.floor(nr)) + "☆".repeat(5 - Math.floor(nr)) : "";
+            return (
+              <a href={`/peluquerias/${n.slug}/`} class="landing-related-card landing-fade">
+                <strong style="font-size:1rem;font-weight:600">{n.title}</strong>
+                {s && (
+                  <div style="margin-top:4px;display:flex;align-items:center;gap:4px">
+                    <span style="color:var(--accent);font-size:0.9rem;letter-spacing:1px">{s}</span>
+                    <span style="color:var(--text-light);font-size:0.8rem">{nr}</span>
+                  </div>
+                )}
+                {n.phone && <p style="color:var(--text-light);font-size:0.8rem;margin-top:4px">📞 {n.phone}</p>}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.landing-fade').forEach(el => observer.observe(el));
+  </script>
+</BaseLayout>
