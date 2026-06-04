@@ -42,12 +42,10 @@ const days = formatHours(e.google_hours);
 function stars(rating) {
   if (!rating) return "";
   const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  let s = "";
-  for (let i = 0; i < full; i++) s += "★";
+  const half = rating - full >= 0.3;
+  let s = "★".repeat(full);
   if (half) s += "½";
-  const empty = 5 - full - (half ? 1 : 0);
-  for (let i = 0; i < empty; i++) s += "☆";
+  s += "☆".repeat(5 - full - (half ? 1 : 0));
   return s;
 }
 
@@ -87,101 +85,124 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
     ]
   }} />
 
-  <article style="max-width:800px;margin:30px auto;padding:0 20px">
-    <nav style="font-size:0.8rem;color:var(--text-light);margin-bottom:20px">
-      <a href={`/${catSlug}`} style="color:var(--accent)">← {negocio.category}</a>
-    </nav>
+  <!-- Breadcrumb -->
+  <div style="background:var(--bg-alt);padding:16px 0;border-bottom:1px solid var(--border)">
+    <div class="container">
+      <nav style="font-size:0.85rem;color:var(--text-light)">
+        <a href="/" style="color:var(--text-light)">Inicio</a>
+        <span style="margin:0 8px">/</span>
+        <a href={`/${catSlug}/`} style="color:var(--text-light)">{negocio.category}</a>
+        <span style="margin:0 8px">/</span>
+        <span style="color:var(--text);font-weight:500">{negocio.title}</span>
+      </nav>
+    </div>
+  </div>
 
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+  <article style="max-width:900px;margin:0 auto;padding:32px 24px 60px">
+    
+    <!-- Main Card -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md)">
       
-      <!-- Header -->
-      <div style="padding:30px 30px 20px;border-bottom:1px solid var(--border)">
-        <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">{subTitulo} en Montcada i Reixac</p>
-        <h1 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;margin-bottom:8px">{negocio.title}</h1>
+      <!-- Header Section -->
+      <div style="padding:36px 36px 24px;border-bottom:1px solid var(--border)">
+        <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--primary);font-weight:600;margin-bottom:6px">{subTitulo} en Montcada i Reixac</p>
+        <h1 style="font-family:var(--font-serif);font-size:2.4rem;font-weight:700;margin-bottom:12px;line-height:1.15">{negocio.title}</h1>
         
         {hasEnriched && e.google_rating && (
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;flex-wrap:wrap">
-            <span style="color:#eab308;font-size:1.4rem;letter-spacing:2px">{stars(e.google_rating)}</span>
-            <span style="font-weight:600;font-size:1.1rem">{e.google_rating}</span>
-            <span style="color:var(--text-light);font-size:0.9rem">({e.google_reviews} reseñas en Google)</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:4px">
+              <span style="color:#F59E0B;font-size:1.4rem;letter-spacing:2px">{stars(e.google_rating)}</span>
+              <span style="font-weight:700;font-size:1.2rem;color:var(--text)">{e.google_rating}</span>
+            </div>
+            <span style="color:var(--text-muted);font-size:0.9rem">({e.google_reviews} reseñas en Google)</span>
           </div>
         )}
         
-        <div style="color:var(--text-light);font-size:0.9rem">
-          {negocio.category}
-          {e.google_business_status === "OPERATIONAL" ? " · Abierto ahora" : e.google_business_status === "CLOSED_TEMPORARILY" ? " · Cerrado temporalmente" : ""}
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:var(--primary-light);color:var(--primary-dark);border-radius:100px;font-size:0.8rem;font-weight:500">{negocio.category}</span>
+          {e.google_business_status === "OPERATIONAL" && (
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:var(--secondary-light);color:var(--secondary);border-radius:100px;font-size:0.8rem;font-weight:500">● Abierto ahora</span>
+          )}
+          {e.google_business_status === "CLOSED_TEMPORARILY" && (
+            <span style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:#FEF3C7;color:#92400E;border-radius:100px;font-size:0.8rem;font-weight:500">⚠ Cerrado temporalmente</span>
+          )}
         </div>
       </div>
 
-      <!-- Info grid -->
-      <div style="padding:25px 30px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <!-- Info Grid -->
+      <div style="padding:28px 36px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
         {(e.google_phone || negocio.phone) && (
-          <div>
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">📞 Teléfono</div>
-            <a href={`tel:${(e.google_phone || negocio.phone).replace(/\s/g, "")}`} style="font-size:1.1rem;font-weight:600;color:var(--accent)">
+          <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+            <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">📞 Teléfono</div>
+            <a href={`tel:${(e.google_phone || negocio.phone).replace(/\s/g, "")}`} style="font-size:1.1rem;font-weight:600;color:var(--primary)">
               {e.google_phone || negocio.phone}
             </a>
           </div>
         )}
         {e.google_address && (
-          <div>
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">📍 Dirección</div>
-            <div style="font-size:0.95rem">{e.google_address}</div>
+          <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+            <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">📍 Dirección</div>
+            <div style="font-size:0.95rem;color:var(--text)">{e.google_address}</div>
           </div>
         )}
         {e.google_website && (
-          <div>
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">🌐 Web</div>
-            <a href={e.google_website} target="_blank" rel="noopener" style="font-size:0.9rem;color:var(--accent);word-break:break-all">
+          <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+            <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">🌐 Web</div>
+            <a href={e.google_website} target="_blank" rel="noopener" style="font-size:0.9rem;color:var(--primary);font-weight:500;word-break:break-all">
               {e.google_website.replace(/^https?:\/\//, "").split("/")[0]}
             </a>
           </div>
         )}
         {e.google_price_level && (
-          <div>
-            <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:4px">💰 Precio</div>
-            <div style="font-size:0.95rem">
-              {e.google_price_level === "PRICE_LEVEL_INEXPENSIVE" ? "Económico" :
-               e.google_price_level === "PRICE_LEVEL_MODERATE" ? "Moderado" :
-               e.google_price_level === "PRICE_LEVEL_EXPENSIVE" ? "Caro" :
-               e.google_price_level === "PRICE_LEVEL_VERY_EXPENSIVE" ? "Muy caro" : e.google_price_level}
+          <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+            <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">💰 Precio</div>
+            <div style="font-size:0.95rem;font-weight:500">
+              {e.google_price_level === "PRICE_LEVEL_INEXPENSIVE" ? "Económico 💚" :
+               e.google_price_level === "PRICE_LEVEL_MODERATE" ? "Moderado 💛" :
+               e.google_price_level === "PRICE_LEVEL_EXPENSIVE" ? "Caro ❤️" :
+               e.google_price_level === "PRICE_LEVEL_VERY_EXPENSIVE" ? "Muy caro 💎" : e.google_price_level}
             </div>
           </div>
         )}
       </div>
 
-      <!-- Hours -->
+      <!-- Hours Section -->
       {days && days.length > 0 && (
-        <div style="padding:0 30px 20px;border-top:1px solid var(--border);padding-top:20px;margin:0 30px">
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:10px">🕐 Horario</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 30px;font-size:0.9rem">
-            {days.map(d => {
-              const parts = d.split(": ");
-              return (
-                <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed var(--border)">
-                  <span style="font-weight:500">{parts[0]}</span>
-                  <span style="color:var(--text-light)">{parts.slice(1).join(": ") || "—"}</span>
-                </div>
-              );
-            })}
+        <div style="padding:0 36px 24px">
+          <div style="border-top:1px solid var(--border);padding-top:24px">
+            <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:12px">🕐 Horario</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 40px;font-size:0.9rem">
+              {days.map(d => {
+                const parts = d.split(": ");
+                return (
+                  <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--border)">
+                    <span style="font-weight:500">{parts[0]}</span>
+                    <span style="color:var(--text-light)">{parts.slice(1).join(": ") || "—"}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
 
-      <!-- Google Maps -->
+      <!-- Google Maps Button -->
       {e.google_maps_url && (
-        <div style="padding:20px 30px;background:#f8f8f8;border-top:1px solid var(--border);text-align:center">
-          <a href={e.google_maps_url} target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:#1a73e8;color:white;border-radius:8px;font-weight:600;font-size:0.9rem;text-decoration:none">
-            📍 Ver en Google Maps
+        <div style="padding:0 36px 24px">
+          <a href={e.google_maps_url} target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;background:linear-gradient(135deg, #1a73e8, #1557B0);color:white;border-radius:var(--radius);font-weight:600;font-size:1rem;text-decoration:none;transition:all 0.2s"
+            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 14px rgba(26,115,232,0.4)'"
+            onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+            <span>📍</span> Ver en Google Maps
+            <span style="font-size:0.8rem;opacity:0.7">↗</span>
           </a>
         </div>
       )}
 
       <!-- SEO Description -->
       {cleanContent && (
-        <div style="padding:20px 30px;border-top:1px solid var(--border);line-height:1.9">
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:10px">Información</div>
-          <div style="font-size:0.95rem;color:var(--text)">
+        <div style="padding:24px 36px 32px;border-top:1px solid var(--border);background:var(--bg)">
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:12px">📋 Información</div>
+          <div style="font-size:0.95rem;color:var(--text);line-height:1.9">
             {cleanContent.split("\n").filter(l => l.trim()).map(line => (
               <p style="margin-bottom:10px">{line}</p>
             ))}
@@ -190,20 +211,26 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
       )}
     </div>
 
-    <!-- More businesses -->
-    <section style="margin-top:40px">
-      <h2 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:600;margin-bottom:15px">
+    <!-- More Businesses Section -->
+    <section style="margin-top:48px">
+      <h2 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:600;margin-bottom:20px;color:var(--text)">
         Más {negocio.category.toLowerCase()} en Montcada i Reixac
       </h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
         {data.negocios.filter(n => n.category === negocio.category && n.slug !== negocio.slug).slice(0, 6).map(n => {
           const ne = n.enriched || {};
+          const nr = ne.google_rating;
+          const s = nr ? "★".repeat(Math.floor(nr)) + "☆".repeat(5 - Math.floor(nr)) : "";
+          const nCatSlug = n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
           return (
-            <a href={`/${n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u")}/${n.slug}/`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
-              <strong style="font-size:0.95rem">{n.title}</strong>
-              {ne.google_rating && (
-                <div style="margin-top:4px;color:#eab308;font-size:0.85rem">
-                  {"★".repeat(Math.floor(ne.google_rating))}{"☆".repeat(5-Math.floor(ne.google_rating))} <span style="color:var(--text-light)">{ne.google_rating}</span>
+            <a href={`/${nCatSlug}/${n.slug}/`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:var(--shadow-sm)"
+              onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-3px)'"
+              onmouseout="this.style.boxShadow='var(--shadow-sm)';this.style.transform='translateY(0)'">
+              <strong style="font-size:1rem;font-weight:600">{n.title}</strong>
+              {s && (
+                <div style="margin-top:4px;display:flex;align-items:center;gap:4px">
+                  <span style="color:#F59E0B;font-size:0.9rem;letter-spacing:1px">{s}</span>
+                  <span style="color:var(--text-light);font-size:0.8rem">{nr}</span>
                 </div>
               )}
               {n.phone && <p style="color:var(--text-light);font-size:0.8rem;margin-top:4px">📞 {n.phone}</p>}

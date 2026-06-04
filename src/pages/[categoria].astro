@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Schema from "../components/Schema.astro";
-import data from "../data/negocios.json";
+import data from "../data/enriched-negocios.json";
 
 export async function getStaticPaths() {
   return data.categories
@@ -14,8 +14,32 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props;
 const businesses = data.negocios.filter(n => n.category === category.name);
+const enrichedBusinesses = businesses.filter(n => n.enriched?.google_place_id);
 const title = `${category.name} en Montcada i Reixac`;
-const desc = `Encuentra los mejores ${category.name.toLowerCase()} en Montcada i Reixac. Directorio con ${businesses.length} negocios, direcciones y teléfonos.`;
+const desc = `Encuentra los mejores ${category.name.toLowerCase()} en Montcada i Reixac. Directorio con ${businesses.length} negocios, direcciones, teléfonos y opiniones.`;
+
+const categoryIcons = {
+  "Restaurantes": { icon: "🍽️", bg: "#FDF0ED" },
+  "Talleres": { icon: "🔧", bg: "#E8F5F0" },
+  "Fisioterapeutas": { icon: "💪", bg: "#EDE9FE" },
+  "Peluquerías": { icon: "💇", bg: "#FCE7F3" },
+  "Concesionarios": { icon: "🚗", bg: "#DBEAFE" },
+  "Veterinarios": { icon: "🐾", bg: "#F0FDF4" },
+  "Abogados": { icon: "⚖️", bg: "#FEF3C7" },
+  "Dentistas": { icon: "🦷", bg: "#F0F9FF" },
+  "Servicios públicos y trámites": { icon: "🏛️", bg: "#F1F5F9" },
+};
+const catStyle = categoryIcons[category.name] || { icon: "📍", bg: "#F5F0EB" };
+
+function stars(rating) {
+  if (!rating) return "";
+  const full = Math.floor(rating);
+  const half = rating - full >= 0.3;
+  let s = "★".repeat(full);
+  if (half) s += "½";
+  s += "☆".repeat(5 - full - (half ? 1 : 0));
+  return s;
+}
 ---
 
 <BaseLayout title={title} description={desc}>
@@ -26,21 +50,78 @@ const desc = `Encuentra los mejores ${category.name.toLowerCase()} en Montcada i
     ]
   }} />
 
-  <section style="padding:30px 0">
-    <a href="/" style="font-size:0.85rem;color:var(--text-light)">← Volver al inicio</a>
-    <h1 style="font-family:var(--font-serif);font-size:2.2rem;font-weight:700;margin:15px 0 10px">
-      {title}
-    </h1>
-    <p style="color:var(--text-light);margin-bottom:30px;font-size:1rem">{businesses.length} negocios encontrados</p>
+  <!-- Category Hero -->
+  <section style="background:linear-gradient(135deg, var(--primary) 0%, #C94D3A 100%);padding:56px 24px;text-align:center;color:white">
+    <div class="container">
+      <nav style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-bottom:20px">
+        <a href="/" style="color:rgba(255,255,255,0.7)">Inicio</a>
+        <span style="margin:0 8px">/</span>
+        <span style="color:white;font-weight:500">{category.name}</span>
+      </nav>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px">
-      {businesses.map(b => (
-        <a href={`/${category.slug}/${b.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;transition:all 0.15s;text-decoration:none;color:var(--text)">
-          <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:6px">{b.title}</h3>
-          {b.excerpt && <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:6px">{b.excerpt}</p>}
-          {b.phone && <p style="font-size:0.85rem;color:var(--accent);font-weight:500">{b.phone}</p>}
-        </a>
-      ))}
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:12px">
+        <span style="font-size:2.5rem;width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.2);border-radius:16px;backdrop-filter:blur(4px)">{catStyle.icon}</span>
+        <h1 style="font-family:var(--font-serif);font-size:2.8rem;font-weight:700;line-height:1.1">{title}</h1>
+      </div>
+      
+      <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:16px">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);padding:6px 16px;border-radius:100px;font-size:0.9rem;backdrop-filter:blur(4px)">
+          📍 Montcada i Reixac
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);padding:6px 16px;border-radius:100px;font-size:0.9rem;backdrop-filter:blur(4px)">
+          {businesses.length} negocios
+        </span>
+        {enrichedBusinesses.length > 0 && (
+          <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);padding:6px 16px;border-radius:100px;font-size:0.9rem;backdrop-filter:blur(4px)">
+            {enrichedBusinesses.length} verificados
+          </span>
+        )}
+      </div>
     </div>
+  </section>
+
+  <!-- Business Grid -->
+  <section class="container" style="padding:40px 24px 60px">
+    {businesses.length === 0 ? (
+      <div style="text-align:center;padding:60px 0">
+        <p style="font-size:1.1rem;color:var(--text-light)">No encontramos negocios en esta categoría.</p>
+        <a href="/" style="display:inline-block;margin-top:16px;padding:10px 24px;background:var(--primary);color:white;border-radius:8px;font-weight:600;font-size:0.9rem">Volver al inicio</a>
+      </div>
+    ) : (
+      <>
+        <p style="color:var(--text-light);font-size:0.9rem;margin-bottom:24px">
+          Mostrando {businesses.length} {businesses.length === 1 ? "negocio" : "negocios"}
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px">
+          {businesses.map(b => {
+            const ne = b.enriched || {};
+            const r = ne.google_rating;
+            const s = r ? stars(r) : "";
+            return (
+              <a href={`/${category.slug}/${b.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-decoration:none;color:var(--text);transition:all 0.25s ease;box-shadow:var(--shadow-sm)"
+                onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-3px)';this.style.borderColor='var(--primary)'"
+                onmouseout="this.style.boxShadow='var(--shadow-sm)';this.style.transform='translateY(0)';this.style.borderColor='var(--border)'">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:6px">{b.title}</h3>
+                
+                {s && (
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+                    <span style="color:#F59E0B;font-size:1rem;letter-spacing:1px">{s}</span>
+                    <span style="font-weight:600;font-size:0.9rem">{r}</span>
+                    <span style="color:var(--text-muted);font-size:0.8rem">({ne.google_reviews} reseñas)</span>
+                  </div>
+                )}
+                
+                {b.excerpt && <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:8px;line-height:1.5">{b.excerpt}</p>}
+                
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px">
+                  {b.phone && <span style="font-size:0.85rem;color:var(--text-light)">📞 {b.phone}</span>}
+                  {ne.google_website && <span style="font-size:0.85rem;color:var(--primary)">🌐 Web</span>}
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </>
+    )}
   </section>
 </BaseLayout>

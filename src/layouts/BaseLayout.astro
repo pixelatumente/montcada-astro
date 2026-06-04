@@ -24,56 +24,103 @@ const site = "https://montcada.com.es";
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="robots" content="index, follow" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
     <style is:global>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       :root {
-        --accent: #ff1956;
-        --accent-dark: #b5005a;
-        --bg: #fbfbfb;
-        --card: #ffffff;
-        --text: #3a3a3a;
-        --text-light: #6b7280;
-        --border: #e5e7eb;
-        --font-sans: "Inter", system-ui, sans-serif;
-        --font-serif: "Playfair Display", serif;
+        --primary: #E85D4A;
+        --primary-dark: #C94D3A;
+        --primary-light: #FDF0ED;
+        --secondary: #2D6A4F;
+        --secondary-light: #E8F5F0;
+        --accent: #F59E0B;
+        --bg: #FCF8F5;
+        --bg-alt: #F5F0EB;
+        --card: #FFFFFF;
+        --text: #1C1917;
+        --text-light: #78716C;
+        --text-muted: #A8A29E;
+        --border: #EDE9E5;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+        --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,0.1);
+        --radius: 12px;
+        --radius-lg: 16px;
+        --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+        --font-serif: "Playfair Display", Georgia, serif;
       }
+      html { scroll-behavior: smooth; }
       body {
         font-family: var(--font-sans);
         background: var(--bg);
         color: var(--text);
         line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
       }
-      a { color: var(--accent); text-decoration: none; }
-      a:hover { color: var(--accent-dark); }
-      img { max-width: 100%; height: auto; }
-      .container { max-width: 1170px; margin: 0 auto; padding: 0 20px; }
+      a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+      a:hover { color: var(--primary-dark); }
+      img { max-width: 100%; height: auto; display: block; }
+      .container { max-width: 1170px; margin: 0 auto; padding: 0 24px; }
       @media (max-width: 768px) {
-        .container { padding: 0 15px; }
+        .container { padding: 0 16px; }
       }
+      ::selection { background: var(--primary); color: white; }
     </style>
   </head>
   <body>
-    <header>
-      <nav class="container" style="display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:1px solid var(--border)">
-        <a href="/" style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--text)">Montcada Online</a>
-        <div style="display:flex;gap:15px;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">
-          <a href="/">Inicio</a>
-          <a href="/restaurantes">Restaurantes</a>
-          <a href="/talleres">Talleres</a>
-          <a href="/peluquerias">Peluquerías</a>
-        </div>
-      </nav>
+    <header style="position:sticky;top:0;z-index:100;background:rgba(252,248,245,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)">
+      <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:64px">
+        <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+          <span style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--primary);color:white;border-radius:10px;font-size:1.1rem;font-weight:700">M</span>
+          <span style="font-family:var(--font-serif);font-size:1.3rem;font-weight:700;color:var(--text)">Montcada Online</span>
+        </a>
+        <nav style="display:flex;align-items:center;gap:24px">
+          <a href="/" style="font-size:0.9rem;font-weight:500;color:var(--text-light)">Inicio</a>
+          <a href="/restaurantes" style="font-size:0.9rem;font-weight:500;color:var(--text-light)">Restaurantes</a>
+          <a href="/talleres" style="font-size:0.9rem;font-weight:500;color:var(--text-light)">Talleres</a>
+          <a href="/peluquerias" style="font-size:0.9rem;font-weight:500;color:var(--text-light)">Peluquerías</a>
+        </nav>
+      </div>
     </header>
-    <main class="container" style="padding:30px 0 60px">
+
+    <main>
       <slot />
     </main>
-    <footer style="background:#050101;color:#ff1956;padding:30px 0;text-align:center;font-size:0.85rem">
+
+    <footer style="background:#1C1917;color:white;padding:48px 0 32px;margin-top:60px">
       <div class="container">
-        <p>&copy; 2026 Montcada Online — Guía de Montcada i Reixac</p>
-        <p style="margin-top:5px;color:#666">
-          <a href="/">Inicio</a> · <a href="/publica-tu-negocio">Publica tu negocio</a>
-        </p>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:32px">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <span style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--primary);color:white;border-radius:8px;font-size:0.9rem;font-weight:700">M</span>
+              <span style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600">Montcada Online</span>
+            </div>
+            <p style="color:#A8A29E;font-size:0.9rem;line-height:1.7;max-width:320px">
+              Tu guía de confianza para descubrir los mejores negocios, comercios y profesionales de Montcada i Reixac.
+            </p>
+          </div>
+          <div>
+            <h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:#A8A29E;margin-bottom:14px">Explorar</h4>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <a href="/" style="color:#D4D0CC;font-size:0.9rem">Inicio</a>
+              <a href="/restaurantes" style="color:#D4D0CC;font-size:0.9rem">Restaurantes</a>
+              <a href="/talleres" style="color:#D4D0CC;font-size:0.9rem">Talleres</a>
+              <a href="/peluquerias" style="color:#D4D0CC;font-size:0.9rem">Peluquerías</a>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:#A8A29E;margin-bottom:14px">Info</h4>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <a href="/publica-tu-negocio" style="color:#D4D0CC;font-size:0.9rem">Publica tu negocio</a>
+              <span style="color:#A8A29E;font-size:0.9rem">📍 Montcada i Reixac</span>
+              <span style="color:#A8A29E;font-size:0.9rem">Vallès Occidental</span>
+            </div>
+          </div>
+        </div>
+        <div style="border-top:1px solid #3A3532;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+          <p style="color:#A8A29E;font-size:0.85rem">&copy; 2026 Montcada Online. Todos los derechos reservados.</p>
+          <p style="color:#A8A29E;font-size:0.8rem">Hecho con ❤️ para Montcada i Reixac</p>
+        </div>
       </div>
     </footer>
   </body>
