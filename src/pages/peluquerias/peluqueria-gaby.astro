@@ -36,11 +36,11 @@ function stars(rating) {
 }
 
 const services = [
-  { icon: "✂️", name: "Corte y Estilo", desc: "Damas, caballeros y niños. Desde clásicos hasta las últimas tendencias.", bg: "#FDF0ED" },
-  { icon: "🎨", name: "Coloración Experta", desc: "Tintes, mechas, balayage y matices con productos de alta calidad.", bg: "#FEF3C7" },
-  { icon: "👑", name: "Trenzas Africanas", desc: "Nuestra especialidad estrella. Diseños únicos y cuidado profesional.", bg: "#EDE9FE" },
-  { icon: "💅", name: "Manicura y Pedicura", desc: "Cuidado completo para tus manos y pies con acabados impecables.", bg: "#FCE7F3" },
-  { icon: "🏠", name: "Servicio a Domicilio", desc: "Llevamos la experiencia del salón a la comodidad de tu hogar.", bg: "#E8F5F0" },
+  { icon: "✂️", name: "Corte y Estilo", desc: "Damas, caballeros y niños. Desde clásicos hasta las últimas tendencias.", bg: "#FDF0ED", prices: ["Lavar + Cortar + Peinar — 20€", "Corte de Hombre — 10€", "Lavar y Peinar — 10€"] },
+  { icon: "🎨", name: "Coloración Experta", desc: "Tintes, mechas, balayage y matices con productos de alta calidad.", bg: "#FEF3C7", prices: ["Color + Lavado + Peinar — desde 30€", "Balayage — desde 35€", "Mechas + Lavar + Peinar — desde 50€"] },
+  { icon: "👑", name: "Trenzas Africanas", desc: "Nuestra especialidad estrella. Diseños únicos y cuidado profesional.", bg: "#EDE9FE", prices: ["Consultar presupuesto personalizado"] },
+  { icon: "💅", name: "Manicura y Pedicura", desc: "Cuidado completo para tus manos y pies con acabados impecables.", bg: "#FCE7F3", prices: ["Manicura Tradicional — 10€", "Uñas Semi Permanentes — 15€", "Pedicura — 16€", "Pedicura Semi Permanente — desde 28€"] },
+  { icon: "🏠", name: "Servicio a Domicilio", desc: "Llevamos la experiencia del salón a la comodidad de tu hogar.", bg: "#E8F5F0", prices: ["Consultar disponibilidad y precios"] },
   { icon: "💬", name: "Trato Personalizado", desc: "Cada cliente es único. Te asesoramos para encontrar tu mejor versión.", bg: "#F0F9FF" },
 ];
 
@@ -346,6 +346,16 @@ const isOpen = e.google_business_status === "OPERATIONAL";
             <div class="landing-service-icon" style={`background:${s.bg}`}>{s.icon}</div>
             <h3>{s.name}</h3>
             <p>{s.desc}</p>
+            {s.prices && (
+              <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px">
+                {s.prices.map(p => (
+                  <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem">
+                    <span style="color:var(--primary);font-weight:600">•</span>
+                    <span style="color:var(--text-light)">{p}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

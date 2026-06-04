@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peluquería Gaby — Montcada i Reixac | Montcada Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #E85D4A;
+      --primary-dark: #C94D3A;
+      --primary-light: #FDF0ED;
+      --secondary: #2D6A4F;
+      --secondary-light: #E8F5F0;
+      --accent: #F59E0B;
+      --bg: #FCF8F5;
+      --bg-alt: #F5F0EB;
+      --card: #FFFFFF;
+      --text: #1C1917;
+      --text-light: #78716C;
+      --text-muted: #A8A29E;
+      --border: #EDE9E5;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.1);
+      --radius: 12px;
+      --radius-lg: 16px;
+      --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+      --font-serif: "Playfair Display", Georgia, serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--primary-dark); }
+    .container { max-width: 1170px; margin: 0 auto; padding: 0 24px; }
+
+    /* ========== HEADER ========== */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(252,248,245,0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; background: var(--primary); color: white;
+      border-radius: 10px; font-size: 1.1rem; font-weight: 700;
+    }
+    .logo-text { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; color: var(--text); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 0.9rem; font-weight: 500; color: var(--text-light); }
+    nav a:hover { color: var(--primary); }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, #C94D3A 40%, #1C1917 100%);
+      overflow: hidden;
+      min-height: 520px;
+      display: flex; align-items: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; padding: 80px 0; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      padding: 8px 18px; border-radius: 100px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--font-serif); font-size: 3.4rem; font-weight: 700;
+      line-height: 1.1; color: white; margin-bottom: 12px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, #FCD34D, #F59E0B);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip:text;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem; color: rgba(255,255,255,0.85);
+      max-width: 540px; line-height: 1.6; font-weight: 300;
+      margin-bottom: 24px;
+    }
+    .hero-stats {
+      display: flex; gap: 32px; flex-wrap: wrap; margin-top: 28px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-size: 2rem; font-weight: 700; color: #FCD34D; line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6); margin-top: 4px;
+    }
+    .hero-divider {
+      width: 1px; background: rgba(255,255,255,0.2); align-self: stretch;
+    }
+    .hero-actions {
+      display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-size: 1rem; font-weight: 600; text-decoration: none;
+      transition: all 0.25s ease; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: white; color: var(--primary);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,255,255,0.3);
+      color: var(--primary-dark);
+    }
+    .btn-outline {
+      background: transparent; color: white;
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+    .btn-outline:hover {
+      border-color: white; background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    /* ========== SERVICES ========== */
+    .services { padding: 72px 0; }
+    .section-header {
+      text-align: center; margin-bottom: 48px;
+    }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--primary); font-weight: 600; margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .section-desc {
+      color: var(--text-light); font-size: 1rem; max-width: 520px; margin: 0 auto;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 32px 28px;
+      transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--primary); opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .service-card:hover {
+      box-shadow: var(--shadow-lg); transform: translateY(-4px);
+      border-color: transparent;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 18px;
+    }
+    .service-card h3 {
+      font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: var(--text);
+    }
+    .service-card p {
+      color: var(--text-light); font-size: 0.9rem; line-height: 1.65;
+    }
+
+    /* ========== REVIEWS ========== */
+    .reviews { padding: 72px 0; background: var(--bg-alt); }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 28px;
+      box-shadow: var(--shadow-sm); transition: all 0.3s ease;
+    }
+    .review-card:hover {
+      box-shadow: var(--shadow-md); transform: translateY(-2px);
+    }
+    .review-stars {
+      color: var(--accent); font-size: 1.1rem; letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .review-text {
+      font-size: 0.95rem; color: var(--text); line-height: 1.7;
+      font-style: italic; margin-bottom: 16px;
+    }
+    .review-author {
+      display: flex; align-items: center; gap: 10px;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .review-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--primary-light); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem;
+    }
+    .review-name { font-weight: 600; font-size: 0.9rem; }
+    .review-source { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ========== INFO ========== */
+    .info { padding: 72px 0; }
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      align-items: start;
+    }
+    .info-left {}
+    .info-right {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+    .info-row {
+      display: flex; gap: 16px; padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--primary-light); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .info-label {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--text-muted); margin-bottom: 2px;
+    }
+    .info-value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+    .info-value a { color: var(--primary); font-weight: 600; }
+
+    .hours-table { width: 100%; }
+    .hours-row {
+      display: flex; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px dashed var(--border);
+      font-size: 0.9rem;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { font-weight: 500; }
+    .hours-time { color: var(--text-light); }
+    .hours-closed { color: var(--primary); font-weight: 500; }
+    .hours-today {
+      background: var(--primary-light);
+      margin: 0 -16px; padding: 10px 16px;
+      border-radius: 8px; border-bottom: none;
+    }
+
+    .map-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #1a73e8, #1557B0);
+      color: white; border-radius: var(--radius);
+      font-weight: 600; font-size: 1rem; text-decoration: none;
+      transition: all 0.2s; margin-top: 20px;
+    }
+    .map-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(26,115,232,0.4);
+      color: white;
+    }
+
+    /* ========== CTA ========== */
+    .cta {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, #C94D3A 100%);
+      text-align: center; color: white;
+      position: relative; overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2l2 2-2 2zm0-16V0h2v4.5h4V6h-4V2h-2v2.5zM0 20.5V20h2v.5h4V20H2v-.5H0zM0 26v-2h6v2H0z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+    .cta h2 {
+      font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .cta p {
+      font-size: 1.05rem; opacity: 0.9; line-height: 1.7; margin-bottom: 32px;
+    }
+    .cta-phone {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; background: white; color: var(--primary);
+      border-radius: 100px; font-size: 1.2rem; font-weight: 700;
+      text-decoration: none; transition: all 0.25s;
+    }
+    .cta-phone:hover {
+      transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      color: var(--primary-dark);
+    }
+    .cta-address {
+      margin-top: 20px; font-size: 0.9rem; opacity: 0.8;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #1C1917; color: white; padding: 48px 0 32px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+      margin-bottom: 32px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-brand-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: var(--primary); color: white;
+      border-radius: 8px; font-size: 0.9rem; font-weight: 700;
+    }
+    .footer-desc { color: #A8A29E; font-size: 0.9rem; line-height: 1.7; max-width: 320px; }
+    .footer-heading {
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: #A8A29E; margin-bottom: 14px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: #D4D0CC; font-size: 0.9rem; }
+    .footer-bottom {
+      border-top: 1px solid #3A3532; padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 8px;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.4rem; }
+      .hero-subtitle { font-size: 1.05rem; }
+      .hero-stats { gap: 24px; }
+      .hero-stat-num { font-size: 1.6rem; }
+      .services-grid, .reviews-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .section-title { font-size: 1.8rem; }
+      nav { display: none; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero { min-height: 420px; }
+      .hero-content { padding: 60px 0; }
+    }
+
+    /* ========== ANIMATIONS ========== */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">M</span>
+        <span class="logo-text">Montcada Online</span>
+      </a>
+      <nav>
+        <a href="/">Inicio</a>
+        <a href="/restaurantes">Restaurantes</a>
+        <a href="/talleres">Talleres</a>
+        <a href="/peluquerias">Peluquerías</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-badge">⭐ Negocio Destacado — Montcada i Reixac</div>
+      <h1>Peluquería <em>Gaby</em></h1>
+      <p class="hero-subtitle">Realza tu belleza con estilo propio. Expertos en coloración, trenzas africanas y estética personalizada en el corazón de Montcada.</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">4.5</div>
+          <div class="hero-stat-label">Estrellas Google</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">23</div>
+          <div class="hero-stat-label">Reseñas</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">6</div>
+          <div class="hero-stat-label">Servicios</div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="tel:695526862" class="btn btn-primary">📞 Llamar Ahora</a>
+        <a href="https://maps.google.com/?cid=4348082453469054620" target="_blank" rel="noopener" class="btn btn-outline">📍 Cómo Llegar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag">✂️ Servicios</div>
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <p class="section-desc">Especialidades diseñadas para resaltar lo mejor de ti.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <div class="service-icon" style="background:#FDF0ED">✂️</div>
+          <h3>Corte y Estilo</h3>
+          <p>Damas, caballeros y niños. Desde clásicos hasta las últimas tendencias.</p>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Lavar + Cortar + Peinar — 20€</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Corte de Hombre — 10€</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Lavar y Peinar — 10€</span></div>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon" style="background:#FEF3C7">🎨</div>
+          <h3>Coloración Experta</h3>
+          <p>Tintes, mechas, balayage y matices con productos de alta calidad.</p>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Color + Lavado + Peinar — desde 30€</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Balayage — desde 35€</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Mechas + Lavar + Peinar — desde 50€</span></div>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon" style="background:#EDE9FE">👑</div>
+          <h3>Trenzas Africanas</h3>
+          <p>Nuestra especialidad estrella. Diseños únicos y cuidado profesional.</p>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Consultar presupuesto personalizado</span></div>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon" style="background:#FCE7F3">💅</div>
+          <h3>Manicura y Pedicura</h3>
+          <p>Cuidado completo para tus manos y pies con acabados impecables.</p>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Manicura Tradicional — 10€</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Uñas Semi Permanentes — 15€</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Pedicura — 16€</span></div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Pedicura Semi Permanente — desde 28€</span></div>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon" style="background:#E8F5F0">🏠</div>
+          <h3>Servicio a Domicilio</h3>
+          <p>Llevamos la experiencia del salón a la comodidad de tu hogar.</p>
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.85rem"><span style="color:var(--primary);font-weight:600">•</span><span style="color:var(--text-light)">Consultar disponibilidad y precios</span></div>
+          </div>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon" style="background:#F0F9FF">💬</div>
+          <h3>Trato Personalizado</h3>
+          <p>Cada cliente es único. Te asesoramos para encontrar tu mejor versión.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-tag">💬 Opiniones</div>
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <p class="section-desc">4.7 de 5 estrellas en Google</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★½</div>
+          <p class="review-text">"¡Encantada es poco! En este salón vas a encontrar más de lo que buscas y con una persona maravillosa que te atiende y entiende a la perfección."</p>
+          <div class="review-author">
+            <div class="review-avatar">ID</div>
+            <div>
+              <div class="review-name">Iratxe D.A.</div>
+              <div class="review-source">Google Review</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Muy buen servicio a domicilio. Corte de pelo, pedicura y también manicura. Una persona encantadora y precio muy asequible."</p>
+          <div class="review-author">
+            <div class="review-avatar">MS</div>
+            <div>
+              <div class="review-name">Mariela Saucedo</div>
+              <div class="review-source">Google Review</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Muy buena atención, la dueña es muy amable. Resultados excelentes en color y corte."</p>
+          <div class="review-author">
+            <div class="review-avatar">CG</div>
+            <div>
+              <div class="review-name">Cira Garcia</div>
+              <div class="review-source">Google Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section class="info">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-left fade-in">
+          <div class="section-tag">📍 Contacto</div>
+          <h2 class="section-title" style="margin-bottom:24px">Encuéntranos</h2>
+
+          <div class="info-row">
+            <div class="info-icon">📞</div>
+            <div>
+              <div class="info-label">Teléfono</div>
+              <div class="info-value"><a href="tel:695526862">695 52 68 62</a></div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Dirección</div>
+              <div class="info-value">Rambla dels Països Catalans, 75<br>08110 Montcada i Reixac, Barcelona</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">🌐</div>
+            <div>
+              <div class="info-label">Web</div>
+              <div class="info-value"><a href="https://montcada.com.es" target="_blank" rel="noopener">montcada.com.es</a></div>
+            </div>
+          </div>
+
+          <a href="https://maps.google.com/?cid=4348082453469054620" target="_blank" rel="noopener" class="map-btn">
+            📍 Ver en Google Maps <span style="font-size:0.8rem;opacity:0.7">↗</span>
+          </a>
+        </div>
+
+        <div class="info-right fade-in">
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:16px">🕐 Horario</div>
+          <div class="hours-table">
+            <div class="hours-row">
+              <span class="hours-day">Lunes</span>
+              <span class="hours-time">9:30–13:30, 16:00–20:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Martes</span>
+              <span class="hours-time">9:30–13:30, 16:00–20:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Miércoles</span>
+              <span class="hours-time">9:30–13:30, 16:00–20:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Jueves</span>
+              <span class="hours-time">9:30–13:30, 16:00–20:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Viernes</span>
+              <span class="hours-time">9:30–13:30, 16:00–20:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Sábado</span>
+              <span class="hours-time">9:00–15:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Domingo</span>
+              <span class="hours-closed">Cerrado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container cta-content fade-in">
+      <h2>¿Listo para un nuevo look?</h2>
+      <p>Ven a visitarnos y descubre por qué somos la peluquería favorita de Montcada i Reixac.</p>
+      <a href="tel:695526862" class="cta-phone">📞 695 52 68 62</a>
+      <div class="cta-address">📍 Rambla dels Països Catalans, 75 — Montcada i Reixac</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="footer-brand-icon">M</span>
+            <span style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600">Montcada Online</span>
+          </div>
+          <p class="footer-desc">Tu guía de confianza para descubrir los mejores negocios, comercios y profesionales de Montcada i Reixac.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Explorar</div>
+          <div class="footer-links">
+            <a href="/">Inicio</a>
+            <a href="/restaurantes">Restaurantes</a>
+            <a href="/talleres">Talleres</a>
+            <a href="/peluquerias">Peluquerías</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Info</div>
+          <div class="footer-links">
+            <a href="/publica-tu-negocio">Publica tu negocio</a>
+            <span style="color:#A8A29E;font-size:0.9rem">📍 Montcada i Reixac</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p style="color:#A8A29E;font-size:0.85rem">&copy; 2026 Montcada Online. Todos los derechos reservados.</p>
+        <p style="color:#A8A29E;font-size:0.8rem">Hecho con ❤️ para Montcada i Reixac</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
