@@ -199,7 +199,7 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
         {data.negocios.filter(n => n.category === negocio.category && n.slug !== negocio.slug).slice(0, 6).map(n => {
           const ne = n.enriched || {};
           return (
-            <a href={`/${n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u")}/${n.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
+            <a href={`/${n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u")}/${n.slug}/`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)">
               <strong style="font-size:0.95rem">{n.title}</strong>
               {ne.google_rating && (
                 <div style="margin-top:4px;color:#eab308;font-size:0.85rem">

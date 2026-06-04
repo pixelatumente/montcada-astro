@@ -1,37 +1,157 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Schema from "../components/Schema.astro";
-import data from "../data/negocios.json";
+import data from "../data/enriched-negocios.json";
 
-const categories = data.categories.filter(c => c.slug !== "tiempo" && c.slug !== "mir");
-const total = data.total;
+const categories = data.categories.filter(c => c.slug !== "mir");
+const total = data.total || categories.reduce((s, c) => s + c.count, 0);
 const topCategories = categories.sort((a, b) => b.count - a.count);
+const enrichedCount = data.negocios.filter(n => n.enriched?.google_place_id).length;
+
+// Get top rated businesses
+const topRated = data.negocios
+  .filter(n => n.enriched?.google_rating && n.enriched?.google_rating >= 4.5)
+  .sort((a, b) => (b.enriched?.google_reviews || 0) - (a.enriched?.google_reviews || 0))
+  .slice(0, 3);
 ---
 
 <BaseLayout
-  title="Negocios en Montcada i Reixac"
-  description="Directorio de comercios, negocios y profesionales de Montcada i Reixac. Encuentra restaurantes, talleres, peluquerías, veterinarios y más."
+  title="Negocios en Montcada i Reixac | Montcada Online"
+  description="Directorio de comercios, negocios y profesionales de Montcada i Reixac. Encuentra restaurantes, talleres, peluquerías, veterinarios y más. {total} negocios locales."
 >
-  <Schema type="WebPage" data={{ name: "Montcada Online", description: "Guía de negocios de Montcada i Reixac" }} />
+  <Schema type="WebPage" data={{ name: "Montcada Online", description: `Guía de negocios de Montcada i Reixac con ${total} comercios` }} />
 
-  <section style="text-align:center;padding:60px 0 40px">
-    <h1 style="font-family:var(--font-serif);font-size:2.8rem;font-weight:700;margin-bottom:15px">
-      Negocios en <span style="color:var(--accent)">Montcada i Reixac</span>
-    </h1>
-    <p style="font-size:1.15rem;color:var(--text-light);max-width:650px;margin:0 auto">
-      El directorio local con {total} comercios, servicios y profesionales de la ciudad.
-      Encuentra lo que necesitas cerca de ti.
+  <!-- Hero Section -->
+  <section style="position:relative;min-height:520px;display:flex;align-items:center;overflow:hidden;border-radius:0 0 24px 24px">
+    <!-- Background image via img tag -->
+    <img src="/montcada-hero.jpg" alt="Montcada i Reixac" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(0.4);z-index:0" />
+    
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);z-index:1"></div>
+    
+    <div style="position:relative;z-index:2;max-width:800px;margin:0 auto;padding:80px 20px;text-align:center;color:white">
+      <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:15px;opacity:0.8">Directorio Local</p>
+      <h1 style="font-family:var(--font-serif);font-size:3.2rem;font-weight:700;margin-bottom:15px;line-height:1.15">
+        Tu guía de negocios en<br/>
+        <span style="color:#ff6b8a">Montcada i Reixac</span>
+      </h1>
+      <p style="font-size:1.15rem;max-width:600px;margin:0 auto 30px;opacity:0.9;line-height:1.6">
+        Descubre los mejores comercios, servicios y profesionales cerca de ti.<br/>
+        {total} negocios locales verificados con datos reales.
+      </p>
+      
+      <!-- Stats row -->
+      <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:2.2rem;font-weight:700;color:#ff6b8a">{total}</div>
+          <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.7">Negocios</div>
+        </div>
+        <div>
+          <div style="font-size:2.2rem;font-weight:700;color:#ff6b8a">{categories.length}</div>
+          <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.7">Categorías</div>
+        </div>
+        <div>
+          <div style="font-size:2.2rem;font-weight:700;color:#ff6b8a">{enrichedCount}</div>
+          <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0.7">Verificados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Grid -->
+  <section style="max-width:1170px;margin:0 auto;padding:50px 20px">
+    <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;margin-bottom:8px;text-align:center">
+      Explora por categoría
+    </h2>
+    <p style="text-align:center;color:var(--text-light);margin-bottom:30px;font-size:1rem">
+      Encuentra lo que buscas entre {total} negocios locales
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+      {topCategories.map(cat => {
+        const icons = {
+          "Restaurantes": "🍽️",
+          "Talleres": "🔧",
+          "Fisioterapeutas": "💪",
+          "Peluquerías": "💇",
+          "Concesionarios": "🚗",
+          "Veterinarios": "🐾",
+          "Abogados": "⚖️",
+          "Dentistas": "🦷",
+          "Servicios públicos y trámites": "🏛️",
+        };
+        const icon = icons[cat.name] || "📍";
+        const slug = cat.slug || cat.name.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
+        return (
+          <a href={`/${slug}/`} style="display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 24px;transition:all 0.25s;text-decoration:none;color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.04);text-decoration:none"
+            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.boxShadow='0 1px 3px rgba(0,0,0,0.04)';this.style.transform='translateY(0)'">
+            <span style="font-size:2rem;width:50px;text-align:center">{icon}</span>
+            <div>
+              <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:2px">{cat.name}</h3>
+              <p style="color:var(--text-light);font-size:0.85rem">{cat.count} {cat.count === 1 ? "negocio" : "negocios"}</p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Top Rated Businesses -->
+  {topRated.length > 0 && (
+    <section style="background:#f8f8f8;padding:50px 20px">
+      <div style="max-width:1170px;margin:0 auto">
+        <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;margin-bottom:8px;text-align:center">
+          ⭐ Más valorados por los vecinos
+        </h2>
+        <p style="text-align:center;color:var(--text-light);margin-bottom:30px;font-size:1rem">
+          Negocios con las mejores puntuaciones en Google
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+          {topRated.map(n => {
+            const ne = n.enriched || {};
+            const stars = "★".repeat(Math.floor(ne.google_rating || 0)) + "☆".repeat(5 - Math.floor(ne.google_rating || 0));
+            const catSlug = n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
+            return (
+              <a href={`/${catSlug}/${n.slug}/`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:0 2px 6px rgba(0,0,0,0.06)"
+                onmouseover="this.style.boxShadow='0 6px 16px rgba(0,0,0,0.12)';this.style.transform='translateY(-3px)'"
+                onmouseout="this.style.boxShadow='0 2px 6px rgba(0,0,0,0.06)';this.style.transform='translateY(0)'">
+                <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:6px">{n.title}</h3>
+                <div style="color:#eab308;font-size:1.1rem;letter-spacing:2px;margin-bottom:4px">{stars}</div>
+                <div style="display:flex;justify-content:space-between;color:var(--text-light);font-size:0.85rem">
+                  <span>{ne.google_rating} ({ne.google_reviews} reseñas)</span>
+                  <span>{n.category}</span>
+                </div>
+                {n.phone && <p style="color:var(--text-light);font-size:0.8rem;margin-top:6px">📞 {n.phone}</p>}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA / About -->
+  <section style="max-width:800px;margin:0 auto;padding:50px 20px;text-align:center">
+    <h2 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;margin-bottom:12px">
+      ¿Tienes un negocio en Montcada i Reixac?
+    </h2>
+    <p style="color:var(--text-light);font-size:1rem;margin-bottom:20px;line-height:1.6">
+      Si tu comercio o servicio no aparece en nuestro directorio, puedes solicitarnos que lo añadamos.<br/>
+      Todos los datos se verifican con Google Places para ofrecer información actualizada.
+    </p>
+    <p style="font-size:0.85rem;color:var(--text-light)">
+      📍 Montcada i Reixac · Vallès Occidental · Barcelona
     </p>
   </section>
 
-  <section>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
-      {topCategories.map(cat => (
-        <a href={`/${cat.slug}`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:30px;transition:all 0.2s;text-decoration:none;color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.04)">
-          <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:8px">{cat.name}</h3>
-          <p style="color:var(--text-light);font-size:0.9rem">{cat.count} {cat.count === 1 ? "negocio" : "negocios"}</p>
-        </a>
-      ))}
-    </div>
-  </section>
+  <!-- Inline highlight styles -->
+  <style>
+    a[href*="montcada"],[href*="/"],
+    section a {
+      transition: all 0.25s ease;
+    }
+    section a:hover {
+      transform: translateY(-3px);
+    }
+  </style>
 </BaseLayout>
