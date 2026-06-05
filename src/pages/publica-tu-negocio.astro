@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Publica tu negocio en Montcada Online";
+const desc = "Da visibilidad a tu negocio en Montcada i Reixac. Aparece en nuestro directorio local con fotos, horarios, reseñas y enlace a Google Maps. Gratuito.";
+---
+
+<BaseLayout title={title} description={desc}>
+  <style is:global>
+    .pub-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #C94D3A 50%, #1C1917 100%);
+      position: relative; overflow: hidden; min-height: 420px;
+      display: flex; align-items: center;
+    }
+    .pub-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .pub-hero-content { position: relative; z-index: 2; width: 100%; padding: 80px 0; }
+    .pub-step { display: flex; align-items: flex-start; gap: 20px; padding: 24px; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .pub-step-num { flex-shrink: 0; width: 44px; height: 44px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+    .pub-benefit { text-align: center; padding: 32px 20px; background: var(--card); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s; }
+    .pub-benefit:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .pub-benefit-icon { font-size: 2.2rem; margin-bottom: 16px; }
+    .pub-pricing { text-align: center; padding: 40px; background: linear-gradient(135deg, var(--primary) 0%, #C94D3A 100%); border-radius: var(--radius-lg); color: white; }
+    .pub-cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; background: white; color: var(--primary); border-radius: 100px; font-weight: 600; font-size: 1.05rem; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+    .pub-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); color: var(--primary-dark); }
+    @media (max-width: 768px) {
+      .pub-hero { min-height: 320px; }
+      .pub-hero h1 { font-size: 2rem; }
+    }
+  </style>
+
+  <!-- Hero -->
+  <section class="pub-hero">
+    <div class="pub-hero-content">
+      <div class="container" style="text-align:center">
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);padding:8px 18px;border-radius:100px;font-size:0.85rem;color:rgba(255,255,255,0.9);margin-bottom:20px">📍 Montcada i Reixac · Vallès Occidental</div>
+        <h1 style="font-family:var(--font-serif);font-size:3rem;font-weight:700;color:white;margin-bottom:16px;line-height:1.15">Haz visible tu negocio<br>en Montcada Online</h1>
+        <p style="color:rgba(255,255,255,0.8);font-size:1.1rem;max-width:600px;margin:0 auto 32px;line-height:1.6">
+          Forma parte del directorio local más completo de Montcada i Reixac. Tus vecinos te buscarán aquí.
+        </p>
+        <a href="mailto:info@montcada.com.es?subject=Quiero%20publicar%20mi%20negocio&body=Nombre%20del%20negocio%3A%0ATipo%20de%20negocio%3A%0ATel%C3%A9fono%3A%0ADirecci%C3%B3n%3A%0AWeb%20(opcional)%3A%0AMensaje%3A" class="pub-cta">📩 Solicitar alta gratuita →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <div class="container" style="margin-top:-40px;position:relative;z-index:3">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+      <div class="pub-benefit">
+        <div class="pub-benefit-icon">🔍</div>
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:8px">Visibilidad en Google</h3>
+        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.6">Tu negocio aparecerá en Google con toda tu información actualizada.</p>
+      </div>
+      <div class="pub-benefit">
+        <div class="pub-benefit-icon">⭐</div>
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:8px">Reseñas de clientes</h3>
+        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.6">Mostramos tus valoraciones reales de Google para generar confianza.</p>
+      </div>
+      <div class="pub-benefit">
+        <div class="pub-benefit-icon">📱</div>
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:8px">Un clic para llamar</h3>
+        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.6">Tus clientes te llaman directamente desde el directorio.</p>
+      </div>
+      <div class="pub-benefit">
+        <div class="pub-benefit-icon">🗺️</div>
+        <h3 style="font-size:1rem;font-weight:600;margin-bottom:8px">Google Maps incluido</h3>
+        <p style="color:var(--text-light);font-size:0.88rem;line-height:1.6">Enlace directo a tu ubicación en Maps para llegar sin pérdida.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cómo funciona -->
+  <div class="container" style="margin:80px auto">
+    <h2 style="font-family:var(--font-serif);font-size:2rem;text-align:center;margin-bottom:48px;color:var(--text)">
+      Cómo funciona
+    </h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:900px;margin:0 auto">
+      <div class="pub-step">
+        <div class="pub-step-num">1</div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:600;margin-bottom:4px">Solicita el alta</h3>
+          <p style="color:var(--text-light);font-size:0.9rem;line-height:1.6">Escríbenos un email con los datos de tu negocio. El proceso es inmediato.</p>
+        </div>
+      </div>
+      <div class="pub-step">
+        <div class="pub-step-num">2</div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:600;margin-bottom:4px">Revisamos la info</h3>
+          <p style="color:var(--text-light);font-size:0.9rem;line-height:1.6">Verificamos los datos y enriquecemos tu ficha con Google Places.</p>
+        </div>
+      </div>
+      <div class="pub-step">
+        <div class="pub-step-num">3</div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:600;margin-bottom:4px">Apareces en el directorio</h3>
+          <p style="color:var(--text-light);font-size:0.9rem;line-height:1.6">Tu negocio se publica con horarios, reseñas, fotos y enlace a Maps.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing / CTA -->
+  <div class="container" style="margin:0 auto 80px;max-width:800px">
+    <div class="pub-pricing">
+      <div style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.8;margin-bottom:8px">ALTA BÁSICA</div>
+      <div style="font-size:3.5rem;font-weight:700;font-family:var(--font-serif);line-height:1">0 €</div>
+      <div style="font-size:0.95rem;opacity:0.9;margin:4px 0 20px">Siempre gratuito · Sin permanencia</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:28px;font-size:0.9rem;opacity:0.85">
+        <span>✅ Ficha completa con datos de Google Places</span>
+        <span>✅ Horarios, reseñas y enlace a Maps</span>
+        <span>✅ Enlace directo a tu web y teléfono</span>
+      </div>
+      <a href="mailto:info@montcada.com.es?subject=Quiero%20publicar%20mi%20negocio&body=Nombre%20del%20negocio%3A%0ATipo%20de%20negocio%3A%0ATel%C3%A9fono%3A%0ADirecci%C3%B3n%3A%0AWeb%20(opcional)%3A%0AMensaje%3A" class="pub-cta">📩 Dame de alta ahora</a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="container" style="margin:0 auto 80px;max-width:800px">
+    <h2 style="font-family:var(--font-serif);font-size:2rem;text-align:center;margin-bottom:40px;color:var(--text)">
+      Preguntas frecuentes
+    </h2>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <details style="background:var(--card);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm);cursor:pointer">
+        <summary style="font-weight:600;font-size:0.95rem;color:var(--text)">¿Tiene algún coste?</summary>
+        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.7;margin-top:12px">No, el alta básica es completamente gratuita. Creemos en apoyar el comercio local de Montcada i Reixac.</p>
+      </details>
+      <details style="background:var(--card);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm);cursor:pointer">
+        <summary style="font-weight:600;font-size:0.95rem;color:var(--text)">¿Qué datos necesito aportar?</summary>
+        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.7;margin-top:12px">Nombre del negocio, tipo (restaurante, taller, peluquería...), teléfono, dirección y web si tienes. Nosotros completamos el resto con Google.</p>
+      </details>
+      <details style="background:var(--card);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm);cursor:pointer">
+        <summary style="font-weight:600;font-size:0.95rem;color:var(--text)">¿Cuánto tarda en publicarse?</summary>
+        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.7;margin-top:12px">Normalmente en menos de 24 horas hábiles. Te confirmaremos por email cuando esté activo.</p>
+      </details>
+      <details style="background:var(--card);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm);cursor:pointer">
+        <summary style="font-weight:600;font-size:0.95rem;color:var(--text)">¿Puedo modificar o eliminar mi ficha después?</summary>
+        <p style="color:var(--text-light);font-size:0.9rem;line-height:1.7;margin-top:12px">Sí, escríbenos y lo actualizamos o eliminamos sin problema. Sin compromiso.</p>
+      </details>
+    </div>
+  </div>
+</BaseLayout>
