@@ -1,5 +1,5 @@
 {
-  "total": 372,
+  "total": 377,
   "categories": [
     {
       "name": "Restaurantes",
@@ -17,13 +17,13 @@
       "count": 54
     },
     {
-      "name": "Fisioterapeutas",
-      "slug": "fisioterapeutas",
-      "count": 32
-    },
-    {
       "name": "Concesionarios",
       "slug": "concesionarios",
+      "count": 31
+    },
+    {
+      "name": "Fisioterapeutas",
+      "slug": "fisioterapeutas",
       "count": 31
     },
     {
@@ -37,13 +37,13 @@
       "count": 13
     },
     {
-      "name": "mir",
-      "slug": "mir",
-      "count": 1
-    },
-    {
       "name": "Dentistas",
       "slug": "dentistas",
+      "count": 7
+    },
+    {
+      "name": "mir",
+      "slug": "mir",
       "count": 1
     },
     {
@@ -11099,7 +11099,7 @@
       "id": "4865",
       "title": "Centro Médico Dental Santa Clara",
       "slug": "centro-medico-dental-santa-clara",
-      "category": "Fisioterapeutas",
+      "category": "Dentistas",
       "categories": [
         "Fisioterapeutas"
       ],
@@ -12331,6 +12331,81 @@
         "google_price_level": null
       },
       "clean_content": "Si buscas un peluquería en Montcada i Reixac, Peluquería Gaby es una excelente opción, con una valoración de 4.5 estrellas sobre 5 en Google y más de 23 reseñas de clientes,situado en Rambla dels Països Catalans, 75, 08110 Barcelona, España. Ofrece servicios profesionales de peluquerías.\n\nPuedes visitar su página web en montcada.com.es para más información, o contactar llamando al 695526862."
+    },
+    {
+      "title": "Clínica Sanz Dentistes",
+      "category": "Dentistas",
+      "slug": "clinica-sanz-dentistes",
+      "phone": null,
+      "enriched": {
+        "google_place_id": null,
+        "google_rating": null,
+        "google_reviews": null,
+        "google_address": "Rambla dels Països Catalans, 08110 Montcada i Reixac, Barcelona, España",
+        "google_website": "https://www.sanzdentistes.com/",
+        "google_business_status": "OPERATIONAL",
+        "google_hours": []
+      }
+    },
+    {
+      "title": "Montcada Dental",
+      "category": "Dentistas",
+      "slug": "montcada-dental",
+      "phone": "930 38 25 65",
+      "enriched": {
+        "google_place_id": null,
+        "google_rating": null,
+        "google_reviews": null,
+        "google_address": "Carrer Lleida, 33, 08110 Montcada i Reixac, Barcelona, España",
+        "google_website": "https://montcadadental.com/",
+        "google_business_status": "OPERATIONAL",
+        "google_hours": []
+      }
+    },
+    {
+      "title": "Clínica Dental Montcada Punt",
+      "category": "Dentistas",
+      "slug": "clinica-dental-montcada-punt",
+      "phone": null,
+      "enriched": {
+        "google_place_id": null,
+        "google_rating": null,
+        "google_reviews": null,
+        "google_address": "08110 Montcada i Reixac, Barcelona, España",
+        "google_website": "https://www.clinicamontcadapunt.com/",
+        "google_business_status": "OPERATIONAL",
+        "google_hours": []
+      }
+    },
+    {
+      "title": "Clínica Dental Doctora Minerva",
+      "category": "Dentistas",
+      "slug": "clinica-dental-doctora-minerva",
+      "phone": null,
+      "enriched": {
+        "google_place_id": null,
+        "google_rating": null,
+        "google_reviews": null,
+        "google_address": "08110 Montcada i Reixac, Barcelona, España",
+        "google_website": "https://doctoraminerva.es/",
+        "google_business_status": "OPERATIONAL",
+        "google_hours": []
+      }
+    },
+    {
+      "title": "Vitaldent Montcada",
+      "category": "Dentistas",
+      "slug": "vitaldent-montcada",
+      "phone": null,
+      "enriched": {
+        "google_place_id": null,
+        "google_rating": null,
+        "google_reviews": null,
+        "google_address": "Passeig Jaume I, 58-60, 08110 Montcada i Reixac, Barcelona, España",
+        "google_website": "https://clinicas.vitaldent.com/barcelona/clinica-dental-vitaldent-montcada-131/",
+        "google_business_status": "OPERATIONAL",
+        "google_hours": []
+      }
     }
   ]
 }
