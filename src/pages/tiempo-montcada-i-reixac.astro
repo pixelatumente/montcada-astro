@@ -1,0 +1,275 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "El Tiempo en Montcada i Reixac — Predicción Actualizada";
+const desc = "Consulta el tiempo hoy en Montcada i Reixac (Vallès Occidental). Temperatura, sensación térmica, humedad, viento y previsión a 7 días. Gratis y actualizado.";
+---
+
+<BaseLayout title={title} description={desc}>
+  <style is:global>
+    .weather-hero {
+      background: linear-gradient(135deg, #1E3A5F 0%, #2D5F8A 40%, #4A8DB7 100%);
+      position: relative; overflow: hidden; min-height: 400px;
+      display: flex; align-items: center;
+    }
+    .weather-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 600px 300px at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 400px at 20% 100%, rgba(255,255,255,0.04) 0%, transparent 70%);
+    }
+    .weather-hero-content { position: relative; z-index: 2; width: 100%; padding: 60px 0; }
+
+    .weather-current-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 36px;
+      color: white;
+    }
+    .weather-temp {
+      font-family: var(--font-serif);
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .weather-icon-big {
+      font-size: 4rem;
+      line-height: 1;
+    }
+    .weather-stat {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .weather-stat-value {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+    .weather-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .weather-day-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .weather-day-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .weather-day-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .weather-day-icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .weather-day-temp {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .weather-day-range {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+    .weather-loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-light);
+    }
+    .weather-loading-spinner {
+      display: inline-block;
+      width: 40px; height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .weather-error {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+    @media (max-width: 768px) {
+      .weather-temp { font-size: 3.2rem; }
+      .weather-icon-big { font-size: 3rem; }
+      .weather-current-card { padding: 24px; }
+    }
+  </style>
+
+  <!-- Hero con tiempo actual -->
+  <section class="weather-hero">
+    <div class="weather-hero-content">
+      <div class="container" style="max-width:900px">
+        <div id="weather-current" style="min-height:200px">
+          <div class="weather-loading">
+            <div class="weather-loading-spinner"></div>
+            <p>Cargando el tiempo en Montcada i Reixac...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Previsión 7 días -->
+  <div class="container" style="max-width:900px;margin:40px auto 60px">
+    <h2 style="font-family:var(--font-serif);font-size:1.6rem;text-align:center;margin-bottom:28px;color:var(--text)">
+      Previsión para los próximos días
+    </h2>
+    <div id="weather-forecast" style="min-height:120px">
+      <div class="weather-loading">
+        <div class="weather-loading-spinner"></div>
+        <p>Cargando previsión...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info adicional -->
+  <div class="container" style="max-width:900px;margin:0 auto 80px">
+    <div style="background:var(--bg-alt);border-radius:var(--radius-lg);padding:32px;text-align:center">
+      <h2 style="font-family:var(--font-serif);font-size:1.3rem;margin-bottom:12px;color:var(--text)">
+        🌍 ¿Buscas algo más?
+      </h2>
+      <p style="color:var(--text-light);font-size:0.95rem;max-width:500px;margin:0 auto 20px;line-height:1.7">
+        Descubre los mejores negocios, restaurantes, talleres y profesionales de Montcada i Reixac.
+      </p>
+      <a href="/" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--primary);color:white;border-radius:100px;font-weight:500;text-decoration:none;transition:background 0.2s">
+        🏠 Ir al directorio
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const COORDS = { lat: 41.4870, lon: 2.1880 };
+    const DAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const DAYS_SHORT = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+
+    function getWeatherEmoji(code, isDay = true) {
+      if (code === 0) return "☀️";
+      if (code <= 2) return isDay ? "⛅" : "☁️";
+      if (code <= 3) return "☁️";
+      if (code <= 20) return "🌫️";
+      if (code <= 30) return "🌧️";
+      if (code <= 40) return "🌦️";
+      if (code <= 50) return "🌧️";
+      if (code <= 60) return "🌧️";
+      if (code <= 70) return "❄️";
+      if (code <= 80) return "🌦️";
+      if (code <= 85) return "🌨️";
+      return "🌧️";
+    }
+
+    function getWeatherDesc(code) {
+      const map = {
+        0: "Despejado", 1: "Mayormente despejado", 2: "Parcialmente nublado",
+        3: "Nublado", 45: "Niebla", 48: "Niebla helada",
+        51: "Llovizna ligera", 53: "Llovizna moderada", 55: "Llovizna densa",
+        56: "Llovizna helada", 57: "Llovizna helada densa",
+        61: "Lluvia ligera", 63: "Lluvia moderada", 65: "Lluvia intensa",
+        66: "Lluvia helada", 67: "Lluvia helada intensa",
+        71: "Nevada ligera", 73: "Nevada moderada", 75: "Nevada intensa",
+        77: "Granizo", 80: "Chubascos ligeros", 81: "Chubascos moderados",
+        82: "Chubascos intensos", 85: "Chubascos de nieve ligeros",
+        86: "Chubascos de nieve intensos", 95: "Tormenta",
+        96: "Tormenta con granizo", 99: "Tormenta con granizo intensa"
+      };
+      return map[code] || "Variable";
+    }
+
+    async function loadWeather() {
+      try {
+        // Current weather
+        const curRes = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${COORDS.lat}&longitude=${COORDS.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,is_day&timezone=Europe/Madrid`
+        );
+        const curData = await curRes.json();
+        const cur = curData.current;
+
+        // 7-day forecast
+        const fcRes = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${COORDS.lat}&longitude=${COORDS.lon}&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_sum,wind_speed_10m_max&timezone=Europe/Madrid&forecast_days=7`
+        );
+        const fcData = await fcRes.json();
+        const daily = fcData.daily;
+
+        // Render current
+        const emoji = getWeatherEmoji(cur.weather_code, cur.is_day === 1);
+        const desc = getWeatherDesc(cur.weather_code);
+
+        const windDir = ["N", "NE", "E", "SE", "S", "SO", "O", "NO"][Math.round(cur.wind_direction_10m / 45) % 8];
+
+        document.getElementById("weather-current").innerHTML = `
+          <div class="weather-current-card">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:24px">
+              <div>
+                <div style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.75;margin-bottom:4px">Montcada i Reixac · Vallès Occidental</div>
+                <h1 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;margin:0 0 4px;color:white">El Tiempo Hoy</h1>
+                <div style="font-size:0.9rem;opacity:0.7">${new Date().toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</div>
+              </div>
+              <div style="text-align:right">
+                <div class="weather-temp">${Math.round(cur.temperature_2m)}°</div>
+                <div style="font-size:0.95rem;opacity:0.85">${desc}</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.15)">
+              <div class="weather-stat">
+                <div class="weather-icon-big" style="font-size:2.8rem">${emoji}</div>
+              </div>
+              <div class="weather-stat">
+                <div class="weather-stat-value">${Math.round(cur.apparent_temperature)}°</div>
+                <div class="weather-stat-label">Sensación</div>
+              </div>
+              <div class="weather-stat">
+                <div class="weather-stat-value">${cur.relative_humidity_2m}%</div>
+                <div class="weather-stat-label">Humedad</div>
+              </div>
+              <div class="weather-stat">
+                <div class="weather-stat-value">${Math.round(cur.wind_speed_10m)} km/h</div>
+                <div class="weather-stat-label">Viento ${windDir}</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Render forecast
+        document.getElementById("weather-forecast").innerHTML =
+          `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px">
+            ${daily.time.map((date, i) => {
+              const dayName = i === 0 ? "Hoy" : DAYS[new Date(date + "T12:00:00").getDay()];
+              const fcEmoji = getWeatherEmoji(daily.weather_code[i], true);
+              return `<div class="weather-day-card">
+                <div class="weather-day-name">${dayName}</div>
+                <div class="weather-day-icon">${fcEmoji}</div>
+                <div class="weather-day-temp">${Math.round(daily.temperature_2m_max[i])}°</div>
+                <div class="weather-day-range">${Math.round(daily.temperature_2m_min[i])}° / ${Math.round(daily.temperature_2m_max[i])}°</div>
+              </div>`;
+            }).join("")}
+          </div>`;
+
+      } catch (e) {
+        document.getElementById("weather-current").innerHTML = `
+          <div class="weather-error">
+            <div style="font-size:3rem;margin-bottom:12px">⚠️</div>
+            <h2 style="font-family:var(--font-serif);font-size:1.4rem;margin-bottom:8px;color:var(--text)">No se pudo cargar el tiempo</h2>
+            <p style="color:var(--text-light);font-size:0.95rem">Vuelve a intentarlo recargando la página.</p>
+          </div>`;
+        document.getElementById("weather-forecast").innerHTML = "";
+      }
+    }
+
+    loadWeather();
+  </script>
+</BaseLayout>
