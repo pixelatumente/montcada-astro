@@ -61,10 +61,185 @@ const site = "https://montcada.com.es";
       a:hover { color: var(--primary-dark); }
       img { max-width: 100%; height: auto; display: block; }
       .container { max-width: 1170px; margin: 0 auto; padding: 0 24px; }
-      @media (max-width: 768px) {
-        .container { padding: 0 16px; }
-      }
       ::selection { background: var(--primary); color: white; }
+
+      /* ========== RESPONSIVE ========== */
+
+      /* Hamburger button — hidden on desktop */
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        z-index: 101;
+      }
+      .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--text);
+        margin: 5px 0;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+      /* Mobile nav — overlay */
+      .nav-overlay {
+        display: none;
+      }
+
+      @media (max-width: 900px) {
+        .container { padding: 0 16px; }
+
+        /* Show hamburger, hide desktop nav */
+        .hamburger { display: block; }
+        .desktop-nav { display: none !important; }
+        .mobile-menu-btn { display: flex !important; }
+
+        /* Mobile nav overlay */
+        .nav-overlay {
+          display: block;
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.4);
+          z-index: 98;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+        .nav-overlay.open {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .mobile-nav {
+          position: fixed;
+          top: 0;
+          right: -300px;
+          width: 280px;
+          height: 100vh;
+          background: var(--card);
+          z-index: 99;
+          padding: 80px 24px 32px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          transition: right 0.3s ease;
+          box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+          overflow-y: auto;
+        }
+        .mobile-nav.open {
+          right: 0;
+        }
+        .mobile-nav a {
+          display: block;
+          padding: 14px 16px;
+          border-radius: var(--radius);
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--text);
+          transition: background 0.2s;
+        }
+        .mobile-nav a:hover,
+        .mobile-nav a:active {
+          background: var(--bg-alt);
+        }
+        .mobile-nav .nav-cta {
+          background: var(--primary);
+          color: white;
+          text-align: center;
+          margin-top: 12px;
+        }
+        .mobile-nav .nav-cta:hover {
+          background: var(--primary-dark);
+        }
+
+        /* Hero mobile */
+        .hero-section { min-height: 420px !important; }
+        .hero-section .hero-content { padding: 60px 0 !important; }
+        .hero-section h1 { font-size: 2.2rem !important; }
+        .hero-section p { font-size: 1rem !important; max-width: 100% !important; }
+        .hero-section .stats-row { gap: 24px !important; }
+        .hero-section .stats-row .stat-number { font-size: 1.8rem !important; }
+        .hero-stat-divider { display: none !important; }
+
+        /* Category cards */
+        .categories-card { padding: 28px 20px !important; }
+        .categories-card h2 { font-size: 1.5rem !important; }
+        .categories-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+
+        /* Featured business (destacado) */
+        .featured-grid { grid-template-columns: 1fr !important; min-height: auto !important; }
+        .featured-content { padding: 28px 24px !important; }
+        .featured-content h2 { font-size: 1.5rem !important; }
+        .featured-services { padding: 28px 24px !important; }
+
+        /* Top rated */
+        .top-rated-grid { grid-template-columns: 1fr !important; }
+        .top-rated-header { flex-direction: column !important; align-items: flex-start !important; }
+
+        /* Category hero */
+        .category-hero { padding: 36px 16px !important; }
+        .category-hero h1 { font-size: 1.8rem !important; }
+        .category-hero .cat-icon { font-size: 2rem !important; width: 48px !important; height: 48px !important; }
+
+        /* Category business grid */
+        .business-grid { grid-template-columns: 1fr !important; }
+
+        /* Footer */
+        .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+        .footer-bottom { flex-direction: column !important; text-align: center !important; }
+
+        /* About/slug page */
+        .slug-hero { padding: 40px 16px !important; }
+        .slug-hero h1 { font-size: 1.6rem !important; }
+        .slug-grid { grid-template-columns: 1fr !important; }
+        .slug-services-grid { grid-template-columns: 1fr 1fr !important; }
+
+        /* Legal pages */
+        .legal-content { padding: 40px 0 !important; }
+        .legal-content h1 { font-size: 1.6rem !important; }
+        .legal-content h2 { font-size: 1.2rem !important; }
+
+        /* Slug page */
+        .slug-grid { grid-template-columns: 1fr !important; }
+        .slug-hours-grid { grid-template-columns: 1fr !important; gap: 4px 0 !important; }
+        .more-businesses-grid { grid-template-columns: 1fr !important; }
+
+        /* CTA badges */
+        .cta-badges { gap: 8px !important; }
+        .cta-badge { font-size: 0.8rem !important; padding: 8px 16px !important; }
+
+        /* Weather page */
+        .weather-hero { padding: 40px 16px !important; }
+        .weather-hero .weather-temp { font-size: 3rem !important; }
+        .weather-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+        .weather-7day-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+
+        /* Publica tu negocio */
+        .pub-hero { padding: 48px 16px !important; }
+        .pub-hero h1 { font-size: 1.8rem !important; }
+        .pub-steps { grid-template-columns: 1fr !important; }
+        .pub-benefits { grid-template-columns: 1fr !important; }
+        .pub-faq { padding: 0 !important; }
+
+        /* Time page specific */
+        .tiempo-detalle-grid { grid-template-columns: 1fr 1fr !important; }
+      }
+
+      @media (max-width: 480px) {
+        .hero-section h1 { font-size: 1.8rem !important; }
+        .hero-section .stats-row { gap: 16px !important; }
+        .hero-section .stats-row .stat-number { font-size: 1.5rem !important; }
+        .slug-services-grid { grid-template-columns: 1fr !important; }
+        .weather-grid { grid-template-columns: 1fr !important; }
+        .weather-7day-grid { grid-template-columns: 1fr !important; }
+        .tiempo-detalle-grid { grid-template-columns: 1fr !important; }
+      }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2971195361656124" crossorigin="anonymous"></script>
   </head>
@@ -74,7 +249,9 @@ const site = "https://montcada.com.es";
         <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
           <img src="/logo.jpg" alt="Montcada Online" style="height:40px;width:auto;border-radius:8px" />
         </a>
-        <nav style="display:flex;align-items:center;gap:8px">
+
+        <!-- Desktop nav -->
+        <nav class="desktop-nav" style="display:flex;align-items:center;gap:6px">
           <a href="/" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">Inicio</a>
           <a href="/restaurantes" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">🍽️ Restaurantes</a>
           <a href="/talleres" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">🔧 Talleres</a>
@@ -82,8 +259,72 @@ const site = "https://montcada.com.es";
           <a href="/tiempo-montcada-i-reixac" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">🌤️ El Tiempo</a>
           <a href="/" style="font-size:0.88rem;font-weight:500;color:var(--text-muted);padding:6px 12px;border-radius:8px;transition:all 0.2s;background:var(--bg-alt)">📋 Más categorías</a>
         </nav>
+
+        <!-- Hamburger button -->
+        <button class="hamburger" id="hamburger" aria-label="Menú" style="display:none">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
+
+    <!-- Mobile overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Mobile nav -->
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="/">🏠 Inicio</a>
+      <a href="/restaurantes">🍽️ Restaurantes</a>
+      <a href="/talleres">🔧 Talleres</a>
+      <a href="/peluquerias">💇 Peluquerías</a>
+      <a href="/dentistas">🦷 Dentistas</a>
+      <a href="/concesionarios">🚗 Concesionarios</a>
+      <a href="/fisioterapeutas">💪 Fisioterapeutas</a>
+      <a href="/veterinarios">🐾 Veterinarios</a>
+      <a href="/abogados">⚖️ Abogados</a>
+      <a href="/servicios-publicos-y-tramites">🏛️ Servicios públicos</a>
+      <a href="/tiempo-montcada-i-reixac">🌤️ El Tiempo</a>
+      <a href="/publica-tu-negocio" class="nav-cta">📢 Publica tu negocio</a>
+    </nav>
+
+    <script>
+      // Mobile menu toggle
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobileNav');
+      const overlay = document.getElementById('navOverlay');
+
+      function toggleMenu() {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        overlay.classList.toggle('open');
+        document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+      }
+
+      function closeMenu() {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      if (hamburger) hamburger.addEventListener('click', toggleMenu);
+      if (overlay) overlay.addEventListener('click', closeMenu);
+
+      // Close menu when a link is clicked
+      if (mobileNav) {
+        mobileNav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', closeMenu);
+        });
+      }
+
+      // Handle resize: close mobile menu when going to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900 && mobileNav?.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+    </script>
 
     <main>
       <slot />
@@ -91,7 +332,7 @@ const site = "https://montcada.com.es";
 
     <footer style="background:#1C1917;color:white;padding:48px 0 32px;margin-top:60px">
       <div class="container">
-        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:32px">
+        <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:32px">
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
               <img src="/logo.jpg" alt="Montcada Online" style="height:32px;width:auto;border-radius:6px" />
@@ -121,7 +362,7 @@ const site = "https://montcada.com.es";
             </div>
           </div>
         </div>
-        <div style="border-top:1px solid #3A3532;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div class="footer-bottom" style="border-top:1px solid #3A3532;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
           <p style="color:#A8A29E;font-size:0.85rem">&copy; 2026 Montcada Online. Todos los derechos reservados.</p>
           <p style="color:#A8A29E;font-size:0.8rem">Hecho con ❤️ para Montcada i Reixac</p>
         </div>

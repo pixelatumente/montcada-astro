@@ -130,7 +130,7 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
       </div>
 
       <!-- Info Grid -->
-      <div style="padding:28px 36px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div class="slug-grid" style="padding:28px 36px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
         {(e.google_phone || negocio.phone) && (
           <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
             <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">📞 Teléfono</div>
@@ -171,7 +171,7 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
         <div style="padding:0 36px 24px">
           <div style="border-top:1px solid var(--border);padding-top:24px">
             <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:12px">🕐 Horario</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 40px;font-size:0.9rem">
+            <div class="slug-hours-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:4px 40px;font-size:0.9rem">
               {days.map(d => {
                 const parts = d.split(": ");
                 return (
@@ -216,7 +216,7 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
       <h2 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:600;margin-bottom:20px;color:var(--text)">
         Más {negocio.category.toLowerCase()} en Montcada i Reixac
       </h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+      <div class="more-businesses-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
         {data.negocios.filter(n => n.category === negocio.category && n.slug !== negocio.slug).slice(0, 6).map(n => {
           const ne = n.enriched || {};
           const nr = ne.google_rating;

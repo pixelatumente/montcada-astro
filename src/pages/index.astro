@@ -34,7 +34,7 @@ const categoryIcons = {
   <Schema type="WebPage" data={{ name: "Montcada Online", description: `Guía de negocios de Montcada i Reixac con ${total} comercios` }} />
 
   <!-- Hero Section -->
-  <section style="position:relative;min-height:560px;display:flex;align-items:center;overflow:hidden">
+  <section class="hero-section" style="position:relative;min-height:560px;display:flex;align-items:center;overflow:hidden">
     <!-- Background image -->
     <img src="/montcada-hero.jpg" alt="Montcada i Reixac" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0" />
     
@@ -42,7 +42,7 @@ const categoryIcons = {
     <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(232,93,74,0.85) 0%, rgba(28,25,23,0.75) 100%);z-index:1"></div>
     
     <div style="position:relative;z-index:2;width:100%">
-      <div class="container" style="text-align:center;padding:100px 0">
+      <div class="container hero-content" style="text-align:center;padding:100px 0">
         <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);padding:8px 18px;border-radius:100px;margin-bottom:24px;font-size:0.85rem;color:rgba(255,255,255,0.9);font-weight:500">
           <span>📍</span> Directorio Local — Montcada i Reixac
         </div>
@@ -56,19 +56,19 @@ const categoryIcons = {
         </p>
 
         <!-- Stats row -->
-        <div style="display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:36px">
+        <div class="stats-row" style="display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:36px">
           <div style="text-align:center">
-            <div style="font-size:2.5rem;font-weight:700;color:#FCD34D;line-height:1">{total}</div>
+            <div class="stat-number" style="font-size:2.5rem;font-weight:700;color:#FCD34D;line-height:1">{total}</div>
             <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.7);margin-top:4px">Negocios</div>
           </div>
-          <div style="width:1px;background:rgba(255,255,255,0.2);align-self:stretch"></div>
+          <div class="hero-stat-divider" style="width:1px;background:rgba(255,255,255,0.2);align-self:stretch"></div>
           <div style="text-align:center">
-            <div style="font-size:2.5rem;font-weight:700;color:#FCD34D;line-height:1">{categories.length}</div>
+            <div class="stat-number" style="font-size:2.5rem;font-weight:700;color:#FCD34D;line-height:1">{categories.length}</div>
             <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.7);margin-top:4px">Categorías</div>
           </div>
-          <div style="width:1px;background:rgba(255,255,255,0.2);align-self:stretch"></div>
+          <div class="hero-stat-divider" style="width:1px;background:rgba(255,255,255,0.2);align-self:stretch"></div>
           <div style="text-align:center">
-            <div style="font-size:2.5rem;font-weight:700;color:#FCD34D;line-height:1">{enrichedCount}</div>
+            <div class="stat-number" style="font-size:2.5rem;font-weight:700;color:#FCD34D;line-height:1">{enrichedCount}</div>
             <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.7);margin-top:4px">Verificados</div>
           </div>
         </div>
@@ -78,7 +78,7 @@ const categoryIcons = {
 
   <!-- Categories Grid -->
   <section class="container" style="padding:60px 24px;margin-top:-30px;position:relative;z-index:3">
-    <div style="background:var(--card);border-radius:var(--radius-lg);padding:48px;box-shadow:var(--shadow-lg)">
+    <div class="categories-card" style="background:var(--card);border-radius:var(--radius-lg);padding:48px;box-shadow:var(--shadow-lg)">
       <div style="text-align:center;margin-bottom:40px">
         <h2 style="font-family:var(--font-serif);font-size:2rem;font-weight:700;color:var(--text);margin-bottom:8px">
           Explora por categoría
@@ -88,7 +88,7 @@ const categoryIcons = {
         </p>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px">
+      <div class="categories-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px">
         {topCategories.map(cat => {
           const style = categoryIcons[cat.name] || { icon: "📍", bg: "#F5F0EB" };
           const slug = cat.slug || cat.name.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
@@ -115,9 +115,9 @@ const categoryIcons = {
       <a href="/peluquerias/peluqueria-gaby/" style="display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);transition:all 0.3s ease"
         onmouseover="this.style.boxShadow='0 12px 40px rgba(232,93,74,0.18)';this.style.transform='translateY(-4px)';this.style.borderColor='var(--primary)'"
         onmouseout="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(0)';this.style.borderColor='var(--border)'">
-        <div style="display:grid;grid-template-columns:1fr 1fr;min-height:320px">
+        <div class="featured-grid" style="display:grid;grid-template-columns:1fr 1fr;min-height:320px">
           <!-- Left: Content -->
-          <div style="padding:40px 36px;display:flex;flex-direction:column;justify-content:center">
+          <div class="featured-content" style="padding:40px 36px;display:flex;flex-direction:column;justify-content:center">
             <div style="display:inline-flex;align-items:center;gap:6px;background:var(--primary-light);color:var(--primary-dark);padding:6px 14px;border-radius:100px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;width:fit-content">
               ⭐ Negocio Destacado
             </div>
@@ -140,7 +140,7 @@ const categoryIcons = {
             </div>
           </div>
           <!-- Right: Services Preview -->
-          <div style="background:linear-gradient(135deg, var(--primary) 0%, #C94D3A 100%);padding:40px 32px;display:flex;flex-direction:column;justify-content:center;gap:14px;position:relative;overflow:hidden">
+          <div class="featured-services" style="background:linear-gradient(135deg, var(--primary) 0%, #C94D3A 100%);padding:40px 32px;display:flex;flex-direction:column;justify-content:center;gap:14px;position:relative;overflow:hidden">
             <div style="position:absolute;inset:0;background:url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"></div>
             {["✂️ Corte y Estilo", "🎨 Coloración Experta", "👑 Trenzas Africanas", "💅 Manicura y Pedicura", "🏠 Servicio a Domicilio", "💬 Trato Personalizado"].map(s => (
               <div style="position:relative;z-index:1;display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(255,255,255,0.12);backdrop-filter:blur(4px);border-radius:10px;color:white;font-size:0.9rem;font-weight:500">
@@ -157,7 +157,7 @@ const categoryIcons = {
   {topRated.length > 0 && (
     <section style="padding:20px 0 60px">
       <div class="container">
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;flex-wrap:wrap;gap:8px">
+        <div class="top-rated-header" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;flex-wrap:wrap;gap:8px">
           <div>
             <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;color:var(--text);margin-bottom:4px">
               ⭐ Más valorados
@@ -168,7 +168,7 @@ const categoryIcons = {
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px">
+        <div class="top-rated-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px">
           {topRated.map(n => {
             const ne = n.enriched || {};
             const fullStars = Math.floor(ne.google_rating || 0);
@@ -232,8 +232,8 @@ const categoryIcons = {
         <p style="color:var(--text-light);font-size:1.05rem;line-height:1.7;margin-bottom:8px">
           Si tu comercio o servicio no aparece en nuestro directorio, puedes solicitarnos que lo añadamos. Todos los datos se verifican con Google Places para ofrecer información actualizada.
         </p>
-        <div style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-          <span style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card);border:1px solid var(--border);border-radius:100px;font-size:0.9rem;color:var(--text-light)">
+        <div class="cta-badges" style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <span class="cta-badge" style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card);border:1px solid var(--border);border-radius:100px;font-size:0.9rem;color:var(--text-light)">
             📍 Montcada i Reixac
           </span>
           <span style="display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card);border:1px solid var(--border);border-radius:100px;font-size:0.9rem;color:var(--text-light)">
