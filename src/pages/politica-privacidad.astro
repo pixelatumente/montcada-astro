@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Política de Privacidad";
+const desc = "Política de Privacidad de Montcada Online. Información sobre tratamiento de datos personales según el RGPD (UE) y la LOPDGDD.";
+---
+
+<BaseLayout title={title} description={desc}>
+  <div class="container" style="max-width:800px;margin:40px auto;padding:0 24px">
+    <article style="background:var(--card);border-radius:var(--radius-lg);padding:48px;box-shadow:var(--shadow-sm)">
+      <h1 style="font-family:var(--font-serif);font-size:2.2rem;margin-bottom:8px;color:var(--text)">Política de Privacidad</h1>
+      <p style="color:var(--text-light);font-size:0.9rem;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+        En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).
+      </p>
+
+      <section style="margin-bottom:32px">
+        <h2 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:12px">1. Responsable del Tratamiento</h2>
+        <div style="background:var(--bg-alt);padding:20px;border-radius:12px;line-height:1.8;font-size:0.95rem">
+          <p><strong>Titular:</strong> Daniel [Apellidos]</p>
+          <p><strong>Correo electrónico:</strong> <a href="mailto:info@montcada.com.es">info@montcada.com.es</a></p>
+          <p><strong>Sitio web:</strong> montcada.com.es</p>
+        </div>
+      </section>
+
+      <section style="margin-bottom:32px">
+        <h2 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:12px">2. Datos que Recogemos</h2>
+        <p style="color:var(--text-light);line-height:1.8;font-size:0.95rem">
+          Este sitio web es un directorio estático. Como norma general, <strong>no recogemos datos personales de los usuarios</strong> a través de formularios, registros o suscripciones. Sin embargo, los siguientes servicios de terceros pueden recopilar datos de forma automática:
+        </p>
+        <ul style="color:var(--text-light);line-height:1.8;font-size:0.95rem;padding-left:20px;margin-top:8px">
+          <li><strong>Google AdSense:</strong> utiliza cookies y balizas web para mostrar anuncios personalizados. Puede recopilar datos como dirección IP, tipo de navegador e interacciones con los anuncios.</li>
+          <li><strong>Google Fonts:</strong> al cargar las fuentes tipográficas desde los servidores de Google, su dirección IP puede ser registrada.</li>
+          <li><strong>Cloudflare (CDN):</strong> procesa direcciones IP para la seguridad y entrega del contenido.</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom:32px">
+        <h2 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:12px">3. Finalidad del Tratamiento</h2>
+        <p style="color:var(--text-light);line-height:1.8;font-size:0.95rem">
+          Los datos recogidos por servicios de terceros se utilizan para:
+        </p>
+        <ul style="color:var(--text-light);line-height:1.8;font-size:0.95rem;padding-left:20px;margin-top:8px">
+          <li>Mostrar publicidad relevante (Google AdSense).</li>
+          <li>Garantizar el correcto funcionamiento y seguridad del sitio web.</li>
+          <li>Analizar el rendimiento y la audiencia del sitio (Google Search Console).</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom:32px">
+        <h2 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:12px">4. Base Legal</h2>
+        <p style="color:var(--text-light);line-height:1.8;font-size:0.95rem">
+          El tratamiento de datos se basa en:
+        </p>
+        <ul style="color:var(--text-light);line-height:1.8;font-size:0.95rem;padding-left:20px;margin-top:8px">
+          <li>El <strong>consentimiento</strong> del usuario al aceptar las cookies (RGPD art. 6.1.a).</li>
+          <li>El <strong>interés legítimo</strong> en la seguridad y funcionamiento del sitio (RGPD art. 6.1.f).</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom:32px">
+        <h2 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:12px">5. Derechos del Usuario</h2>
+        <p style="color:var(--text-light);line-height:1.8;font-size:0.95rem">
+          De acuerdo con el RGPD, puedes ejercer los siguientes derechos:
+        </p>
+        <ul style="color:var(--text-light);line-height:1.8;font-size:0.95rem;padding-left:20px;margin-top:8px">
+          <li><strong>Acceso:</strong> saber qué datos tuyos estamos tratando.</li>
+          <li><strong>Rectificación:</strong> solicitar la corrección de datos inexactos.</li>
+          <li><strong>Supresión:</strong> solicitar la eliminación de tus datos.</li>
+          <li><strong>Limitación:</strong> solicitar que restrinjamos el tratamiento.</li>
+          <li><strong>Portabilidad:</strong> recibir tus datos en formato estructurado.</li>
+          <li><strong>Oposición:</strong> oponerte al tratamiento de tus datos.</li>
+        </ul>
+        <p style="color:var(--text-light);line-height:1.8;font-size:0.95rem;margin-top:12px">
+          Para ejercer estos derechos, escríbenos a <a href="mailto:info@montcada.com.es">info@montcada.com.es</a>.
+        </p>
+      </section>
+
+      <section style="margin-bottom:32px">
+        <h2 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:12px">6. Conservación de Datos</h2>
+        <p style="color:var(--text-light);line-height:1.8;font-size:0.95rem">
+          Los datos recogidos por servicios de terceros se conservan según sus propias políticas. No almacenamos datos personales en nuestros servidores al tratarse de un sitio estático sin base de datos.
+        </p>
+      </section>
+
+      <section>
+        <h2 style="font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:12px">7. Reclamaciones</h2>
+        <p style="color:var(--text-light);line-height:1.8;font-size:0.95rem">
+          Si consideras que tus derechos no han sido atendidos adecuadamente, puedes presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong> — <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
+        </p>
+      </section>
+
+      <p style="color:var(--text-muted);font-size:0.85rem;margin-top:40px;padding-top:24px;border-top:1px solid var(--border)">
+        Última actualización: junio 2026
+      </p>
+    </article>
+  </div>
+</BaseLayout>
