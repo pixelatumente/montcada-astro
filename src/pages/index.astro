@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Schema from "../components/Schema.astro";
+import AdUnit from "../components/AdUnit.astro";
 import data from "../data/enriched-negocios.json";
 
 const categories = data.categories.filter(c => c.slug !== "mir");
@@ -153,6 +154,11 @@ const categoryIcons = {
     </div>
   </section>
 
+  <!-- ═══ AdSense: Anuncio entre destacado y más valorados ═══ -->
+  <section class="container" style="padding:8px 24px">
+    <AdUnit format="horizontal" />
+  </section>
+
   <!-- Top Rated Businesses -->
   {topRated.length > 0 && (
     <section style="padding:20px 0 60px">
@@ -220,6 +226,11 @@ const categoryIcons = {
       </div>
     </section>
   )}
+
+  <!-- ═══ AdSense: Anuncio antes de CTA ═══ -->
+  <section class="container" style="padding:8px 24px">
+    <AdUnit format="horizontal" />
+  </section>
 
   <!-- CTA Section -->
   <section style="background:var(--bg-alt);padding:72px 0">

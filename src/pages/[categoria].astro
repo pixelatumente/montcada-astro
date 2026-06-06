@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Schema from "../components/Schema.astro";
+import AdUnit from "../components/AdUnit.astro";
 import data from "../data/enriched-negocios.json";
 
 export async function getStaticPaths() {
@@ -78,6 +79,11 @@ function stars(rating) {
         )}
       </div>
     </div>
+  </section>
+
+  <!-- ═══ AdSense: Anuncio entre hero y grid de negocios ═══ -->
+  <section class="container" style="padding:8px 24px">
+    <AdUnit format="horizontal" />
   </section>
 
   <!-- Business Grid -->

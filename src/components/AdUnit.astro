@@ -1,0 +1,102 @@
+---
+/**
+ * Componente de anuncio AdSense.
+ * 
+ * IMPORTANTE: Antes de publicar, crea las unidades de anuncio en
+ * https://adsense.google.com y reemplaza los data-ad-slot con los valores
+ * que genere Google para cada formato.
+ *
+ * Formatos recomendados:
+ *   "horizontal"  → Display horizontal responsive (728x90 / 320x100)
+ *   "rectangle"   → Display rectangular (336x280 / 300x250)
+ *   "in-article"  → Display adaptable en contenido
+ */
+
+export interface Props {
+  /** Formato del anuncio: "horizontal" | "rectangle" | "in-article" */
+  format?: "horizontal" | "rectangle" | "in-article";
+  /** ID del slot generado por AdSense (ej: "1234567890") */
+  adSlot?: string;
+  /** CSS class adicional */
+  className?: string;
+}
+
+const { format = "horizontal", adSlot, className } = Astro.props;
+const slotId = adSlot || "REEMPLAZAR_CON_TU_AD_SLOT_ID";
+const isHorizontal = format === "horizontal";
+const isRectangle = format === "rectangle";
+---
+
+{
+  adSlot ? (
+    <div class={`ad-container ${className || ""}`} style={isRectangle ? "min-height:280px" : "min-height:90px"}>
+      {
+        isHorizontal ? (
+          <!-- Anuncio horizontal responsive -->
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2971195361656124"
+            data-ad-slot={slotId}
+            data-ad-format="auto"
+            data-full-width-responsive="true">
+          </ins>
+        ) : isRectangle ? (
+          <!-- Anuncio rectangular responsive -->
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2971195361656124"
+            data-ad-slot={slotId}
+            data-ad-format="auto"
+            data-full-width-responsive="true">
+          </ins>
+        ) : (
+          <!-- Anuncio in-article -->
+          <ins class="adsbygoogle"
+            style="display:block;text-align:center"
+            data-ad-client="ca-pub-2971195361656124"
+            data-ad-slot={slotId}
+            data-ad-layout="in-article"
+            data-ad-format="fluid">
+          </ins>
+        )
+      }
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  ) : (
+    <!-- Placeholder visible durante desarrollo: reemplazar data-ad-slot -->
+    <div class={`ad-container ad-placeholder ${className || ""}`}
+      style={`
+        background: var(--bg-alt);
+        border: 2px dashed var(--border);
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        ${isRectangle ? "min-height:250px" : "min-height:90px"}
+      `}>
+      <div>
+        <p style="font-size:0.8rem;color:var(--text-muted);font-weight:600;margin-bottom:4px">📢 Espacio publicitario</p>
+        <p style="font-size:0.7rem;color:var(--text-muted)">
+          {isHorizontal ? "Anuncio horizontal" : isRectangle ? "Anuncio rectangular" : "Anuncio in-article"}
+          — Configurar en AdSense →
+        </p>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .ad-container {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .ad-container ins {
+    width: 100%;
+  }
+  .ad-placeholder {
+    user-select: none;
+  }
+</style>
