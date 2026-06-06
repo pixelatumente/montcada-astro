@@ -1,7 +1,5 @@
-# ─────────────────────────────────────────────
-# WordPress → Astro 301 Redirects
-# Generated from GSC data (190 redirects)
-# ─────────────────────────────────────────────
+# WordPress to Astro 301 redirects (190 rules)
+# Generated from GSC data
 /abogados-montcada-i-reixac /abogados/ 301
 /abogados-montcada-i-reixac/borrallo-abogados /abogados/borrallo-abogados/ 301
 /abogados-montcada-i-reixac/toro-pujol-abogados /abogados/toro-pujol-abogados/ 301
@@ -14,7 +12,7 @@
 /fisioterapeutas-montcada-i-reixac /fisioterapeutas/ 301
 /fisioterapeutas-montcada-i-reixac/barcelona-medical-consulting /fisioterapeutas/barcelona-medical-consulting/ 301
 /fisioterapeutas-montcada-i-reixac/brugues-asistencial /fisioterapeutas/brugues-asistencial/ 301
-/fisioterapeutas-montcada-i-reixac/cap-les-indianes /servicios-públicos-y-trámites/cap-les-indianes/ 301
+/fisioterapeutas-montcada-i-reixac/cap-les-indianes /servicios-publicos-y-tramites/cap-les-indianes/ 301
 /fisioterapeutas-montcada-i-reixac/centre-medic-fiatc-tarradellas /fisioterapeutas/centre-medic-fiatc-tarradellas/ 301
 /fisioterapeutas-montcada-i-reixac/centre-medic-montcada /fisioterapeutas/centre-medic-montcada/ 301
 /fisioterapeutas-montcada-i-reixac/centro-medico-amedics /fisioterapeutas/centro-medico/ 301
@@ -106,7 +104,7 @@
 /restaurantes-montcada-i-reixac/restaurante-trianas /restaurantes/restaurante-trianas/ 301
 /restaurantes-montcada-i-reixac/rostisseria-noni /restaurantes/rostisseria-noni/ 301
 /restaurantes-montcada-i-reixac/toki-restaurant /restaurantes/toki-restaurant/ 301
-/servicios-publicos-y-tramites/policia-de-montcada-i-reixac /servicios-públicos-y-trámites/policia-de-montcada-i-reixac/ 301
+/servicios-publicos-y-tramites/policia-de-montcada-i-reixac /servicios-publicos-y-tramites/policia-de-montcada-i-reixac/ 301
 /talleres-montcada-i-reixac /talleres/ 301
 /talleres-montcada-i-reixac/amat-diagnosis-avanzada /talleres/amat-diagnosis-avanzada/ 301
 /talleres-montcada-i-reixac/auto-taller-ripollet /talleres/auto-taller-ripollet/ 301
