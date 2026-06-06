@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Schema from "../../components/Schema.astro";
-import AdUnit from "../../components/AdUnit.astro";
 import data from "../../data/enriched-negocios.json";
 
 export async function getStaticPaths() {
@@ -211,11 +210,6 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
         </div>
       )}
     </div>
-
-    <!-- ═══ AdSense: Anuncio entre ficha y más negocios ═══ -->
-    <section style="margin-top:32px;padding:8px 0">
-      <AdUnit format="rectangle" />
-    </section>
 
     <!-- More Businesses Section -->
     <section style="margin-top:48px">
