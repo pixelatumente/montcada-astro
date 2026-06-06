@@ -92,6 +92,21 @@ const site = "https://montcada.com.es";
         display: none;
       }
 
+      /* Desktop dropdown — "Más categorías" */
+      .nav-dropdown:hover .nav-dropdown-menu,
+      .nav-dropdown:focus-within .nav-dropdown-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+      }
+      .nav-dropdown:hover .nav-dropdown-trigger,
+      .nav-dropdown:focus-within .nav-dropdown-trigger {
+        background: var(--border) !important;
+      }
+      .nav-dropdown-menu a:hover {
+        background: var(--bg-alt) !important;
+      }
+
       /* Mobile nav — overlay */
       .nav-overlay {
         display: none;
@@ -264,9 +279,23 @@ const site = "https://montcada.com.es";
           <a href="/" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">Inicio</a>
           <a href="/restaurantes" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">🍽️ Restaurantes</a>
           <a href="/talleres" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">🔧 Talleres</a>
-          <a href="/dentistas" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">🦷 Dentistas</a>
-          <a href="/tiempo-montcada-i-reixac" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">🌤️ El Tiempo</a>
-          <a href="/" style="font-size:0.88rem;font-weight:500;color:var(--text-muted);padding:6px 12px;border-radius:8px;transition:all 0.2s;background:var(--bg-alt)">📋 Más categorías</a>
+          <a href="/peluquerias" style="font-size:0.88rem;font-weight:500;color:var(--text-light);padding:6px 12px;border-radius:8px;transition:all 0.2s">💇 Peluquerías</a>
+          <div class="nav-dropdown" style="position:relative">
+            <button class="nav-dropdown-trigger" style="font-size:0.88rem;font-weight:500;color:var(--text-muted);padding:6px 12px;border-radius:8px;border:none;background:var(--bg-alt);cursor:pointer;font-family:inherit;transition:all 0.2s;display:flex;align-items:center;gap:4px;white-space:nowrap">
+              📋 Más categorías <span style="font-size:0.65rem;opacity:0.6">▼</span>
+            </button>
+            <div class="nav-dropdown-menu" style="position:absolute;top:100%;right:0;margin-top:8px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);min-width:200px;padding:6px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:all 0.2s ease;z-index:200">
+              <a href="/dentistas" style="display:block;font-size:0.88rem;font-weight:500;color:var(--text);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">🦷 Dentistas</a>
+              <a href="/concesionarios" style="display:block;font-size:0.88rem;font-weight:500;color:var(--text);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">🚗 Concesionarios</a>
+              <a href="/fisioterapeutas" style="display:block;font-size:0.88rem;font-weight:500;color:var(--text);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">💪 Fisioterapeutas</a>
+              <a href="/veterinarios" style="display:block;font-size:0.88rem;font-weight:500;color:var(--text);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">🐾 Veterinarios</a>
+              <a href="/abogados" style="display:block;font-size:0.88rem;font-weight:500;color:var(--text);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">⚖️ Abogados</a>
+              <a href="/servicios-publicos-y-tramites" style="display:block;font-size:0.88rem;font-weight:500;color:var(--text);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">🏛️ Servicios públicos</a>
+              <div style="border-top:1px solid var(--border);margin:4px 0"></div>
+              <a href="/tiempo-montcada-i-reixac" style="display:block;font-size:0.88rem;font-weight:500;color:var(--text);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">🌤️ El Tiempo</a>
+              <a href="/publica-tu-negocio" style="display:block;font-size:0.88rem;font-weight:500;color:var(--primary);padding:10px 14px;border-radius:8px;text-decoration:none;transition:background 0.15s">📢 Publica tu negocio</a>
+            </div>
+          </div>
         </nav>
 
         <!-- Hamburger button -->
