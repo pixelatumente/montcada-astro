@@ -25,19 +25,33 @@ const categoryIcons = {
   "Abogados": { icon: "⚖️", bg: "#FEF3C7" },
   "Dentistas": { icon: "🦷", bg: "#F0F9FF" },
   "Servicios públicos y trámites": { icon: "🏛️", bg: "#F1F5F9" },
+  "Supermercados": { icon: "🛒", bg: "#E8F5E9" },
+  "Farmacias": { icon: "💊", bg: "#E0F7FA" },
+  "Fontaneros": { icon: "🔧", bg: "#FFF3E0" },
+  "Electricistas": { icon: "⚡", bg: "#FFFDE7" },
+  "Reformas": { icon: "🏗️", bg: "#F3E5F5" },
+  "Ópticas": { icon: "👓", bg: "#E0F2FE" },
 };
 ---
 
 <BaseLayout
-  title="Negocios en Montcada i Reixac | Montcada Online"
+  title="Negocios en Montcada i Reixac"
   description={`Directorio de comercios, negocios y profesionales de Montcada i Reixac. Encuentra restaurantes, talleres, peluquerías, veterinarios y más. ${total} negocios locales.`}
 >
   <Schema type="WebPage" data={{ name: "Montcada Online", description: `Guía de negocios de Montcada i Reixac con ${total} comercios` }} />
+  <Schema type="WebSite" data={{
+    name: "Montcada Online",
+    url: "https://montcada.com.es",
+    description: `Directorio de comercios y negocios de Montcada i Reixac. ${total} negocios locales.`,
+    searchAction: {
+      target: "https://montcada.com.es/buscar/?q={search_term_string}"
+    }
+  }} />
 
   <!-- Hero Section -->
   <section class="hero-section" style="position:relative;min-height:560px;display:flex;align-items:center;overflow:hidden">
     <!-- Background image -->
-    <img src="/montcada-hero.jpg" alt="Montcada i Reixac" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0" />
+    <img src="/montcada-hero.webp" srcset="/montcada-hero-mobile.webp 600w, /montcada-hero.webp 1200w" sizes="(max-width: 768px) 600px, 1200px" alt="Montcada i Reixac" fetchpriority="high" width="1280" height="763" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0" />
     
     <!-- Gradient overlay (warm) -->
     <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(232,93,74,0.85) 0%, rgba(28,25,23,0.75) 100%);z-index:1"></div>
@@ -94,7 +108,9 @@ const categoryIcons = {
       <div class="categories-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px">
         {topCategories.map(cat => {
           const style = categoryIcons[cat.name] || { icon: "📍", bg: "#F5F0EB" };
-          const slug = cat.slug || cat.name.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
+          const slug = cat.slug || cat.name.toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/[\s|]+/g, "-").replace(/[^a-z0-9-]/g, "");
           return (
             <a href={`/${slug}/`} style="display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:var(--radius);background:var(--card);border:1px solid var(--border);transition:all 0.25s ease;text-decoration:none;color:var(--text);box-shadow:var(--shadow-sm)"
               onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='0 4px 14px rgba(232,93,74,0.15)';this.style.transform='translateY(-2px)'"
@@ -177,7 +193,9 @@ const categoryIcons = {
             const fullStars = Math.floor(ne.google_rating || 0);
             const hasHalf = (ne.google_rating || 0) - fullStars >= 0.3;
             const stars = "★".repeat(fullStars) + (hasHalf ? "½" : "") + "☆".repeat(5 - fullStars - (hasHalf ? 1 : 0));
-            const catSlug = n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
+            const catSlug = n.category.toLowerCase()
+              .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+              .replace(/[\s|]+/g, "-").replace(/[^a-z0-9-]/g, "");
             const catIcon = categoryIcons[n.category]?.icon || "📍";
             return (
               <a href={`/${catSlug}/${n.slug}/`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:var(--text);transition:all 0.3s ease;box-shadow:var(--shadow-sm)"

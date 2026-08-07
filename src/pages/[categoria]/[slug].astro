@@ -6,7 +6,9 @@ import data from "../../data/enriched-negocios.json";
 export async function getStaticPaths() {
   const paths = [];
   for (const n of data.negocios) {
-    const catSlug = n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
+    const catSlug = n.category.toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\s|]+/g, "-").replace(/[^a-z0-9-]/g, "");
     paths.push({
       params: { categoria: catSlug, slug: n.slug },
       props: { negocio: n, catSlug }
@@ -18,11 +20,11 @@ export async function getStaticPaths() {
 const { negocio, catSlug } = Astro.props;
 const e = negocio.enriched || {};
 
-// Build description
+// Build description — allow custom seo fields from data
 const ratingText = e.google_rating ? `${e.google_rating} estrellas (${e.google_reviews} reseñas en Google)` : "";
-const desc = `${negocio.title} en Montcada i Reixac. ${e.google_address || ""}. ${ratingText}. ${negocio.phone ? "Teléfono: " + negocio.phone : ""}`.trim();
+const desc = (negocio.seo_description || `${negocio.title} en Montcada i Reixac. ${e.google_address || ""}. ${ratingText}. ${negocio.phone ? "Teléfono: " + negocio.phone : ""}`).trim();
 
-const title = `${negocio.title} | Montcada i Reixac`;
+const title = negocio.seo_title || `${negocio.title} | Montcada i Reixac`;
 const canon = `https://montcada.com.es/${catSlug}/${negocio.slug}/`;
 
 // Format hours
@@ -61,6 +63,12 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
                    negocio.category === "Dentistas" ? "Dentista" :
                    negocio.category === "mir" ? "Servicio público" :
                    negocio.category === "Servicios públicos y trámites" ? "Servicio público" :
+                   negocio.category === "Supermercados" ? "Supermercado" :
+                   negocio.category === "Farmacias" ? "Farmacia" :
+                   negocio.category === "Fontaneros" ? "Fontanero" :
+                   negocio.category === "Electricistas" ? "Electricista" :
+                   negocio.category === "Reformas" ? "Reformas" :
+                   negocio.category === "Ópticas" ? "Óptica" :
                    negocio.category).toLowerCase();
 ---
 
@@ -230,7 +238,9 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
           const ne = n.enriched || {};
           const nr = ne.google_rating;
           const s = nr ? "★".repeat(Math.floor(nr)) + "☆".repeat(5 - Math.floor(nr)) : "";
-          const nCatSlug = n.category.toLowerCase().replace(/[\s|]+/g, "-").replace(/[íí]/g, "i").replace(/[ó]/g, "o").replace(/[ú]/g, "u");
+          const nCatSlug = n.category.toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/[\s|]+/g, "-").replace(/[^a-z0-9-]/g, "");
           return (
             <a href={`/${nCatSlug}/${n.slug}/`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:var(--shadow-sm)"
               onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-3px)'"

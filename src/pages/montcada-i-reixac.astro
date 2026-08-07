@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Schema from "../components/Schema.astro";
+import data from "../data/enriched-negocios.json";
+
+const total = data.total || 384;
+const categories = data.categories.filter(c => c.slug !== "mir");
+const topCats = categories.sort((a, b) => b.count - a.count).slice(0, 6);
+
+const categoryIcons = {
+  "Restaurantes": "🍽️", "Talleres": "🔧", "Fisioterapeutas": "💪",
+  "Peluquerías": "💇", "Concesionarios": "🚗", "Veterinarios": "🐾",
+  "Abogados": "⚖️", "Dentistas": "🦷", "Supermercados": "🛒",
+  "Farmacias": "💊", "Fontaneros": "🔧", "Electricistas": "⚡",
+  "Reformas": "🏗️", "Ópticas": "👓", "Servicios públicos y trámites": "🏛️"
+};
+---
+
+<BaseLayout
+  title="Montcada i Reixac — Guía del municipio del Vallès Occidental"
+  description="Montcada i Reixac, municipio del Vallès Occidental, Barcelona. Guía completa con más de 384 negocios locales: restaurantes, talleres, peluquerías y servicios. Información práctica del municipio."
+>
+  <Schema type="WebPage" data={{ name: "Montcada i Reixac", description: "Guía del municipio de Montcada i Reixac con más de 384 negocios locales" }} />
+
+  <!-- Hero -->
+  <section style="background:linear-gradient(135deg, #2D6A4F 0%, #1C1917 100%);padding:60px 24px;text-align:center;color:white">
+    <div class="container">
+      <span style="font-size:3rem;display:block;margin-bottom:12px">📍</span>
+      <h1 style="font-family:var(--font-serif);font-size:2.8rem;font-weight:700;margin-bottom:8px">Montcada i Reixac</h1>
+      <p style="font-size:1.1rem;color:rgba(255,255,255,0.8);max-width:600px;margin:0 auto">
+        Municipio del Vallès Occidental, Barcelona · {total} negocios locales
+      </p>
+    </div>
+  </section>
+
+  <div class="container" style="max-width:800px;margin:0 auto;padding:40px 24px 60px">
+
+    <!-- About -->
+    <section style="background:var(--card);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-sm);border:1px solid var(--border);margin-bottom:32px">
+      <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;margin-bottom:16px;color:var(--text)">Sobre Montcada i Reixac</h2>
+      <div style="line-height:1.9;color:var(--text-light);font-size:0.95rem">
+        <p style="margin-bottom:16px">
+          <strong>Montcada i Reixac</strong> es un municipio de la comarca del Vallès Occidental, en la provincia de Barcelona, 
+          situado estratégicamente a unos 10 km al norte de la capital catalana. Con una población de aproximadamente 
+          37.000 habitantes, Montcada i Reixac combina la tranquilidad de una ciudad de tamaño medio con la cercanía 
+          a Barcelona gracias a su excelente conexión por carretera (N-152, C-58) y ferrocarril (líneas R4, R7 y R8 de Renfe).
+        </p>
+        <p style="margin-bottom:16px">
+          El municipio está formado por varios núcleos de población: el casco antiguo, el barrio de Can Sant Joan, 
+          la Ribera, Mas Rampinyo y el polígono industrial de Foinvasa, entre otros. Su término municipal limita 
+          con Ripollet, Barberà del Vallès, Cerdanyola del Vallès, Badia del Vallès y Santa Perpètua de Mogoda.
+        </p>
+        <p>
+          Históricamente, Montcada i Reixac fue un importante cruce de caminos desde la época romana, 
+          y su nombre hace referencia al peaje (montcada) que se cobraba en la zona. El río Ripoll atraviesa 
+          el municipio, y el Parque Fluvial del Ripoll ofrece un espacio natural para pasear y hacer deporte.
+        </p>
+      </div>
+    </section>
+
+    <!-- Quick stats -->
+    <section style="background:var(--card);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-sm);border:1px solid var(--border);margin-bottom:32px">
+      <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;margin-bottom:20px;color:var(--text)">Datos prácticos</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+        <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">🚆 Transporte</div>
+          <div style="font-weight:600">Renfe R4, R7, R8</div>
+          <div style="font-size:0.85rem;color:var(--text-light)">Estación Montcada i Reixac</div>
+        </div>
+        <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">🚗 Carreteras</div>
+          <div style="font-weight:600">N-152, C-58</div>
+          <div style="font-size:0.85rem;color:var(--text-light)">Salidas 15-17</div>
+        </div>
+        <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">🏘️ Población</div>
+          <div style="font-weight:600">~37.000 hab.</div>
+          <div style="font-size:0.85rem;color:var(--text-light)">Vallès Occidental</div>
+        </div>
+        <div style="padding:16px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);margin-bottom:4px">🏪 Negocios</div>
+          <div style="font-weight:600">{total} locales</div>
+          <div style="font-size:0.85rem;color:var(--text-light)">15 categorías</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top categories -->
+    <section style="background:var(--card);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-sm);border:1px solid var(--border);margin-bottom:32px">
+      <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;margin-bottom:20px;color:var(--text)">Principales categorías en Montcada</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+        {topCats.map(c => {
+          const icon = categoryIcons[c.name] || "📍";
+          return (
+            <a href={`/${c.slug}/`} style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:all 0.2s"
+              onmouseover="this.style.borderColor='var(--primary)';this.style.background='var(--card)'"
+              onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--bg)'">
+              <span><span style="margin-right:10px">{icon}</span>{c.name}</span>
+              <span style="color:var(--text-light);font-size:0.85rem">{c.count}</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section style="background:var(--card);border-radius:var(--radius-lg);padding:40px;box-shadow:var(--shadow-sm);border:1px solid var(--border)">
+      <h2 style="font-family:var(--font-serif);font-size:1.8rem;font-weight:700;margin-bottom:16px;color:var(--text)">¿Dónde está Montcada i Reixac?</h2>
+      <div style="line-height:1.8;color:var(--text-light);font-size:0.95rem">
+        <p style="margin-bottom:12px">
+          Montcada i Reixac se encuentra en la comarca del Vallès Occidental, a 10 km de Barcelona. 
+          Sus coordenadas son 41°29′N 2°11′E. El municipio está bien comunicado por la N-152 
+          (antigua carretera de Barcelona a Vic) y la C-58 (Barcelona-Manresa), además de la 
+          autopista C-33. Dispone de tres estaciones de tren: Montcada i Reixac, Montcada Bifurcació 
+          y Montcada Manresa, todas ellas con servicio de Rodalies Renfe.
+        </p>
+        <p>
+          Los municipios vecinos son Ripollet al norte, Barberà del Vallès y Badia del Vallès al oeste, 
+          Cerdanyola del Vallès al sur, y Santa Perpètua de Mogoda al noreste. El aeropuerto de 
+          Barcelona-El Prat está a unos 25 minutos en coche (30 km).
+        </p>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

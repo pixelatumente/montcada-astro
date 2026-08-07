@@ -1,0 +1,127 @@
+{
+  "Restaurantes": {
+    "intro": "Montcada i Reixac ofrece una variada oferta gastronómica que refleja la diversidad del Vallès Occidental. Desde bares de tapas tradicionales donde tomar una caña con amigos hasta restaurantes de cocina asiática, pasando por braserías especializadas en carnes a la brasa y establecimientos de comida mediterránea. La cercanía con Barcelona no ha desplazado la esencia de los bares de barrio, esos locales de toda la vida donde el trato cercano y el producto de proximidad siguen siendo los protagonistas. Muchos de estos restaurantes han sabido combinar la tradición culinaria catalana con influencias internacionales, creando una oferta para todos los paladares.",
+    "outro": "Tanto si buscas un sitio para una comida de trabajo cerca del polígono industrial, un restaurante familiar para el fin de semana, o simplemente un bar donde tomar el vermut del domingo, la oferta de restauración de Montcada i Reixac tiene opciones para cada momento. No olvides consultar los horarios y, en los más populares, reservar con antelación los fines de semana.",
+    "faqs": [
+      {"question": "¿Cuántos restaurantes hay en Montcada i Reixac?", "answer": "En Montcada i Reixac hay más de 150 restaurantes y bares, desde bares de tapas tradicionales hasta restaurantes de cocina asiática, braserías y establecimientos de comida mediterránea."},
+      {"question": "¿Cuál es el restaurante mejor valorado de Montcada?", "answer": "La Riba Bar Restaurante y Bar la Cueva son algunos de los más valorados, con puntuaciones superiores a 4.5 estrellas en Google y cientos de reseñas positivas."},
+      {"question": "¿Hay restaurantes de comida asiática en Montcada?", "answer": "Sí, Montcada cuenta con restaurantes de comida japonesa, china y fusión asiática como TOKI Restaurant, Restaurante Japonés Osaka, Sushi Lai y Restaurant Xinès Amistat."},
+      {"question": "¿Qué tipo de cocina predomina en Montcada?", "answer": "Predomina la cocina tradicional de bar y restaurante familiar, con opciones que van desde tapas y raciones hasta menús del día. También hay presencia de cocina internacional (asiática, árabe, italiana) y braserías especializadas en carne."}
+    ]
+  },
+  "Talleres": {
+    "intro": "Encontrar un taller mecánico de confianza en Montcada i Reixac no tiene por qué ser complicado. El municipio cuenta con una amplia red de profesionales de la automoción distribuidos por el casco urbano, el polígono industrial de Foinvasa y las áreas cercanas a la N-152. Desde talleres multimarca especializados en mecánica general y electrónica del automóvil hasta centros de reparación rápida y carrocería, pasando por concesionarios oficiales que ofrecen servicio postventa. La oferta de talleres en Montcada cubre todas las necesidades del automovilista, desde la ITV y el cambio de neumáticos hasta reparaciones más complejas del motor y la transmisión.",
+    "outro": "Para elegir el taller adecuado, valora la proximidad a tu domicilio o trabajo, las especialidades que ofrecen y, por supuesto, las opiniones de otros clientes. Muchos talleres de Montcada ofrecen presupuesto sin compromiso y vehículo de sustitución. Recuerda que un mantenimiento periódico alarga la vida de tu coche y te ahorra sorpresas desagradables.",
+    "faqs": [
+      {"question": "¿Cuántos talleres mecánicos hay en Montcada i Reixac?", "answer": "Hay más de 55 talleres mecánicos en Montcada i Reixac, incluyendo especialistas en mecánica general, electrónica del automóvil, carrocería y reparación rápida."},
+      {"question": "¿Hay talleres oficiales de marca en Montcada?", "answer": "Sí, Montcada cuenta con concesionarios oficiales de Renault, Seat, Citroën, Kia, Ford y Nissan que ofrecen servicio de taller postventa con recambios originales."},
+      {"question": "¿Los talleres de Montcada ofrecen servicio de ITV?", "answer": "Muchos talleres ofrecen revisión previa a la ITV y preparación del vehículo para pasar la inspección técnica. Algunos también realizan el cambio de neumáticos y revisiones periódicas."}
+    ]
+  },
+  "Peluquerías": {
+    "intro": "El sector de la peluquería y la estética en Montcada i Reixac es uno de los más dinámicos del municipio. Con más de medio centenar de establecimientos repartidos por barrios como Can Sant Joan, la Ribera o el centro, los vecinos tienen acceso a una amplia variedad de servicios que van desde el corte clásico de toda la vida hasta las últimas tendencias en coloración, mechas y tratamientos capilares. Muchas peluquerías de Montcada destacan por su especialización en trenzas africanas, un servicio muy demandado que ha convertido a algunos salones en referentes comarcales. También encontrarás centros de estética que combinan servicios de peluquería con manicura, pedicura y tratamientos faciales.",
+    "outro": "Ya sea para un corte de hombre exprés, un cambio de look radical o un tratamiento de belleza completo, las peluquerías de Montcada i Reixac ofrecen precios competitivos y un trato cercano. Muchos establecimientos atienden sin cita previa y algunos ofrecen servicio a domicilio, especialmente pensado para personas mayores o con movilidad reducida.",
+    "faqs": [
+      {"question": "¿Cuántas peluquerías hay en Montcada i Reixac?", "answer": "Hay más de 50 peluquerías y centros de estética en Montcada i Reixac, repartidas por todos los barrios del municipio."},
+      {"question": "¿Hay peluquerías especializadas en trenzas africanas en Montcada?", "answer": "Sí, varias peluquerías de Montcada destacan por su especialización en trenzas africanas, un servicio muy demandado que ha convertido a algunos salones en referentes de la comarca."},
+      {"question": "¿Las peluquerías de Montcada ofrecen servicio a domicilio?", "answer": "Sí, varios salones de peluquería en Montcada ofrecen servicio a domicilio, especialmente pensado para personas mayores o con movilidad reducida."}
+    ]
+  },
+  "Concesionarios": {
+    "intro": "El sector de la automoción en Montcada i Reixac cuenta con una importante presencia de concesionarios oficiales y compraventas de vehículos. Ubicados estratégicamente junto a la N-152 y en el polígono industrial, estos establecimientos ofrecen tanto vehículos nuevos como de ocasión de las principales marcas del mercado. Desde concesionarios oficiales de Renault, Seat, Citroën, Kia, Ford y Nissan hasta compraventas multimarca especializadas en vehículos de segunda mano, la oferta automovilística de Montcada permite comparar y encontrar el coche que mejor se adapta a cada necesidad y presupuesto.",
+    "outro": "Además de la venta de vehículos, muchos concesionarios de Montcada i Reixac ofrecen servicios adicionales como financiación a medida, mantenimiento oficial, taller propio y recogida de vehículos de segunda mano como parte del pago. La competencia entre los distintos establecimientos juega a favor del comprador, que puede negociar condiciones y obtener un mejor precio.",
+    "faqs": [
+      {"question": "¿Qué marcas tienen concesionario oficial en Montcada i Reixac?", "answer": "En Montcada hay concesionarios oficiales de Renault, Seat, Citroën, Kia, Ford, Nissan, Fiat y DR, además de compraventas multimarca con vehículos de todas las marcas."},
+      {"question": "¿Hay coches de segunda mano en los concesionarios de Montcada?", "answer": "Sí, la mayoría de concesionarios ofrecen vehículos de ocasión con garantía, y hay compraventas especializadas exclusivamente en coches de segunda mano."},
+      {"question": "¿Los concesionarios de Montcada tienen taller propio?", "answer": "La mayoría de concesionarios oficiales disponen de taller propio con recambios originales y personal certificado por la marca."}
+    ]
+  },
+  "Fisioterapeutas": {
+    "intro": "La salud y el bienestar son prioritarios, y en Montcada i Reixac los vecinos cuentan con numerosos centros médicos y fisioterapeutas para cuidar de su salud física. El municipio dispone de una completa red de CAPs (Centros de Atención Primaria), consultas médicas privadas y centros de fisioterapia que cubren desde la medicina general hasta especialidades como la traumatología, la rehabilitación o la medicina deportiva. Muchos de estos centros están gestionados por profesionales con años de experiencia que combinan la atención pública y privada para ofrecer un servicio integral a los pacientes.",
+    "outro": "Tanto si necesitas una consulta médica de atención primaria, tratamiento de fisioterapia para una lesión deportiva o simplemente un chequeo general, los centros de salud de Montcada i Reixac ofrecen opciones tanto públicas como privadas. La mayoría de centros privados ofrecen cita previa online y atención sin listas de espera.",
+    "faqs": [
+      {"question": "¿Cuántos centros de fisioterapia hay en Montcada i Reixac?", "answer": "Hay más de 30 centros entre fisioterapeutas, consultas médicas y CAPs en Montcada i Reixac, que cubren desde atención primaria hasta especialidades como traumatología y rehabilitación."},
+      {"question": "¿Hay fisioterapeutas que atienden sin cita previa en Montcada?", "answer": "Los CAPs (Centros de Atención Primaria) atienden urgencias sin cita previa en horario de mañana y tarde. Los centros privados generalmente requieren cita previa."}
+    ]
+  },
+  "Veterinarios": {
+    "intro": "Las mascotas son parte fundamental de muchos hogares en Montcada i Reixac, y la oferta de clínicas veterinarias del municipio está a la altura. El cuidado de perros, gatos y otros animales de compañía está garantizado por una veintena de centros veterinarios distribuidos por todo el término municipal. Estos establecimientos ofrecen servicios que van desde las consultas generales y las vacunaciones obligatorias hasta cirugía, hospitalización, análisis clínicos y peluquería canina. Muchas clínicas cuentan con equipos de diagnóstico por imagen (radiografía, ecografía) que permiten una valoración precisa del estado de salud del animal.",
+    "outro": "Para elegir la clínica veterinaria adecuada en Montcada, considera la proximidad a tu domicilio, los servicios que ofrece (urgencias 24h, hospitalización, peluquería) y las opiniones de otros dueños de mascotas. La mayoría de centros atienden con cita previa y algunos disponen de servicio de urgencias para emergencias.",
+    "faqs": [
+      {"question": "¿Cuántas clínicas veterinarias hay en Montcada i Reixac?", "answer": "Hay más de 20 clínicas y centros veterinarios en Montcada i Reixac, que ofrecen desde consultas generales hasta cirugía y hospitalización."},
+      {"question": "¿Hay clínicas veterinarias con urgencias 24h en Montcada?", "answer": "Varias clínicas veterinarias de Montcada disponen de servicio de urgencias y algunas ofrecen atención continuada para emergencias."}
+    ]
+  },
+  "Abogados": {
+    "intro": "El asesoramiento legal es un servicio esencial, y Montcada i Reixac cuenta con una selección de despachos de abogados que cubren las principales ramas del derecho. Desde bufetes especializados en derecho civil y familiar (divorcios, herencias, separaciones) hasta abogados laboralistas, penalistas y expertos en extranjería. La mayoría de estos profesionales ejercen tanto en Montcada como en los municipios vecinos de Ripollet, Barberà del Vallès y Cerdanyola, lo que les permite ofrecer un servicio de proximidad con conocimiento del tejido social y económico de la comarca.",
+    "outro": "A la hora de elegir abogado en Montcada i Reixac, es recomendable buscar especialización en la rama del derecho que necesitas y valorar las opiniones de otros clientes. Muchos despachos ofrecen una primera consulta gratuita o a precio reducido para valorar tu caso sin compromiso.",
+    "faqs": [
+      {"question": "¿Qué tipos de abogados puedo encontrar en Montcada i Reixac?", "answer": "En Montcada hay abogados especializados en derecho civil, familiar (divorcios y herencias), laboral, penal y extranjería, entre otras ramas."},
+      {"question": "¿Los abogados de Montcada ofrecen primera consulta gratuita?", "answer": "Muchos despachos de abogados en Montcada ofrecen una primera consulta gratuita o a precio reducido para valorar tu caso sin compromiso."}
+    ]
+  },
+  "Supermercados": {
+    "intro": "La compra diaria en Montcada i Reixac está bien cubierta gracias a una completa red de supermercados que incluye tanto grandes cadenas nacionales como establecimientos de proximidad. Las principales enseñas del sector como Mercadona, Lidl, Aldi, Condis, Caprabo, Sorli y Dia tienen presencia en el municipio, ofreciendo diferentes perfiles de compra según las necesidades de cada familia. Desde los supermercados de bajo coste ideales para el ahorro semanal hasta los establecimientos con productos gourmet y sección de frescos de calidad, la oferta permite llenar la nevera sin necesidad de desplazarse a otros municipios.",
+    "outro": "Cada supermercado en Montcada tiene sus ventajas: unos destacan por su relación calidad-precio, otros por la variedad de productos frescos y los hay que ofrecen servicio a domicilio gratuito a partir de cierto importe. Consulta los horarios de cada establecimiento, ya que algunos abren los domingos y festivos.",
+    "faqs": [
+      {"question": "¿Qué supermercados hay en Montcada i Reixac?", "answer": "En Montcada hay supermercados de Mercadona, Lidl, Aldi, Condis, Caprabo, Sorli y Dia, entre otros, con diferentes perfiles de precio y producto."},
+      {"question": "¿Hay supermercados abiertos los domingos en Montcada?", "answer": "Algunos supermercados en Montcada abren los domingos y festivos, especialmente en temporada alta. Consulta los horarios de cada establecimiento."}
+    ]
+  },
+  "Electricistas": {
+    "intro": "Los problemas eléctricos requieren soluciones rápidas y profesionales. En Montcada i Reixac, los electricistas locales ofrecen servicios que van desde reparaciones domésticas urgentes hasta instalaciones completas para comunidades de vecinos y empresas. Estos profesionales están capacitados para realizar instalaciones eléctricas nuevas, reparaciones de averías, certificados de instalación (boletines), automatización de viviendas (domótica) y sistemas de eficiencia energética.",
+    "outro": "Para cualquier trabajo eléctrico en Montcada, es importante contar con profesionales autorizados que emitan los certificados correspondientes. La mayoría de electricistas ofrecen presupuesto sin compromiso y servicio urgente para averías, con desplazamiento a domicilio en toda el área del Vallès Occidental.",
+    "faqs": [
+      {"question": "¿Hay electricistas de urgencia en Montcada i Reixac?", "answer": "Sí, varios electricistas en Montcada ofrecen servicio urgente para averías con desplazamiento a domicilio en toda el área del Vallès Occidental."},
+      {"question": "¿Los electricistas de Montcada emiten boletines de instalación?", "answer": "Sí, los electricistas profesionales en Montcada están autorizados para emitir los certificados de instalación eléctrica (boletines) necesarios para legalizar instalaciones."}
+    ]
+  },
+  "Farmacias": {
+    "intro": "Las farmacias de Montcada i Reixac son puntos esenciales de atención sanitaria y asesoramiento farmacéutico para los vecinos del municipio. Distribuidas estratégicamente por los diferentes barrios, estas oficinas de farmacia ofrecen servicios que van más allá de la dispensación de medicamentos: elaboración de fórmulas magistrales, medición de la tensión arterial, control de glucemia, asesoramiento nutricional y revisión de la medicación.",
+    "outro": "La mayoría de farmacias en Montcada establecen guardias de urgencia según el calendario oficial, garantizando la cobertura farmacéutica 24 horas. Muchas cuentan además con servicio de pedidos online y entrega a domicilio para personas con movilidad reducida.",
+    "faqs": [
+      {"question": "¿Cuántas farmacias hay en Montcada i Reixac?", "answer": "Hay 10 farmacias en Montcada i Reixac, distribuidas por los diferentes barrios del municipio para dar cobertura a toda la población."},
+      {"question": "¿Hay farmacia de guardia en Montcada?", "answer": "Sí, las farmacias de Montcada establecen guardias de urgencia según el calendario oficial, garantizando la cobertura farmacéutica 24 horas."}
+    ]
+  },
+  "Fontaneros": {
+    "intro": "Las averías de fontanería nunca avisan, y contar con un fontanero de confianza en Montcada i Reixac es esencial para cualquier hogar o negocio. Los fontaneros locales atienden desde pequeñas reparaciones domésticas (grifos que gotean, cisternas averiadas, desagües obstruidos) hasta instalaciones completas de baños y cocinas, sistemas de calefacción por radiadores, calderas de gas y tuberías generales para comunidades.",
+    "outro": "La mayoría de fontaneros en Montcada ofrecen servicio urgente 24 horas para emergencias como roturas de tuberías o inundaciones. Solicita siempre presupuesto previo por escrito y verifica que el profesional esté dado de alta en el correspondiente registro de instaladores.",
+    "faqs": [
+      {"question": "¿Hay fontaneros de urgencia 24h en Montcada i Reixac?", "answer": "Sí, varios fontaneros en Montcada ofrecen servicio urgente 24 horas para emergencias como roturas de tuberías, inundaciones o averías graves."},
+      {"question": "¿Los fontaneros de Montcada instalan calderas y calefacción?", "answer": "Sí, muchos fontaneros en Montcada están especializados también en instalaciones de calefacción, calderas de gas y sistemas de agua caliente."}
+    ]
+  },
+  "Reformas": {
+    "intro": "Si estás pensando en reformar tu vivienda o local comercial en Montcada i Reixac, el municipio cuenta con profesionales especializados en todo tipo de reformas integrales y parciales. Desde pequeñas renovaciones de baños y cocinas hasta reformas completas de viviendas, pasando por rehabilitación de fachadas, instalación de suelos, falsos techos y trabajos de pintura. Las empresas de reformas de Montcada ofrecen servicios llave en mano que incluyen albañilería, fontanería, electricidad, carpintería y acabados.",
+    "outro": "Antes de contratar una reforma en Montcada, solicita varios presupuestos detallados, comprueba las referencias de trabajos anteriores y asegúrate de que la empresa esté legalmente constituida y con los seguros obligatorios en regla. Las reformas integrales suelen requerir licencia municipal de obras.",
+    "faqs": [
+      {"question": "¿Qué tipo de reformas hacen en Montcada i Reixac?", "answer": "Las empresas de reformas en Montcada realizan desde reformas integrales de viviendas hasta renovaciones de baños y cocinas, rehabilitación de fachadas, instalación de suelos y pintura."},
+      {"question": "¿Necesito licencia municipal para reformar en Montcada?", "answer": "Las reformas integrales y obras estructurales suelen requerir licencia municipal de obras. Las empresas de reformas en Montcada pueden asesorarte sobre los trámites necesarios."}
+    ]
+  },
+  "Ópticas": {
+    "intro": "La salud visual es importante a cualquier edad, y las ópticas de Montcada i Reixac ofrecen servicios completos de revisión visual, graduación de la vista y adaptación de lentes graduadas y gafas de sol. Las principales cadenas ópticas tienen presencia en el municipio, junto con ópticas independientes que ofrecen un trato más personalizado y un asesoramiento cercano.",
+    "outro": "La mayoría de ópticas en Montcada realizan revisiones visuales gratuitas y ofrecen financiación a medida para la compra de gafas. Muchas disponen además de servicio de urgencia para rotura de gafas y adaptación de lentillas en el mismo día.",
+    "faqs": [
+      {"question": "¿Cuántas ópticas hay en Montcada i Reixac?", "answer": "Hay 10 ópticas en Montcada i Reixac, incluyendo tanto cadenas nacionales como ópticas independientes con trato personalizado."},
+      {"question": "¿Las ópticas de Montcada hacen revisiones gratuitas?", "answer": "Sí, la mayoría de ópticas en Montcada realizan revisiones visuales gratuitas e incluyen graduación de la vista sin coste."}
+    ]
+  },
+  "Servicios públicos y trámites": {
+    "intro": "Montcada i Reixac dispone de los servicios públicos esenciales para atender las necesidades de sus vecinos. El Ayuntamiento, situado en la plaza de la Vila, es el centro administrativo donde realizar trámites municipales, empadronamiento y solicitudes de licencias. Las bibliotecas Can Sant Joan y Elisenda de Montcada ofrecen espacios de estudio y lectura, mientras que los CAPs (Centros de Atención Primaria) garantizan la asistencia sanitaria básica. La oficina de Correos y la policía local complementan los servicios esenciales del municipio.",
+    "outro": "Para trámites administrativos, se recomienda solicitar cita previa a través de la sede electrónica del Ayuntamiento de Montcada i Reixac. Los centros de salud atienden urgencias sin cita previa en horario de mañana y tarde.",
+    "faqs": [
+      {"question": "¿Dónde está el Ayuntamiento de Montcada i Reixac?", "answer": "El Ayuntamiento de Montcada i Reixac está situado en la plaza de la Vila, en el centro del municipio. Se recomienda solicitar cita previa a través de la sede electrónica."},
+      {"question": "¿Qué bibliotecas hay en Montcada?", "answer": "Montcada cuenta con dos bibliotecas públicas: la Biblioteca Can Sant Joan y la Biblioteca Elisenda de Montcada, ambas con espacios de estudio y préstamo de libros."}
+    ]
+  },
+  "Dentistas": {
+    "intro": "La salud bucodental en Montcada i Reixac está atendida por varias clínicas dentales que ofrecen servicios completos de odontología general y especializada. Desde las revisiones periódicas y limpiezas dentales hasta tratamientos más complejos como endodoncias, implantes, ortodoncia y periodoncia. Las clínicas dentales de Montcada combinan la tecnología más avanzada con un trato cercano y precios adaptados a diferentes presupuestos.",
+    "outro": "Muchas clínicas dentales en Montcada ofrecen financiación sin intereses para tratamientos de mayor coste como implantes u ortodoncia. La primera consulta suele ser gratuita e incluye un estudio completo de la situación bucodental del paciente.",
+    "faqs": [
+      {"question": "¿Cuántas clínicas dentales hay en Montcada i Reixac?", "answer": "Hay 7 clínicas dentales en Montcada i Reixac que ofrecen servicios de odontología general, ortodoncia, implantes y estética dental."},
+      {"question": "¿Las clínicas dentales de Montcada ofrecen financiación?", "answer": "Sí, muchas clínicas dentales en Montcada ofrecen financiación sin intereses para tratamientos de mayor coste como implantes u ortodoncia. La primera consulta suele ser gratuita."}
+    ]
+  }
+}

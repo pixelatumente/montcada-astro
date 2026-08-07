@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  type: "LocalBusiness" | "WebPage" | "BreadcrumbList";
+  type: "LocalBusiness" | "WebPage" | "BreadcrumbList" | "ItemList" | "WebSite";
   data: Record<string, any>;
 }
 
@@ -23,6 +23,12 @@ function buildSchema() {
           addressCountry: "ES"
         } : undefined,
         image: data.image || undefined,
+        aggregateRating: data.aggregateRating ? {
+          "@type": "AggregateRating",
+          ratingValue: data.aggregateRating.ratingValue,
+          reviewCount: data.aggregateRating.reviewCount,
+          bestRating: data.aggregateRating.bestRating || 5
+        } : undefined,
         areaServed: {
           "@type": "City",
           name: "Montcada i Reixac"
@@ -37,6 +43,50 @@ function buildSchema() {
           position: i + 1,
           name: item.name,
           item: item.url
+        }))
+      };
+    case "ItemList":
+      return {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: data.name || undefined,
+        description: data.description || undefined,
+        numberOfItems: data.numberOfItems || undefined,
+        url: data.url || undefined,
+        itemListElement: (data.items || []).map((item: any, i: number) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: item.url,
+          name: item.name
+        }))
+      };
+    case "WebSite":
+      return {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: data.name || "Montcada Online",
+        url: data.url || "https://montcada.com.es",
+        description: data.description || undefined,
+        potentialAction: data.searchAction ? {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: data.searchAction.target
+          },
+          "query-input": "required name=search_term_string"
+        } : undefined
+      };
+    case "FAQPage":
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: (data.questions || []).map((q: any) => ({
+          "@type": "Question",
+          name: q.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: q.answer
+          }
         }))
       };
     default:

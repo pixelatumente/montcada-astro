@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://montcada.com.es/sitemap-index.xml
