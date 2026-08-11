@@ -15,8 +15,9 @@
 /google-maps-montcada-i-reixac/ / 301
 /notarios-montcada-i-reixac / 301
 /notarios-montcada-i-reixac/ / 301
-/farmacias-montcada-i-reixac / 301
-/farmacias-montcada-i-reixac/ / 301
+/farmacias-montcada-i-reixac /farmacias/ 301
+/farmacias-montcada-i-reixac/ /farmacias/ 301
+/farmacias-montcada-i-reixac/* /farmacias/:splat 301
 /floristerias-montcada-i-reixac / 301
 /floristerias-montcada-i-reixac/ / 301
 /psicologos-montcada-i-reixac / 301
@@ -49,6 +50,29 @@
 /dentistas-montcada-i-reixac /dentistas/ 301
 /dentistas-montcada-i-reixac/ /dentistas/ 301
 /dentistas-montcada-i-reixac/* /dentistas/:splat 301
+
+# Remaining categories from old WP permalink format
+/supermercados-montcada-i-reixac /supermercados/ 301
+/supermercados-montcada-i-reixac/ /supermercados/ 301
+/supermercados-montcada-i-reixac/* /supermercados/:splat 301
+/fontaneros-montcada-i-reixac /fontaneros/ 301
+/fontaneros-montcada-i-reixac/ /fontaneros/ 301
+/fontaneros-montcada-i-reixac/* /fontaneros/:splat 301
+/electricistas-montcada-i-reixac /electricistas/ 301
+/electricistas-montcada-i-reixac/ /electricistas/ 301
+/electricistas-montcada-i-reixac/* /electricistas/:splat 301
+/reformas-montcada-i-reixac /reformas/ 301
+/reformas-montcada-i-reixac/ /reformas/ 301
+/reformas-montcada-i-reixac/* /reformas/:splat 301
+/opticas-montcada-i-reixac /opticas/ 301
+/opticas-montcada-i-reixac/ /opticas/ 301
+/opticas-montcada-i-reixac/* /opticas/:splat 301
+/servicios-publicos-y-tramites-montcada-i-reixac /servicios-publicos-y-tramites/ 301
+/servicios-publicos-y-tramites-montcada-i-reixac/ /servicios-publicos-y-tramites/ 301
+/servicios-publicos-y-tramites-montcada-i-reixac/* /servicios-publicos-y-tramites/:splat 301
+/mir-montcada-i-reixac /mir/ 301
+/mir-montcada-i-reixac/ /mir/ 301
+/mir-montcada-i-reixac/* /mir/:splat 301
 
 # Redirect old accented URLs for servicios públicos y trámites
 /servicios-p%C3%BAblicos-y-tr%C3%A1mites/* /servicios-publicos-y-tramites/:splat 301
