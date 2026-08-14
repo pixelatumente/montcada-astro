@@ -2,7 +2,6 @@
 
 # Static page redirects (non-business)
 /publica-tu-negocio /publica-tu-negocio/ 301
-/publica-tu-negocio/ /publica-tu-negocio/ 301
 /contacto /publica-tu-negocio/ 301
 /contacto/ /publica-tu-negocio/ 301
 /comercios-en-montcada-i-reixac / 301
@@ -10,7 +9,6 @@
 /centro-medico-montcada-i-reixac /fisioterapeutas/ 301
 /centro-medico-montcada-i-reixac/ /fisioterapeutas/ 301
 /tiempo-montcada-i-reixac /tiempo-montcada-i-reixac/ 301
-/tiempo-montcada-i-reixac/ /tiempo-montcada-i-reixac/ 301
 /google-maps-montcada-i-reixac / 301
 /google-maps-montcada-i-reixac/ / 301
 /notarios-montcada-i-reixac / 301
