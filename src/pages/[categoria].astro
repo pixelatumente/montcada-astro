@@ -17,7 +17,7 @@ const { category } = Astro.props;
 const businesses = data.negocios.filter(n => n.category === category.name);
 const enrichedBusinesses = businesses.filter(n => n.enriched?.google_place_id);
 const title = `${category.name} en Montcada i Reixac`;
-const desc = `Encuentra los mejores ${category.name.toLowerCase()} en Montcada i Reixac. Directorio con ${businesses.length} negocios, direcciones, teléfonos y opiniones.`;
+const desc = contenidoCategorias[category.name]?.seo_description || `Encuentra los mejores ${category.name.toLowerCase()} en Montcada i Reixac. Directorio con ${businesses.length} negocios, direcciones, teléfonos y opiniones.`;
 
 const categoryIcons = {
   "Restaurantes": { icon: "🍽️", bg: "#FDF0ED" },

@@ -27,6 +27,31 @@ const desc = (negocio.seo_description || `${negocio.title} en Montcada i Reixac.
 const title = negocio.seo_title || `${negocio.title} | Montcada i Reixac`;
 const canon = `https://montcada.com.es/${catSlug}/${negocio.slug}/`;
 
+// Public service pages get a data-driven FAQ schema (hours, phone, address from real data)
+const isPublicService = negocio.category === "mir" || negocio.category === "Servicios públicos y trámites";
+const faqQuestions = [];
+if (isPublicService) {
+  if (e.google_hours && e.google_hours.length) {
+    const hoursSummary = e.google_hours.join("; ");
+    faqQuestions.push({
+      question: `¿Cuál es el horario de ${negocio.title}?`,
+      answer: hoursSummary.charAt(0).toUpperCase() + hoursSummary.slice(1) + "."
+    });
+  }
+  if (e.google_phone || negocio.phone) {
+    faqQuestions.push({
+      question: `¿Cuál es el teléfono de ${negocio.title}?`,
+      answer: `El teléfono de ${negocio.title} es ${e.google_phone || negocio.phone}.`
+    });
+  }
+  if (e.google_address || negocio.address) {
+    faqQuestions.push({
+      question: `¿Dónde está ${negocio.title}?`,
+      answer: `${negocio.title} está en ${e.google_address || negocio.address}.`
+    });
+  }
+}
+
 // Format hours
 function formatHours(hours) {
   if (!hours || !hours.length) return null;
@@ -92,6 +117,9 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
       { name: negocio.title, url: canon }
     ]
   }} />
+  {faqQuestions.length > 0 && (
+    <Schema type="FAQPage" data={{ questions: faqQuestions }} />
+  )}
 
   <!-- Breadcrumb -->
   <div style="background:var(--bg-alt);padding:16px 0;border-bottom:1px solid var(--border)">

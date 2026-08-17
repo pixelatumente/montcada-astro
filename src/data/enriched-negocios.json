@@ -1207,40 +1207,6 @@
       "clean_content": "TALLER MACIAS es un taller mecánico en Montcada i Reixac, valorado con 4.4 estrellas sobre 5 en Google (36 reseñas). Está situado en Carrer de l'Or, 24, 08290 Cerdanyola del Vallès, Barcelona, España, ofreciendo servicios de talleres.\n\nContacta al 935 92 14 61 para más información."
     },
     {
-      "id": "3948",
-      "title": "Rodi Motor Services",
-      "slug": "rodi-motor-services-2",
-      "category": "Talleres",
-      "categories": [
-        "Talleres"
-      ],
-      "permalink": "https://montcada.com.es/talleres-montcada-i-reixac/rodi-motor-services-2/",
-      "content": "Teléfono de Rodi Motor ServicesSi necesitas contactar directamente, puedes hacer click en el número para realizar una llamada.  Si llamas desde el extranjero, debes añadir el prefijo +34.935 80 10 76Dirección de la Rodi Motor ServicesAunque si es difícil para tí ubicarte sólo con la dirección, más abajo puedes ver en el mapa dónde se ubica y saber cómo llegar.Carrer de Balmes, 40-42, 08291 Ripollet, BarcelonaPágina webEn la siguiente dirección web encontrarás más información de Rodi Motor Services.https://www.rodi.es/talleres-mecanicos/barcelona/ripollet/Correo electrónicoPuedes contactar con un clic sobre el e-mail. En el caso de que tengas un problema con el correo, indícalo en nuestro formulario de contacto para solucionarlo.Horarios de atenciónEstas son los horarios durante toda la semana, tanto de mañana y tarde:De 8:30 a 13:30,De 15:30 a 19:30De 8:30 a 13:30,De 15:30 a 19:30De 8:30 a 13:30,De 15:30 a 19:30De 8:30 a 13:30,De 15:30 a 19:30De 8:30 a 13:30,De 15:30 a 19:30De 9:00 a 13:00CerradoDónde está Rodi Motor ServicesPuedes pulsar sobre el bóton \"Cómo llegar\" para obtener las indicaciones en Google Maps.Código Plus CodePlus Code es una forma de identificar un lugar. Copia el Plus Code siguiente y podrás enviarlo para que otra persona pueda acceder directamente a esa ubicación, sin complicaciones.F5V5+JX RipolletLa persona a la que le enviemos este Plus Code solo tiene que pegarlo en  la barra de búsqueda de Google Maps para acceder al instante al lugar.También te puede interesar[page-generator-pro-related-links output_type=\"list_links\" link_title=\"%title\" limit=\"3\" columns=\"1\" parent_title=\"%title\" next_title=\"%title »\" prev_title=\"« %title\" post_status=\"publish\" orderby=\"distance\" order=\"asc\" category=\"talleres\"]",
-      "phone": "935 80 10 76",
-      "excerpt": "Rodi Motor Services — Talleres en Pk Gros Mercat. Valorado con 4.3/5 (293 reseñas en Google). Ubicado en Pk Gros Mercat. Contacto: 935 75 23 18.",
-      "enriched": {
-        "google_place_id": "ChIJR2U8L8K9pBIRXdrd9dqF9aA",
-        "google_rating": 4.3,
-        "google_reviews": 293,
-        "google_address": "Pk Gros Mercat, Pol. Ind. Ferreria, 08110 Montcada i Reixac, Barcelona, España",
-        "google_phone": "935 75 23 18",
-        "google_website": "https://www.rodi.es/talleres-mecanicos/barcelona/montcada/",
-        "google_maps_url": "https://maps.google.com/?cid=11598323590836902493&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
-        "google_hours": [
-          "lunes: 8:00–13:00, 15:00–19:00",
-          "martes: 8:00–13:00, 15:00–19:00",
-          "miércoles: 8:00–13:00, 15:00–19:00",
-          "jueves: 8:00–13:00, 15:00–19:00",
-          "viernes: 8:00–13:00, 15:00–19:00",
-          "sábado: Cerrado",
-          "domingo: Cerrado"
-        ],
-        "google_business_status": "OPERATIONAL",
-        "google_price_level": null
-      },
-      "clean_content": "Si buscas un taller mecánico en Montcada i Reixac, Rodi Motor Services es una excelente opción, con una valoración de 4.3 estrellas sobre 5 en Google y más de 293 reseñas de clientes,situado en Pk Gros Mercat, Pol. Ind. Ferreria, 08110 Montcada i Reixac, Barcelona, España. Ofrece servicios profesionales de talleres.\n\nPuedes visitar su página web en www.rodi.es para más información, o contactar llamando al 935 80 10 76."
-    },
-    {
       "id": "3952",
       "title": "Talleres Viñuela Pérez",
       "slug": "talleres-vinuela-perez",
@@ -6968,7 +6934,8 @@
         "google_business_status": "OPERATIONAL",
         "google_price_level": "PRICE_LEVEL_INEXPENSIVE"
       },
-      "clean_content": "Si buscas un restaurante en Montcada i Reixac, Bar Petit Marc es una excelente opción, con una valoración de 4.3 estrellas sobre 5 en Google y más de 1472 reseñas de clientes,situado en Rambla dels Països Catalans, 37, 08110 Montcada i Reixac, Barcelona, España. Ofrece servicios profesionales de restaurantes, con un nivel de precio económico.\n\nPuedes visitar su página web en montcada.com.es para más información, o contactar llamando al 935 72 66 68."
+      "clean_content": "Si buscas un restaurante en Montcada i Reixac, Bar Petit Marc es una excelente opción, con una valoración de 4.3 estrellas sobre 5 en Google y más de 1472 reseñas de clientes,situado en Rambla dels Països Catalans, 37, 08110 Montcada i Reixac, Barcelona, España. Ofrece servicios profesionales de restaurantes, con un nivel de precio económico.\n\nPuedes visitar su página web en montcada.com.es para más información, o contactar llamando al 935 72 66 68.",
+      "seo_description": "Bar Petit Marc en Rambla dels Països Catalans 37. Abierto mar-sáb hasta 23:30, domingo hasta 17:00 (lunes cerrado). 4.3★ (1472 reseñas). Tel. 935 72 66 68."
     },
     {
       "id": "4481",
@@ -11397,7 +11364,8 @@
         "google_business_status": "OPERATIONAL",
         "google_price_level": null
       },
-      "clean_content": "Si buscas un centro de fisioterapia en Montcada i Reixac, CAP Les Indianes es una excelente opción, con una valoración de 1.9 estrellas sobre 5 en Google y más de 173 reseñas de clientes,situado en Camí Font Freda, 13, 08110 Montcada i Reixac, Barcelona, España. Ofrece servicios profesionales de fisioterapeutas.\n\nPuedes visitar su página web en ics.gencat.cat para más información, o contactar llamando al 935 75 26 01."
+      "clean_content": "Si buscas un centro de fisioterapia en Montcada i Reixac, CAP Les Indianes es una excelente opción, con una valoración de 1.9 estrellas sobre 5 en Google y más de 173 reseñas de clientes,situado en Camí Font Freda, 13, 08110 Montcada i Reixac, Barcelona, España. Ofrece servicios profesionales de fisioterapeutas.\n\nPuedes visitar su página web en ics.gencat.cat para más información, o contactar llamando al 935 75 26 01.",
+      "seo_description": "CAP Les Indianes en Camí de la Font Freda 9 (Can Sant Joan). Atención primaria y PAC de urgencias. Abierto lunes a viernes 8:00-20:00. Tel. 935 752 601."
     },
     {
       "id": "4901",
@@ -12544,7 +12512,8 @@
         "google_rating": null,
         "google_reviews": null
       },
-      "id": "5128"
+      "id": "5128",
+      "seo_description": "CAP Les Indianes en Camí de la Font Freda 9 (Can Sant Joan). Atención primaria y PAC de urgencias. Abierto lunes a viernes 8:00-20:00. Tel. 935 752 601."
     },
     {
       "title": "Biblioteca Can Sant Joan",
@@ -12640,7 +12609,8 @@
         "google_rating": null,
         "google_reviews": null
       },
-      "id": "5131"
+      "id": "5131",
+      "seo_description": "Correos Montcada i Reixac en Carrer Montiu 12. Envíos, certificados, burofax y giros. Lunes a viernes 8:30-20:30, sábado 9:30-13:00. Tel. 935 640 347."
     },
     {
       "title": "Casal de Gent Gran Casa de la Mina",

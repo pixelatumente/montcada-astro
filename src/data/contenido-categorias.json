@@ -1,5 +1,6 @@
 {
   "Restaurantes": {
+    "seo_description": "157 restaurantes y bares en Montcada i Reixac · 108 con precios económicos · tapas, brasa, sushi, kebab y cocina mediterránea · direcciones, teléfonos y horarios reales",
     "intro": "Montcada i Reixac ofrece una variada oferta gastronómica que refleja la diversidad del Vallès Occidental. Desde bares de tapas tradicionales donde tomar una caña con amigos hasta restaurantes de cocina asiática, pasando por braserías especializadas en carnes a la brasa y establecimientos de comida mediterránea. La cercanía con Barcelona no ha desplazado la esencia de los bares de barrio, esos locales de toda la vida donde el trato cercano y el producto de proximidad siguen siendo los protagonistas. Muchos de estos restaurantes han sabido combinar la tradición culinaria catalana con influencias internacionales, creando una oferta para todos los paladares.",
     "outro": "Tanto si buscas un sitio para una comida de trabajo cerca del polígono industrial, un restaurante familiar para el fin de semana, o simplemente un bar donde tomar el vermut del domingo, la oferta de restauración de Montcada i Reixac tiene opciones para cada momento. No olvides consultar los horarios y, en los más populares, reservar con antelación los fines de semana.",
     "faqs": [
@@ -113,7 +114,11 @@
     "outro": "Para trámites administrativos, se recomienda solicitar cita previa a través de la sede electrónica del Ayuntamiento de Montcada i Reixac. Los centros de salud atienden urgencias sin cita previa en horario de mañana y tarde.",
     "faqs": [
       {"question": "¿Dónde está el Ayuntamiento de Montcada i Reixac?", "answer": "El Ayuntamiento de Montcada i Reixac está situado en la plaza de la Vila, en el centro del municipio. Se recomienda solicitar cita previa a través de la sede electrónica."},
-      {"question": "¿Qué bibliotecas hay en Montcada?", "answer": "Montcada cuenta con dos bibliotecas públicas: la Biblioteca Can Sant Joan y la Biblioteca Elisenda de Montcada, ambas con espacios de estudio y préstamo de libros."}
+      {"question": "¿Qué bibliotecas hay en Montcada?", "answer": "Montcada cuenta con dos bibliotecas públicas: la Biblioteca Can Sant Joan y la Biblioteca Elisenda de Montcada, ambas con espacios de estudio y préstamo de libros."},
+      {"question": "¿Dónde está el CAP Les Indianes y cuál es su horario?", "answer": "El CAP Les Indianes está en Camí de la Font Freda 9 (barrio de Can Sant Joan) y abre de lunes a viernes de 8:00 a 20:00. Teléfono: 935 752 601."},
+      {"question": "¿Cuál es el horario de Correos en Montcada i Reixac?", "answer": "La oficina de Correos de Montcada i Reixac está en Carrer Montiu 12 y abre de lunes a viernes de 8:30 a 20:30 y sábados de 9:30 a 13:00. Teléfono: 935 640 347."},
+      {"question": "¿Dónde está la comisaría de Mossos d'Esquadra en Montcada?", "answer": "La comisaría de los Mossos d'Esquadra está en Carrer Pla de Matabous 2 y abre 24 horas. Teléfono: 935 614 200 (emergencias 112)."},
+      {"question": "¿Dónde está la Policía Local de Montcada y cuál es su horario?", "answer": "La Policía Local está en Carrer Major 38 y atiende de lunes a viernes de 9:00 a 14:30. Teléfono: 935 64 26 54."}
     ]
   },
   "Dentistas": {

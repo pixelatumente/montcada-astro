@@ -75,3 +75,7 @@
 # Redirect old accented URLs for servicios públicos y trámites
 /servicios-p%C3%BAblicos-y-tr%C3%A1mites/* /servicios-publicos-y-tramites/:splat 301
 /servicios-p%C3%BAblicos-y-tr%C3%A1mites /servicios-publicos-y-tramites/ 301
+
+# Duplicate business redirect: rodi-motor-services-2 (same Google place) -> canonical clean slug
+/talleres/rodi-motor-services-2/ /talleres/rodi-motor-services/ 301
+/talleres/rodi-motor-services-2 /talleres/rodi-motor-services/ 301
