@@ -117,6 +117,44 @@ function stars(rating) {
     </section>
   )}
 
+  <!-- Trámites Hub: solo en la landing de servicios públicos (enlaces internos a fichas clave) -->
+  {category.name === "Servicios públicos y trámites" && (
+    <section class="container" style="padding:32px 24px 0">
+      <div style="background:var(--card);border-radius:var(--radius);padding:28px 32px;border:1px solid var(--border);box-shadow:var(--shadow-sm)">
+        <h2 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:600;margin-bottom:4px;color:var(--text)">Resuelve tu trámite en Montcada</h2>
+        <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:20px">Acceso directo a los servicios públicos con más consultas: horarios y teléfonos actualizados.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px">
+          {
+            [
+              { slug: "cap-les-indianes", etiqueta: "🩺 CAP Les Indianes", desc: "Atención primaria + PAC en Can Sant Joan" },
+              { slug: "cap-montcada-i-reixac", etiqueta: "🩺 CAP Montcada", desc: "Atención primaria del ICS en Montcada" },
+              { slug: "correos-montcada-i-reixac", etiqueta: "📮 Correos", desc: "Envíos, certificados, burofax y giros" },
+              { slug: "mossos-desquadra-montcada-i-reixac", etiqueta: "👮 Mossos d'Esquadra", desc: "Comisaría 24 horas en Pla de Matabous 2" },
+              { slug: "policia-de-montcada-i-reixac", etiqueta: "🚓 Policía Local", desc: "Trámites y citas en Carrer Major 38" },
+              { slug: "ayuntamiento-de-montcada-i-reixac", etiqueta: "🏛️ Ayuntamiento", desc: "Empadronamiento, licencias y trámites" }
+            ].map(t => {
+              // Prefer the canonical "Servicios públicos y trámites" ficha; some slugs also exist under Fisioterapeutas (historic duplicates)
+              const ficha = data.negocios.find(n => n.slug === t.slug && n.category === "Servicios públicos y trámites")
+                || data.negocios.find(n => n.slug === t.slug);
+              if (!ficha) return null;
+              const fCatSlug = ficha.category.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[\s|]+/g, "-").replace(/[^a-z0-9-]/g, "");
+              return (
+                <a href={`/${fCatSlug}/${ficha.slug}/`} style="display:block;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-decoration:none;color:var(--text);transition:all 0.2s"
+                  onmouseover="this.style.boxShadow='var(--shadow-sm)';this.style.borderColor='var(--primary)'"
+                  onmouseout="this.style.boxShadow='none';this.style.borderColor='var(--border)'">
+                  <strong style="font-size:0.95rem;font-weight:600;display:block;margin-bottom:4px">{t.etiqueta}</strong>
+                  <span style="font-size:0.82rem;color:var(--text-light);line-height:1.4">{t.desc}</span>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Business Grid -->
   <section class="container" style="padding:40px 24px 60px">
     {businesses.length === 0 ? (
