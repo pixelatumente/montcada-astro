@@ -79,3 +79,12 @@
 # Duplicate business redirect: rodi-motor-services-2 (same Google place) -> canonical clean slug
 /talleres/rodi-motor-services-2/ /talleres/rodi-motor-services/ 301
 /talleres/rodi-motor-services-2 /talleres/rodi-motor-services/ 301
+
+# Canibalization fix: CAPs/correos existed under Fisioterapeutas AND Servicios públicos (2 canonical pages competing)
+# 301 Fisioterapeutas variants -> canonical Servicios públicos y trámites
+/fisioterapeutas/cap-les-indianes/ /servicios-publicos-y-tramites/cap-les-indianes/ 301
+/fisioterapeutas/cap-les-indianes /servicios-publicos-y-tramites/cap-les-indianes/ 301
+/fisioterapeutas/cap-montcada-i-reixac/ /servicios-publicos-y-tramites/cap-montcada-i-reixac/ 301
+/fisioterapeutas/cap-montcada-i-reixac /servicios-publicos-y-tramites/cap-montcada-i-reixac/ 301
+/fisioterapeutas/correos-montcada-i-reixac/ /servicios-publicos-y-tramites/correos-montcada-i-reixac/ 301
+/fisioterapeutas/correos-montcada-i-reixac /servicios-publicos-y-tramites/correos-montcada-i-reixac/ 301

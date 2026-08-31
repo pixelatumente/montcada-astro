@@ -256,6 +256,33 @@ const subTitulo = (negocio.category === "Restaurantes" ? "Restaurante" :
       )}
     </div>
 
+    <!-- Related public-safety services (Policía <-> Mossos crosslinks) -->
+    {negocio.slug === "policia-de-montcada-i-reixac" || negocio.slug === "mossos-desquadra-montcada-i-reixac" ? (
+      (() => {
+        const relatedSlug = negocio.slug === "policia-de-montcada-i-reixac"
+          ? "mossos-desquadra-montcada-i-reixac"
+          : "policia-de-montcada-i-reixac";
+        const related = data.negocios.find(n => n.slug === relatedSlug);
+        if (!related) return null;
+        const relCatSlug = related.category.toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .replace(/[\s|]+/g, "-").replace(/[^a-z0-9-]/g, "");
+        return (
+          <section style="margin-top:32px">
+            <h2 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;margin-bottom:16px;color:var(--text)">Servicios relacionados</h2>
+            <a href={`/${relCatSlug}/${related.slug}/`} style="display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-decoration:none;color:var(--text);transition:all 0.2s;box-shadow:var(--shadow-sm)"
+              onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-3px)'"
+              onmouseout="this.style.boxShadow='var(--shadow-sm)';this.style.transform='translateY(0)'">
+              <strong style="font-size:1rem;font-weight:600">{related.title}</strong>
+              {related.enriched?.google_address && (
+                <p style="font-size:0.85rem;color:var(--text-light);margin-top:6px;line-height:1.5">{related.enriched.google_address}</p>
+              )}
+            </a>
+          </section>
+        );
+      })()
+    ) : null}
+
     <!-- More Businesses Section -->
     <section style="margin-top:48px">
       <h2 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:600;margin-bottom:20px;color:var(--text)">
