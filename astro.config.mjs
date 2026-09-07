@@ -9,7 +9,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         // Exclude legal pages from sitemap
-        const excluded = ['/aviso-legal/', '/politica-privacidad/', '/politica-cookies/', '/publica-tu-negocio/'];
+        const excluded = ['/aviso-legal/', '/politica-privacidad/', '/politica-cookies/', '/publica-tu-negocio/', '/admin/'];
         return !excluded.includes(new URL(page).pathname);
       }
     })

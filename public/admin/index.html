@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Montcada Directorio</title>
+<style>
+* { box-sizing: border-box; margin: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f6f2; color: #1f1b16; padding: 20px; }
+.container { max-width: 960px; margin: 0 auto; }
+.card { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+h1 { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+h2 { font-size: 18px; font-weight: 700; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #0f766e; }
+p { color: #666; font-size: 14px; margin-bottom: 16px; }
+label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 4px; margin-top: 12px; }
+input, textarea, select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; }
+textarea { min-height: 80px; resize: vertical; font-family: monospace; }
+select { cursor: pointer; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; border-radius: 999px; font-weight: 700; font-size: 14px; border: none; cursor: pointer; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: #1f1b16; color: #fff; box-shadow: 0 4px 12px rgba(31,27,22,0.15); }
+.btn-soft { background: #fff; color: #1f1b16; border: 1px solid #ddd; }
+.btn-sm { padding: 6px 14px; font-size: 13px; }
+.btn-danger { background: #dc2626; color: #fff; }
+.flex { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.mt-2 { margin-top: 12px; }
+.mb-2 { margin-bottom: 12px; }
+.hidden { display: none; }
+.tag { display: inline-block; background: #eef2ff; color: #4338ca; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; margin: 2px; }
+.badge { display: inline-block; background: #f1f5f9; color: #475569; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.search-box { display: flex; gap: 8px; margin-bottom: 16px; }
+.search-box input { flex: 1; }
+.result-item { padding: 12px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 8px; cursor: pointer; transition: background .15s; }
+.result-item:hover { background: #fafafa; }
+.result-item h3 { font-size: 15px; font-weight: 700; }
+.result-item .meta { font-size: 12px; color: #888; margin-top: 4px; }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 14px; z-index: 999; box-shadow: 0 4px 20px rgba(0,0,0,0.15); max-width: 90vw; }
+.toast-success { background: #064e3b; color: #a7f3d0; }
+.toast-error { background: #450a0a; color: #fca5a5; }
+.toast-info { background: #1e1b4b; color: #c7d2fe; }
+.editor-section { border-top: 1px solid #eee; margin-top: 16px; padding-top: 16px; }
+.field-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .field-group { grid-template-columns: 1fr; } }
+.spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid #ddd; border-top-color: #1f1b16; border-radius: 50%; animation: spin .6s linear infinite; vertical-align: middle; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <!-- Login -->
+  <div id="login-view" class="card" style="max-width:480px;margin:60px auto;">
+    <h1>🔐 Admin · Montcada</h1>
+    <p>Panel de edición del directorio montcada.com.es.<br>Introduce un <strong>token de GitHub</strong> con scope <code>repo</code>.</p>
+    <label for="token-input">Token de GitHub</label>
+    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+    <div class="flex mt-2">
+      <button class="btn btn-primary" onclick="login()">Entrar</button>
+      <span id="login-status" style="font-size:13px;color:#888;"></span>
+    </div>
+    <p style="margin-top:20px;font-size:12px;color:#aaa;">
+      El token se guarda solo en tu navegador (localStorage).<br>
+      Para que funcione: <code>repo</code> scope, acceso al repo <code>pixelatumente/montcada-astro</code>.
+    </p>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dash-view" class="hidden">
+    <div class="flex" style="justify-content:space-between;margin-bottom:16px;">
+      <div>
+        <h1>📋 Montcada · Directorio</h1>
+        <p id="stats-line" style="font-size:13px;color:#888;"></p>
+      </div>
+      <div class="flex">
+        <span id="user-badge" style="font-size:13px;color:#666;"></span>
+        <button class="btn btn-soft btn-sm" onclick="logout()">Salir</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar negocio por nombre, categoría, slug…" oninput="filterResults()">
+        <select id="cat-filter" onchange="filterResults()">
+          <option value="">Todas las categorías</option>
+        </select>
+        <span id="results-count" style="font-size:13px;color:#888;white-space:nowrap;"></span>
+      </div>
+      <div id="results-list"></div>
+    </div>
+
+    <div id="editor-view" class="card hidden">
+      <h2>✏️ Editar negocio</h2>
+      <div id="editor-form"></div>
+      <div class="flex mt-2">
+        <button class="btn btn-primary" onclick="saveChanges()">💾 Guardar cambios</button>
+        <button class="btn btn-soft" onclick="cancelEdit()">Cancelar</button>
+        <span id="save-status" style="font-size:13px;color:#888;margin-left:8px;"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+// ─── Config ───
+const OWNER = 'pixelatumente';
+const REPO = 'montcada-astro';
+const DATA_PATH = 'src/data/enriched-negocios.json';
+const BRANCH = 'main';
+
+// ─── State ───
+let token = localStorage.getItem('montcada_token') || '';
+let user = null;
+let data = null;
+let negocios = [];
+let categories = [];
+let editingId = null;
+let filterTimeout = null;
+
+// ─── DOM refs ───
+const $ = id => document.getElementById(id);
+
+// ─── Login ───
+async function login() {
+  const inp = $('token-input');
+  token = inp.value.trim();
+  if (!token) return toast('Introduce un token', 'error');
+  $('login-status').textContent = ' Verificando…';
+  try {
+    const r = await fetch('https://api.github.com/user', {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error('Token inválido o sin permisos (HTTP ' + r.status + ')');
+    user = (await r.json()).login;
+    // Verify repo access
+    const repoR = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!repoR.ok) throw new Error('Sin acceso al repo ' + OWNER + '/' + REPO);
+    localStorage.setItem('montcada_token', token);
+    $('login-status').textContent = '';
+    $('login-view').classList.add('hidden');
+    $('dash-view').classList.remove('hidden');
+    $('user-badge').textContent = '👤 ' + user;
+    await loadData();
+  } catch(e) {
+    toast(e.message, 'error');
+    $('login-status').textContent = '';
+  }
+}
+
+function logout() {
+  localStorage.removeItem('montcada_token');
+  token = '';
+  user = null;
+  data = null;
+  negocios = [];
+  $('dash-view').classList.add('hidden');
+  $('login-view').classList.remove('hidden');
+  $('token-input').value = '';
+}
+
+// Auto-login
+if (token) {
+  (async () => {
+    try {
+      const r = await fetch('https://api.github.com/user', {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      if (r.ok) {
+        user = (await r.json()).login;
+        localStorage.setItem('montcada_token', token);
+        $('login-view').classList.add('hidden');
+        $('dash-view').classList.remove('hidden');
+        $('user-badge').textContent = '👤 ' + user;
+        await loadData();
+      } else {
+        localStorage.removeItem('montcada_token');
+      }
+    } catch(e) { localStorage.removeItem('montcada_token'); }
+  })();
+}
+
+// ─── Data loading ───
+async function loadData() {
+  try {
+    const r = await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/${DATA_PATH}`);
+    if (!r.ok) throw new Error('No se pudo cargar el JSON (HTTP ' + r.status + ')');
+    data = await r.json();
+    negocios = data.negocios || [];
+    categories = data.categories || [];
+    $('stats-line').textContent = `${negocios.length} negocios · ${categories.length} categorías`;
+    // Populate category filter
+    const sel = $('cat-filter');
+    for (const c of categories) {
+      const opt = document.createElement('option');
+      opt.value = c.slug;
+      opt.textContent = c.name + ' (' + c.count + ')';
+      sel.appendChild(opt);
+    }
+    renderResults(negocios);
+  } catch(e) {
+    toast('Error al cargar datos: ' + e.message, 'error');
+  }
+}
+
+// ─── Search / Filter ───
+function filterResults() {
+  clearTimeout(filterTimeout);
+  filterTimeout = setTimeout(() => {
+    const q = $('search-input').value.toLowerCase().trim();
+    const cat = $('cat-filter').value;
+    let filtered = negocios;
+    if (cat) filtered = filtered.filter(n => {
+      const s = (n.category || '').toLowerCase().replace(/[^a-z0-9]/g, '-');
+      return s === cat;
+    });
+    if (q) {
+      filtered = filtered.filter(n =>
+        n.title.toLowerCase().includes(q) ||
+        (n.slug || '').includes(q) ||
+        (n.category || '').toLowerCase().includes(q) ||
+        (n.phone || '').includes(q) ||
+        (n.content || '').toLowerCase().includes(q)
+      );
+    }
+    renderResults(filtered);
+  }, 200);
+}
+
+function renderResults(list) {
+  const el = $('results-list');
+  $('results-count').textContent = list.length + ' resultados';
+  if (!list.length) { el.innerHTML = '<p style="color:#999;padding:12px;">Sin resultados</p>'; return; }
+  el.innerHTML = list.map(n => {
+    const cats = Array.isArray(n.categories) ? n.categories.join(', ') : n.category;
+    const phone = n.phone || (n.enriched && n.enriched.google_phone) || '—';
+    const rating = n.enriched && n.enriched.google_rating ? '⭐ ' + n.enriched.google_rating + ' (' + n.enriched.google_reviews + ')' : '';
+    return `<div class="result-item" onclick="editNegocio(${n.id})">
+      <h3>${n.title}</h3>
+      <div class="meta">${cats} · 📞 ${phone} ${rating ? '· ' + rating : ''}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── Edit ───
+let originalSnapshot = null;
+
+function editNegocio(id) {
+  editingId = id;
+  const n = negocios.find(x => x.id === id);
+  if (!n) return toast('Negocio no encontrado', 'error');
+  originalSnapshot = JSON.parse(JSON.stringify(n));
+
+  const e = n.enriched || {};
+  const form = $('editor-form');
+  form.innerHTML = `
+    <div class="field-group">
+      <div><label>Título</label><input id="ef-title" value="${escHtml(n.title || '')}"></div>
+      <div><label>Teléfono</label><input id="ef-phone" value="${escHtml(n.phone || '')}" placeholder="Teléfono principal"></div>
+    </div>
+    <label>Descripción corta (excerpt)</label>
+    <textarea id="ef-excerpt" rows="3">${escHtml(n.excerpt || '')}</textarea>
+    <label>Contenido (descripción completa)</label>
+    <textarea id="ef-content" rows="6">${escHtml(n.content || '')}</textarea>
+    <div class="editor-section">
+      <h3 style="font-size:14px;font-weight:600;margin-bottom:8px;">🔗 Datos de Google (enriched)</h3>
+      <div class="field-group">
+        <div><label>Dirección Google</label><input id="ef-addr" value="${escHtml(e.google_address || '')}"></div>
+        <div><label>Teléfono Google</label><input id="ef-gphone" value="${escHtml(e.google_phone || '')}"></div>
+        <div><label>Valoración</label><input id="ef-rating" value="${escHtml(e.google_rating || '')}" placeholder="4.2"></div>
+        <div><label>Reseñas</label><input id="ef-reviews" value="${escHtml(e.google_reviews || '')}" placeholder="42"></div>
+        <div><label>Estado</label>
+          <select id="ef-status">
+            <option value="OPERATIONAL" ${e.google_business_status === 'OPERATIONAL' ? 'selected' : ''}>Abierto</option>
+            <option value="CLOSED_TEMPORARILY" ${e.google_business_status === 'CLOSED_TEMPORARILY' ? 'selected' : ''}>Cerrado temporalmente</option>
+            <option value="CLOSED_PERMANENTLY" ${e.google_business_status === 'CLOSED_PERMANENTLY' ? 'selected' : ''}>Cerrado permanentemente</option>
+          </select>
+        </div>
+        <div><label>Website</label><input id="ef-website" value="${escHtml(e.google_website || '')}"></div>
+      </div>
+      <label>Horario (JSON)</label>
+      <textarea id="ef-hours" rows="4" style="font-family:monospace;font-size:12px;">${escHtml(JSON.stringify(e.google_hours || [], null, 2))}</textarea>
+    </div>
+    <div class="editor-section">
+      <div class="flex" style="justify-content:space-between;">
+        <span style="font-size:13px;color:#888;">ID: ${n.id} · Slug: ${n.slug} · Categoría: ${n.category}</span>
+        <span style="font-size:12px;color:#999;">Modificado: ${n.clean_content_origen || '—'}</span>
+      </div>
+    </div>
+  `;
+  $('editor-view').classList.remove('hidden');
+  $('editor-view').scrollIntoView({ behavior: 'smooth' });
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function cancelEdit() {
+  $('editor-view').classList.add('hidden');
+  editingId = null;
+  originalSnapshot = null;
+}
+
+// ─── Save ───
+async function saveChanges() {
+  const status = $('save-status');
+  status.innerHTML = '<span class="spinner"></span> Guardando…';
+
+  const n = negocios.find(x => x.id === editingId);
+  if (!n) { status.textContent = 'Error: negocio no encontrado'; return; }
+
+  // Collect fields
+  n.title = $('ef-title').value.trim();
+  n.phone = $('ef-phone').value.trim();
+  n.excerpt = $('ef-excerpt').value.trim();
+  n.content = $('ef-content').value.trim();
+
+  if (!n.enriched) n.enriched = {};
+  n.enriched.google_address = $('ef-addr').value.trim();
+  n.enriched.google_phone = $('ef-gphone').value.trim();
+  n.enriched.google_rating = parseFloat($('ef-rating').value) || undefined;
+  n.enriched.google_reviews = parseInt($('ef-reviews').value) || undefined;
+  n.enriched.google_business_status = $('ef-status').value;
+  n.enriched.google_website = $('ef-website').value.trim();
+  try {
+    n.enriched.google_hours = JSON.parse($('ef-hours').value.trim());
+  } catch(e) {
+    toast('El horario no es JSON válido. Revisa las comillas.', 'error');
+    status.textContent = 'Error en horario JSON';
+    return;
+  }
+
+  // Also update excerpt and clean_content if content changed
+  if (n.content && n.content !== originalSnapshot.content) {
+    n.clean_content = n.content;
+    n.clean_content_origen = 'admin-' + new Date().toISOString().slice(0, 10);
+  }
+
+  // Write to GitHub
+  try {
+    // Get current file SHA
+    const shaR = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${DATA_PATH}?ref=${BRANCH}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!shaR.ok) throw new Error('No se pudo leer el SHA (HTTP ' + shaR.status + ')');
+    const shaData = await shaR.json();
+    const sha = shaData.sha;
+
+    // Recompute negocios array with the updated item
+    const idx = data.negocios.findIndex(x => x.id === editingId);
+    if (idx === -1) throw new Error('Índice no encontrado');
+    data.negocios[idx] = n;
+
+    const jsonStr = JSON.stringify(data, null, 2);
+
+    // Commit via GitHub API
+    const commitR = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${DATA_PATH}`, {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `✏️ Admin: editar ${n.title} (ID ${n.id})`,
+        content: btoa(unescape(encodeURIComponent(jsonStr))),
+        sha: sha,
+        branch: BRANCH
+      })
+    });
+    if (!commitR.ok) {
+      const err = await commitR.json().catch(() => ({}));
+      throw new Error(err.message || 'HTTP ' + commitR.status);
+    }
+
+    status.innerHTML = '✅ ¡Guardado!';
+    toast('✅ ' + n.title + ' actualizado. GitHub Action desplegará en ~2 min.', 'success');
+    originalSnapshot = JSON.parse(JSON.stringify(n));
+    // Refresh results
+    renderResults(negocios);
+  } catch(e) {
+    status.textContent = '❌ Error';
+    toast('Error al guardar: ' + e.message, 'error');
+    // Revert
+    Object.assign(n, originalSnapshot);
+  }
+}
+
+// ─── Toast ───
+function toast(msg, type) {
+  const t = document.createElement('div');
+  t.className = 'toast toast-' + type;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+</script>
+</body>
+</html>
