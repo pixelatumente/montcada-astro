@@ -236,7 +236,8 @@ function renderResults(list) {
     const cats = Array.isArray(n.categories) ? n.categories.join(', ') : n.category;
     const phone = n.phone || (n.enriched && n.enriched.google_phone) || '—';
     const rating = n.enriched && n.enriched.google_rating ? '⭐ ' + n.enriched.google_rating + ' (' + n.enriched.google_reviews + ')' : '';
-    return `<div class="result-item" onclick="editNegocio(${n.id})">
+    const nId = n.id || '';
+    return `<div class="result-item" onclick="editNegocio('${nId}')">
       <h3>${n.title}</h3>
       <div class="meta">${cats} · 📞 ${phone} ${rating ? '· ' + rating : ''}</div>
     </div>`;
@@ -247,6 +248,7 @@ function renderResults(list) {
 let originalSnapshot = null;
 
 function editNegocio(id) {
+  if (!id) return toast('ID de negocio no válido', 'error');
   editingId = id;
   const n = negocios.find(x => x.id === id);
   if (!n) return toast('Negocio no encontrado', 'error');
